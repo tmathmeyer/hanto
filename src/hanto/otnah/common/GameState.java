@@ -17,11 +17,12 @@ public abstract class GameState implements HantoGame
 	
 	public String getPrintableBoard()
 	{
-		for(HantoTile tile : gameBoard.getValues())
+		StringBuilder builder = new StringBuilder();
+		for(HantoTile tile : gameBoard.values())
 		{
-			// meh
+			builder.append(tile.toString());
 		}
 		
-		return "";
+		return builder.toString();
 	}
 }
