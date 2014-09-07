@@ -27,7 +27,7 @@ public abstract class HantoTile implements HantoPiece{
 	 * @param game The current GameState object.
 	 * @return
 	 */
-	public abstract boolean isValidMove(Position to, GameState game);
+	public abstract boolean isValidMove(Position to);
 	
 	/**
 	 * Returns a collection of the adjacent non-empty tiles.
