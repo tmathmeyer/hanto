@@ -6,29 +6,51 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
-
+/**
+ * 
+ * @author otnah
+ *
+ */
 public abstract class HantoPlayer
 {
 	private final HantoPlayerColor playerColor;
 	private final Set<Position> currentPositions;
 	
-	public HantoPlayer(HantoPlayerColor hpc)
+	
+	/**
+	 * 
+	 * @param hpc the color of this player
+	 */
+	public HantoPlayer(HantoPlayerColor hpc, Set<Position> defaultInventory)
 	{
 		playerColor = hpc;
-		currentPositions = new HashSet<>();
+		currentPositions = defaultInventory;
 	}
 	
+	/**
+	 * PlayerColor Accessor
+	 * @return the color of this player
+	 */
 	public HantoPlayerColor getColor()
 	{
 		return playerColor;
 	}
 	
+	/**
+	 * 
+	 * @return get a collection of positions where this player has pieces
+	 */
 	public Collection<Position> getCurrentPositions()
 	{
 		return currentPositions;
 	}
 	
-	public abstract boolean canMakeMove();
-	
-	public abstract Collection<HantoTile> getInventory();
+	/**
+	 * 
+	 * @return all the tiles in this players inventory
+	 */
+	public Set<Position> getInventory()
+	{
+		return currentPositions;
+	}
 }
