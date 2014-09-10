@@ -9,9 +9,11 @@ import hanto.common.HantoCoordinate;
  * Class for handling the things pieces can do and things
  * around them.
  */
-public abstract class HantoTile implements HantoPiece{
-	Position position;
-	boolean played;
+public abstract class HantoTile implements HantoPiece
+{
+	
+	private Position position;
+	private boolean played;
 	
 	/**
 	 * Makes the tile move to the given coordinates, regardless
@@ -33,13 +35,14 @@ public abstract class HantoTile implements HantoPiece{
 	 * Returns a collection of the adjacent non-empty tiles.
 	 * @return the collection of non-empty tiles
 	 */
-	public abstract Collection<HantoTile> getAdjacentPieces();
+	public abstract Collection<HantoCoordinate> getAdjacentPositions();
 	
 	/**
 	 * Gets Current Position
 	 * @return the Position object
 	 */
-	public Position getPosition(){
+	public Position getPosition()
+	{
 		return position;
 	}
 	
@@ -47,7 +50,8 @@ public abstract class HantoTile implements HantoPiece{
 	 * Tells whether the tile is in play or not.
 	 * @return true if on the board;
 	 */
-	public boolean inPlay(){
+	public boolean inPlay()
+	{
 		return played;
 	}
 	

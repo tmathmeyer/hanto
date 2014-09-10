@@ -14,17 +14,18 @@ import java.util.Set;
 public abstract class HantoPlayer
 {
 	private final HantoPlayerColor playerColor;
-	private final Set<Position> currentPositions;
+	private final Set<Position> currentPositions = new HashSet<>();
+	private final Set<HantoTile> currentInventory;
 	
 	
 	/**
 	 * 
 	 * @param hpc the color of this player
 	 */
-	public HantoPlayer(HantoPlayerColor hpc, Set<Position> defaultInventory)
+	public HantoPlayer(HantoPlayerColor hpc, Set<HantoTile> defaultInventory)
 	{
 		playerColor = hpc;
-		currentPositions = defaultInventory;
+		currentInventory = defaultInventory;
 	}
 	
 	/**
@@ -49,8 +50,8 @@ public abstract class HantoPlayer
 	 * 
 	 * @return all the tiles in this players inventory
 	 */
-	public Set<Position> getInventory()
+	public Set<HantoTile> getInventory()
 	{
-		return currentPositions;
+		return currentInventory;
 	}
 }

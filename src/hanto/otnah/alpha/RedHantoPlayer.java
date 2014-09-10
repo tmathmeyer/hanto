@@ -1,0 +1,17 @@
+package hanto.otnah.alpha;
+
+import hanto.common.HantoPlayerColor;
+import hanto.otnah.common.HantoPlayer;
+import hanto.otnah.common.HantoTile;
+import hanto.otnah.common.util.CollectionUtils;
+
+public class RedHantoPlayer extends HantoPlayer
+{
+
+	public RedHantoPlayer()
+	{
+		super(HantoPlayerColor.RED, CollectionUtils.toSetFromArray(
+				HantoTile.class, new Butterfly(HantoPlayerColor.RED)));
+	}
+
+}

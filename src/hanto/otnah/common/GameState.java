@@ -5,6 +5,7 @@ import java.util.Map;
 
 import hanto.common.HantoCoordinate;
 import hanto.common.HantoGame;
+import hanto.common.HantoPiece;
 import hanto.common.HantoPieceType;
 
 /**
@@ -16,9 +17,18 @@ public abstract class GameState implements HantoGame
 {
 	private final Map<HantoCoordinate, HantoTile> gameBoard = new HashMap<>();
 	
+	/**
+	 * Dont let this class be created from outside (not that it can anyways)
+	 */
 	protected GameState()
 	{
 		new GameStateSingleton(this);
+	}
+	
+	@Override
+	public HantoPiece getPieceAt(HantoCoordinate where)
+	{
+		return gameBoard.get(where);
 	}
 	
 	/**
@@ -46,5 +56,15 @@ public abstract class GameState implements HantoGame
 		}
 		
 		return builder.toString();
+	}
+	
+	/**
+	 * Silently fail if the piece can't be added :)
+	 * @param piece the piece to add
+	 * @param location the location of the piece
+	 */
+	public void setPieceAt(HantoTile piece, HantoCoordinate location)
+	{
+		gameBoard.put(location, piece);
 	}
 }
