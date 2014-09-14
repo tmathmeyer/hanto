@@ -1,11 +1,11 @@
 package hanto.otnah.common.util;
 
 import java.util.Collection;
-import java.util.Collections;
 import java.util.HashSet;
 
 import hanto.common.HantoCoordinate;
 import hanto.otnah.alpha.AlphaPosition;
+import hanto.otnah.common.Position;
 
 public class HexUtil
 {
@@ -22,10 +22,14 @@ public class HexUtil
 	
 	public static Collection<HantoCoordinate> locationsSurrounding(HantoCoordinate position)
 	{
+		Collection<HantoCoordinate> surrounding = new HashSet<>();
+		if (position == null)
+		{
+			return surrounding;
+		}
+		
 		int x = position.getX();
 		int y = position.getY();
-		
-		Collection<HantoCoordinate> surrounding = new HashSet<>();
 		
 		surrounding.add(new AlphaPosition(x+1, y));
 		surrounding.add(new AlphaPosition(x-1, y));
@@ -35,5 +39,10 @@ public class HexUtil
 		surrounding.add(new AlphaPosition(x, y-1));
 		
 		return surrounding;
+	}
+	
+	public static int distance(Position from, Position to)
+	{
+		return from.getDistanceTo(to);
 	}
 }

@@ -37,7 +37,7 @@ public class Butterfly extends HantoTile
 	@Override
 	public void move(HantoCoordinate to)
 	{
-		GameStateSingleton.getInstance().setPieceAt(this, to);
+		//TODO: not in alpha
 	}
 
 	@Override
