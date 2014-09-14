@@ -25,6 +25,11 @@ public class AlphaGameState extends GameState
 	@Override
 	public MoveResult makeMove(HantoPieceType pieceType, HantoCoordinate from, HantoCoordinate to) throws HantoException
 	{
+		if (pieceType != HantoPieceType.BUTTERFLY)
+		{
+			throw new HantoException("piece: " + pieceType.getPrintableName() + " not recognized");
+		}
+		
 		if (isMovePossible(from, to, pieceType))
 		{
 			if (which)

@@ -28,7 +28,7 @@ public abstract class GameState implements HantoGame
 	@Override
 	public HantoPiece getPieceAt(HantoCoordinate where)
 	{
-		return gameBoard.get(where);
+		return gameBoard.get(Position.asPosition(where));
 	}
 	
 	/**
@@ -65,6 +65,6 @@ public abstract class GameState implements HantoGame
 	 */
 	public void setPieceAt(HantoTile piece, HantoCoordinate location)
 	{
-		gameBoard.put(location, piece);
+		gameBoard.put(Position.asPosition(location), piece);
 	}
 }
