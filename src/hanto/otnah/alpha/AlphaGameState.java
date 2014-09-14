@@ -8,7 +8,6 @@ import hanto.common.MoveResult;
 import hanto.otnah.common.GameState;
 import hanto.otnah.common.HantoPlayer;
 import hanto.otnah.common.Position;
-import hanto.otnah.common.util.HexUtil;
 
 public class AlphaGameState extends GameState
 {
@@ -53,22 +52,26 @@ public class AlphaGameState extends GameState
 	@Override
 	public boolean isMovePossible(HantoCoordinate from, HantoCoordinate to, HantoPieceType type)
 	{
-		int distance = Position.asPosition(from).getDistanceTo(to);
+		int distance = Position.asPosition(from).getDistanceTo(Position.asPosition(to));
 		boolean result = false;
 		if (distance == 0)
 		{
 			if (which)
 			{ // color is blue
-				result = (0 == HexUtil.distance(to, new AlphaPosition(0, 0)));
+				result = (0 == new AlphaPosition(0,0).getDistanceTo(Position.asPosition(to)));
 			}
 			else
 			{ // color is red
-				result = (1 == HexUtil.distance(to, new AlphaPosition(0, 0)));
+				result = (1 == new AlphaPosition(0,0).getDistanceTo(Position.asPosition(to)));
 			}
 		}
 		return result;
 	}
 
+	/**
+	 * get the default alpha game state
+	 * @return
+	 */
 	public static AlphaGameState defaultAGS()
 	{
 		HantoPlayer redPlayer = new RedHantoPlayer();

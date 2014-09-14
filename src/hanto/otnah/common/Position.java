@@ -15,21 +15,7 @@ public abstract class Position implements HantoCoordinate {
 	 * @param other The other piece to get distance to
 	 * @return the distance as an int.
 	 */
-	public abstract int getDistanceTo(HantoCoordinate other);
-	
-	/**
-	 * a specific overload for inventory positions,
-	 * so that there is no attempt to call getX() or
-	 * getY() on one of them. Also do not let it be 
-	 * over-written by subtypes
-	 * 
-	 * @param other another inventoryPosition
-	 * @return 0
-	 */
-	public final int getDistanceTo(InventoryPosition other)
-	{
-		return 0;
-	}
+	public abstract int getDistanceTo(Position other);
 	
 	@Override
 	public boolean equals(Object other)
@@ -55,6 +41,13 @@ public abstract class Position implements HantoCoordinate {
 	}
 	
 	/**
+	 * let dynamic dispatch do its work
+	 * @param other the other position
+	 * @return the distance between
+	 */
+	public abstract int distanceFrom(Position other);
+	
+	/**
 	 * use casting or if unable, create a new position
 	 * 
 	 * @param other a hanto coordinate, which may be a position already
@@ -62,7 +55,7 @@ public abstract class Position implements HantoCoordinate {
 	 */
 	public static Position asPosition(final HantoCoordinate other)
 	{
-		if (other == null)
+		if (other == null || other instanceof InventoryPosition)
 		{
 			return new InventoryPosition();
 		}
@@ -79,7 +72,12 @@ public abstract class Position implements HantoCoordinate {
 			}
 
 			@Override
-			public int getDistanceTo(HantoCoordinate other) {
+			public int getDistanceTo(Position other) {
+				return other.distanceFrom(this);
+			}
+
+			@Override
+			public int distanceFrom(Position other) {
 				return HexUtil.distance(this, other);
 			}
 		};

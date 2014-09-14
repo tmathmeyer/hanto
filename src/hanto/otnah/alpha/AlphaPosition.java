@@ -1,7 +1,7 @@
 package hanto.otnah.alpha;
 
-import hanto.common.HantoCoordinate;
 import hanto.otnah.common.Position;
+import hanto.otnah.common.util.HexUtil;
 
 public class AlphaPosition extends Position
 {
@@ -26,9 +26,14 @@ public class AlphaPosition extends Position
 	}
 
 	@Override
-	public int getDistanceTo(HantoCoordinate other)
+	public int getDistanceTo(Position other)
 	{
-		return -1; //TODO: fix
+		return other.distanceFrom(this);
+	}
+
+	@Override
+	public int distanceFrom(Position other) {
+		return HexUtil.distance(this, other);
 	}
 
 }

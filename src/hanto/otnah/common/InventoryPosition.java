@@ -1,7 +1,5 @@
 package hanto.otnah.common;
 
-import hanto.common.HantoCoordinate;
-
 public class InventoryPosition extends Position
 {
 	/**
@@ -27,9 +25,14 @@ public class InventoryPosition extends Position
 	}
 
 	@Override
-	public int getDistanceTo(HantoCoordinate other)
+	public int getDistanceTo(Position other)
 	{
 		return 0;
+	}
+
+	@Override
+	public int distanceFrom(Position other) {
+		return -1;
 	}
 
 }

@@ -54,6 +54,18 @@ public class AlphaGameStateTests {
 		assertTrue(unfreshGame.isMovePossible(new InventoryPosition(),
 				new AlphaPosition(1, 0), HantoPieceType.BUTTERFLY));
 	}
+	
+	@Test
+	public void isFirstStandardMovePossible() {
+		assertTrue(freshGame.isMovePossible(null,
+				new AlphaPosition(0, 0), HantoPieceType.BUTTERFLY));
+	}
+	
+	@Test
+	public void isSecondStandardMovePossible() {
+		assertTrue(unfreshGame.isMovePossible(null,
+				new AlphaPosition(1, 0), HantoPieceType.BUTTERFLY));
+	}
 
 	
 	
@@ -67,6 +79,18 @@ public class AlphaGameStateTests {
 	@Test
 	public void failOnBadSecondMove() {
 		assertFalse(unfreshGame.isMovePossible(new InventoryPosition(),
+				new AlphaPosition(0, 0), HantoPieceType.BUTTERFLY));
+	}
+	
+	@Test
+	public void failOnBadStandardFirstMove() {
+		assertFalse(freshGame.isMovePossible(null,
+				new AlphaPosition(1, 0), HantoPieceType.BUTTERFLY));
+	}
+	
+	@Test
+	public void failOnBadStandardSecondMove() {
+		assertFalse(unfreshGame.isMovePossible(null,
 				new AlphaPosition(0, 0), HantoPieceType.BUTTERFLY));
 	}
 	
@@ -85,10 +109,32 @@ public class AlphaGameStateTests {
 	}
 	
 	@Test
+	public void doStandardFirstMove() {
+		try {
+			assertEquals(MoveResult.OK, freshGame.makeMove(
+					HantoPieceType.BUTTERFLY, null,
+					new AlphaPosition(0, 0)));
+		} catch (HantoException e) {
+			assertTrue(false);
+		}
+	}
+	
+	@Test
 	public void doSecondMove() {
 		try {
 			assertEquals(MoveResult.DRAW, unfreshGame.makeMove(
 					HantoPieceType.BUTTERFLY, new InventoryPosition(),
+					new AlphaPosition(1, 0)));
+		} catch (HantoException e) {
+			assertTrue(false);
+		}
+	}
+	
+	@Test
+	public void doStandardSecondMove() {
+		try {
+			assertEquals(MoveResult.DRAW, unfreshGame.makeMove(
+					HantoPieceType.BUTTERFLY, null,
 					new AlphaPosition(1, 0)));
 		} catch (HantoException e) {
 			assertTrue(false);
@@ -115,5 +161,32 @@ public class AlphaGameStateTests {
 		} catch (HantoException e) {
 			assertTrue(true);
 		}
+	}
+	
+	@Test
+	public void doInvalidStandardFirstMove() {
+		try {
+			freshGame.makeMove(HantoPieceType.BUTTERFLY, null, new AlphaPosition(1, 0));
+		} catch (HantoException e) {
+			assertTrue(true);
+		}
+	}
+	
+	@Test
+	public void doInvalidStandardSecondMove() {
+		try {
+			freshGame.makeMove(HantoPieceType.BUTTERFLY, null, new AlphaPosition(0, 0));
+		} catch (HantoException e) {
+			assertTrue(true);
+		}
+	}
+	
+	
+	
+	
+	@Test(expected=HantoException.class)
+	public void veryInvalidMove() throws HantoException
+	{
+		AlphaGameState.defaultAGS().makeMove(null, null, null);
 	}
 }

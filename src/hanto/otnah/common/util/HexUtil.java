@@ -15,7 +15,7 @@ public class HexUtil
 		int deltay = from.getY() - to.getY();
 		if (deltax * deltay > 0) // test if signs are equal
 		{
-			return Math.abs(deltax - deltay);
+			return Math.abs(deltax + deltay);
 		}
 		return Math.max(Math.abs(deltax), Math.abs(deltay));
 	}
@@ -39,10 +39,5 @@ public class HexUtil
 		surrounding.add(new AlphaPosition(x, y-1));
 		
 		return surrounding;
-	}
-	
-	public static int distance(Position from, Position to)
-	{
-		return from.getDistanceTo(to);
 	}
 }
