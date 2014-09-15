@@ -46,6 +46,9 @@ public class BetaHantoGame extends GameState
 			//put piece on board
 			this.setPieceAt(played, to);
 			
+			//increment player count
+			current.increaseMoveCount();
+			
 			//switch player
 			current = current.getNextPlayer();
 			
@@ -67,6 +70,11 @@ public class BetaHantoGame extends GameState
 		if (!hasPieceInInventory(type))
 		{
 			return false;
+		}
+		
+		if (forcedToPlayButterfly())
+		{
+			return HantoPieceType.BUTTERFLY == type;
 		}
 		
 		return isFirstMove(toPos) || (piecePlaceContinuityCheck(toPos) && isLocationUnoccupied(toPos));
@@ -125,5 +133,11 @@ public class BetaHantoGame extends GameState
 		}
 		
 		return false;
+	}
+	
+	private boolean forcedToPlayButterfly()
+	{
+		return getCurrentPlayer().getMovesPlayed() >= 3
+				&& hasPieceInInventory(HantoPieceType.BUTTERFLY);
 	}
 }

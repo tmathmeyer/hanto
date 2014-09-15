@@ -18,6 +18,7 @@ public abstract class HantoPlayer
 	private final HantoPlayerColor playerColor;
 	private final Set<Position> currentPositions = new HashSet<>();
 	private final List<HantoTile> currentInventory;
+	private int movesPlayed;
 	
 	
 	/**
@@ -56,6 +57,14 @@ public abstract class HantoPlayer
 	{
 		return currentInventory;
 	}
+	
+	/**
+	 * increase the number of times the player has played
+	 */
+	public void increaseMoveCount()
+	{
+		movesPlayed ++;
+	}
 
 	public HantoTile play(HantoPieceType pieceType)
 	{
@@ -84,4 +93,13 @@ public abstract class HantoPlayer
 	 * @param next the next player
 	 */
 	public abstract void setNextPlayer(HantoPlayer next);
+
+	/**
+	 * 
+	 * @return how many moves this player has made
+	 */
+	public int getMovesPlayed()
+	{
+		return movesPlayed;
+	}
 }
