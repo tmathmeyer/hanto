@@ -1,3 +1,12 @@
+/*******************************************************************************
+ * All sources under the hanto.otnah package were developed by
+ * Ted Meyer and Nilesh Patel for the term project in CS4233
+ * at Worcester Polytechnic Institute. Since WPI holds all other forms
+ * of ownership to this software, we have decided to not make this
+ * software available under any license. Evaluation or compilation rights
+ * are therefore granted only to course staff.
+ *******************************************************************************/
+
 package hanto.otnah.alpha;
 
 import hanto.common.HantoCoordinate;
@@ -34,14 +43,14 @@ public class AlphaGameState extends GameState
 		if (isMovePossible(from, to, pieceType))
 		{
 			if (which)
-			{ // blue, red can go
-				setPieceAt(new Butterfly(HantoPlayerColor.BLUE) , to);
+			{ // blue: red can go
+				setPieceAt(new Butterfly(HantoPlayerColor.BLUE), to);
 				which = false;
 				return MoveResult.OK;
 			}
 			else
-			{ // red, game over
-				setPieceAt(new Butterfly(HantoPlayerColor.RED) , to);
+			{ // red: game is over
+				setPieceAt(new Butterfly(HantoPlayerColor.RED), to);
 				return MoveResult.DRAW;
 			}
 		}
@@ -58,17 +67,18 @@ public class AlphaGameState extends GameState
 	@Override
 	public boolean isMovePossible(HantoCoordinate from, HantoCoordinate to, HantoPieceType type)
 	{
-		int distance = Position.asPosition(from).getDistanceTo(Position.asPosition(to));
+		final int distance = Position.asPosition(from).getDistanceTo(Position.asPosition(to));
 		boolean result = false;
 		if (distance == 0)
 		{
+			final int whichDistance = new HexPosition(0, 0).getDistanceTo(Position.asPosition(to));
 			if (which)
 			{ // color is blue
-				result = (0 == new HexPosition(0,0).getDistanceTo(Position.asPosition(to)));
+				result = (whichDistance == 0);
 			}
 			else
 			{ // color is red
-				result = (1 == new HexPosition(0,0).getDistanceTo(Position.asPosition(to)));
+				result = (whichDistance == 1);
 			}
 		}
 		return result;

@@ -1,3 +1,6 @@
+/**
+ * unknown
+ */
 package provided;
 
 import static org.junit.Assert.*;
@@ -23,7 +26,7 @@ public class AlphaHantoMasterTest {
 	class TestHantoCoordinate implements HantoCoordinate {
 		private final int x, y;
 
-		public TestHantoCoordinate(int x, int y) {
+		private TestHantoCoordinate(int x, int y) {
 			this.x = x;
 			this.y = y;
 		} /* * @see hanto.common.HantoCoordinate#getX() */
@@ -39,7 +42,7 @@ public class AlphaHantoMasterTest {
 		}
 	}
 
-	private static HantoGameFactory factory;
+	private static HantoGameFactory factory = null;
 	private HantoGame game;
 
 	@BeforeClass
