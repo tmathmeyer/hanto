@@ -12,13 +12,13 @@ import hanto.otnah.common.HantoPlayer;
 import hanto.otnah.common.HantoTile;
 import hanto.otnah.common.Position;
 
-public class BetaGameState extends GameState
+public class BetaHantoGame extends GameState
 {
 	private HantoPlayer current;
 	private final HantoPlayer red = new RedPlayer();
 	private final HantoPlayer blue = new BluePlayer();
 	
-	public BetaGameState(HantoPlayerColor firstPlayer) throws HantoException {
+	public BetaHantoGame(HantoPlayerColor firstPlayer) throws HantoException {
 		red.setNextPlayer(blue);
 		blue.setNextPlayer(red);
 		switch (firstPlayer)
@@ -62,6 +62,12 @@ public class BetaGameState extends GameState
 	@Override
 	public boolean isMovePossible(HantoCoordinate from, HantoCoordinate to, HantoPieceType type) {
 		Position toPos = Position.asPosition(to);
+
+		if (!hasPieceInInventory(type))
+		{
+			return false;
+		}
+		
 		return isFirstMove(toPos) || (piecePlaceContinuityCheck(toPos) && isLocationUnoccupied(toPos));
 	}
 
@@ -71,13 +77,13 @@ public class BetaGameState extends GameState
 	 * @return the BetaGameState with firstPlayer going first
 	 * @throws HantoException if there is a problem creating the game
 	 */
-	public static BetaGameState createBetaGameState(HantoPlayerColor firstPlayer) throws HantoException
+	public static BetaHantoGame createBetaGameState(HantoPlayerColor firstPlayer) throws HantoException
 	{
 		if (firstPlayer == null)
 		{
 			throw new HantoException("invalid starting user color");
 		}
-		return new BetaGameState(firstPlayer);
+		return new BetaHantoGame(firstPlayer);
 	}
 	
 	
@@ -105,5 +111,18 @@ public class BetaGameState extends GameState
 	private boolean isLocationUnoccupied(Position check)
 	{
 		return this.getPieceAt(check) == null;
+	}
+	
+	private boolean hasPieceInInventory(HantoPieceType hpt)
+	{
+		for(HantoTile ht : getCurrentPlayer().getInventory())
+		{
+			if (ht.getType().equals(hpt))
+			{
+				return true;
+			}
+		}
+		
+		return false;
 	}
 }
