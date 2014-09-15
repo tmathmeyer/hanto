@@ -65,13 +65,7 @@ public abstract class GameState implements HantoGame
 	@Override
 	public String getPrintableBoard()
 	{
-		StringBuilder builder = new StringBuilder();
-		for(HantoTile tile : gameBoard.values())
-		{
-			builder.append(tile.toString());
-		}
-		
-		return builder.toString();
+		return "";
 	}
 	
 	/**

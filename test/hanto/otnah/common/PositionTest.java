@@ -52,5 +52,19 @@ public class PositionTest
 		assertEquals(hc3.getDistanceTo(i), -1);
 		
 	}
+	
+	@Test(expected=UnsupportedOperationException.class)
+	public void testInventoryHasNoX() throws UnsupportedOperationException
+	{
+		Position i = new InventoryPosition();
+		i.getX();
+	}
+	
+	@Test(expected=UnsupportedOperationException.class)
+	public void testInventoryHasNoY() throws UnsupportedOperationException
+	{
+		Position i = new InventoryPosition();
+		i.getY();
+	}
 
 }
