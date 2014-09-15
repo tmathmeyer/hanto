@@ -108,10 +108,10 @@ public class BetaGameStateTests
 		BetaHantoGame beta = BetaHantoGame.createBetaGameState(HantoPlayerColor.BLUE);
 		beta.makeMove(HantoPieceType.BUTTERFLY, new InventoryPosition(), new HexPosition(0, 0));
 		beta.makeMove(HantoPieceType.BUTTERFLY, new InventoryPosition(), new HexPosition(1, 0));
-		assertEquals(beta.makeMove(HantoPieceType.BUTTERFLY, new InventoryPosition(), new HexPosition(0, 0)), MoveResult.OK);
-		assertEquals(beta.makeMove(HantoPieceType.BUTTERFLY, new InventoryPosition(), new HexPosition(0, 1)), MoveResult.OK);
+		assertEquals(beta.makeMove(HantoPieceType.SPARROW, new InventoryPosition(), new HexPosition(0, 1)), MoveResult.OK);
 		assertEquals(beta.makeMove(HantoPieceType.SPARROW, new InventoryPosition(), new HexPosition(1, 1)), MoveResult.OK);
 		assertEquals(beta.makeMove(HantoPieceType.SPARROW, new InventoryPosition(), new HexPosition(2, 1)), MoveResult.OK);
+		assertEquals(beta.makeMove(HantoPieceType.SPARROW, new InventoryPosition(), new HexPosition(2, 2)), MoveResult.OK);
 	}
 	
 	@Test
