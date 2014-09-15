@@ -5,19 +5,19 @@ import static org.junit.Assert.*;
 import java.util.Collection;
 
 import hanto.common.HantoCoordinate;
-import hanto.otnah.alpha.AlphaPosition;
+import hanto.otnah.common.HexPosition;
 
 import org.junit.Test;
 
 public class HexUtilsTest {
 
-	HantoCoordinate HC0 = new AlphaPosition(0, 0);
-	HantoCoordinate HC1 = new AlphaPosition(1, 0);
-	HantoCoordinate HC2 = new AlphaPosition(0, 1);
-	HantoCoordinate HC3 = new AlphaPosition(-1, 1);
-	HantoCoordinate HC4 = new AlphaPosition(1, -1);
-	HantoCoordinate HC5 = new AlphaPosition(-1, 0);
-	HantoCoordinate HC6 = new AlphaPosition(0, -1);
+	HantoCoordinate HC0 = new HexPosition(0, 0);
+	HantoCoordinate HC1 = new HexPosition(1, 0);
+	HantoCoordinate HC2 = new HexPosition(0, 1);
+	HantoCoordinate HC3 = new HexPosition(-1, 1);
+	HantoCoordinate HC4 = new HexPosition(1, -1);
+	HantoCoordinate HC5 = new HexPosition(-1, 0);
+	HantoCoordinate HC6 = new HexPosition(0, -1);
 	
 	@Test
 	public void verticalDistance()

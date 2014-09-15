@@ -8,6 +8,7 @@ import hanto.common.MoveResult;
 import hanto.otnah.common.GameState;
 import hanto.otnah.common.HantoPlayer;
 import hanto.otnah.common.Position;
+import hanto.otnah.common.HexPosition;
 
 public class AlphaGameState extends GameState
 {
@@ -63,11 +64,11 @@ public class AlphaGameState extends GameState
 		{
 			if (which)
 			{ // color is blue
-				result = (0 == new AlphaPosition(0,0).getDistanceTo(Position.asPosition(to)));
+				result = (0 == new HexPosition(0,0).getDistanceTo(Position.asPosition(to)));
 			}
 			else
 			{ // color is red
-				result = (1 == new AlphaPosition(0,0).getDistanceTo(Position.asPosition(to)));
+				result = (1 == new HexPosition(0,0).getDistanceTo(Position.asPosition(to)));
 			}
 		}
 		return result;

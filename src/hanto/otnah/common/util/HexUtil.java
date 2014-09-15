@@ -4,7 +4,7 @@ import java.util.Collection;
 import java.util.HashSet;
 
 import hanto.common.HantoCoordinate;
-import hanto.otnah.alpha.AlphaPosition;
+import hanto.otnah.common.HexPosition;
 
 public class HexUtil
 {
@@ -30,12 +30,12 @@ public class HexUtil
 		int x = position.getX();
 		int y = position.getY();
 		
-		surrounding.add(new AlphaPosition(x+1, y));
-		surrounding.add(new AlphaPosition(x-1, y));
-		surrounding.add(new AlphaPosition(x-1, y+1));
-		surrounding.add(new AlphaPosition(x, y+1));
-		surrounding.add(new AlphaPosition(x+1, y-1));
-		surrounding.add(new AlphaPosition(x, y-1));
+		surrounding.add(new HexPosition(x+1, y));
+		surrounding.add(new HexPosition(x-1, y));
+		surrounding.add(new HexPosition(x-1, y+1));
+		surrounding.add(new HexPosition(x, y+1));
+		surrounding.add(new HexPosition(x+1, y-1));
+		surrounding.add(new HexPosition(x, y-1));
 		
 		return surrounding;
 	}
