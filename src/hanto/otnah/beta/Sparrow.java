@@ -19,11 +19,16 @@ import hanto.otnah.common.Position;
 
 public class Sparrow extends HantoTile
 {
-
+	private final HantoPlayerColor myColor;
+	
+	public Sparrow(HantoPlayerColor hpc)
+	{
+		myColor = hpc;
+	}
+	
 	@Override
 	public HantoPlayerColor getColor() {
-		// TODO Auto-generated method stub
-		return null;
+		return myColor;
 	}
 
 	@Override

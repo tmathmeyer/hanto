@@ -29,7 +29,7 @@ public class BetaHantoGame extends GameState
 	private final BetaPlayer red = new BetaPlayer(HantoPlayerColor.RED);
 	private final BetaPlayer blue = new BetaPlayer(HantoPlayerColor.BLUE);
 
-	public BetaHantoGame(HantoPlayerColor firstPlayer) throws HantoException
+	public BetaHantoGame(HantoPlayerColor firstPlayer)
 	{
 		red.setNextPlayer(blue);
 		blue.setNextPlayer(red);
@@ -40,9 +40,7 @@ public class BetaHantoGame extends GameState
 				break;
 			case RED:
 				current = red;
-				break;
-			default:
-				throw new HantoException("invalid starting user");	
+				break;	
 		}
 	}
 

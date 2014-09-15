@@ -40,7 +40,7 @@ public class BetaPlayer extends HantoPlayer<BetaPlayer>
 	public BetaPlayer(HantoPlayerColor color)
 	{
 		super(color, CollectionUtils.toSetFromFactoryArray(
-				HantoTile.class, Factory.norm(Butterfly.class, 1), Factory.norm(Sparrow.class, 5)));
+				HantoTile.class, Factory.makes(Butterfly.class, 1, color), Factory.makes(Sparrow.class, 5, color)));
 	}
 	
 	/**

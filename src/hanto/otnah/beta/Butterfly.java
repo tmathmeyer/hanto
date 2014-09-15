@@ -19,10 +19,16 @@ import hanto.otnah.common.Position;
 
 public class Butterfly extends HantoTile
 {
-
+	private final HantoPlayerColor myColor;
+	
+	public Butterfly(HantoPlayerColor hpc)
+	{
+		myColor = hpc;
+	}
+	
 	@Override
 	public HantoPlayerColor getColor() {
-		return null;
+		return myColor;
 	}
 
 	@Override

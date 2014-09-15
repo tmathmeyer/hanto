@@ -61,14 +61,14 @@ public class HantoGameFactory
 	 * @return the game instance
 	 * @throws HantoException 
 	 */
-	public HantoGame makeHantoGame(HantoGameID gameId, HantoPlayerColor movesFirst) throws HantoException {
+	public HantoGame makeHantoGame(HantoGameID gameId, HantoPlayerColor movesFirst) {
 		final HantoGame game;
 		switch (gameId) {
 			case ALPHA_HANTO:
 				game = AlphaHantoGame.defaultAGS();
 				break;
 			case BETA_HANTO:
-				game = BetaHantoGame.createBetaGameState(movesFirst);
+				game = new BetaHantoGame(movesFirst);
 			default:
 				throw new NotImplementedException();
 		}

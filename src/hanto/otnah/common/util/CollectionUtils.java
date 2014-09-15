@@ -11,6 +11,7 @@ package hanto.otnah.common.util;
 
 import hanto.common.HantoException;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -63,6 +64,20 @@ public class CollectionUtils
 			}
 		}
 		
+		private <B> Factory(Class<T> type, int count, B arg1) throws HantoException
+		{
+			for(int i = 0; i < count; i++)
+			{
+				try {
+					inner.add(type.getConstructor(arg1.getClass()).newInstance(arg1));
+				} catch (InstantiationException | IllegalAccessException
+						| IllegalArgumentException | InvocationTargetException
+						| NoSuchMethodException | SecurityException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		
 		private Factory(){}
 		
 		public List<T> getWrapped()
@@ -74,6 +89,15 @@ public class CollectionUtils
 		{
 			try {
 				return new Factory<A> (type, count);
+			} catch (HantoException e) {
+				return new Factory<A>();
+			}
+		}
+		
+		public static <A, B> Factory<A> makes(Class<A> type, int count, B ob)
+		{
+			try {
+				return new Factory<A> (type, count, ob);
 			} catch (HantoException e) {
 				return new Factory<A>();
 			}
