@@ -112,9 +112,30 @@ public class BetaGameStateTests
 		assertEquals(beta.makeMove(HantoPieceType.SPARROW, new InventoryPosition(), new BetaPosition(1, 0)), MoveResult.OK);
 	}
 	
-	
-	public void forcePlayButterflyOnFourthMove()
+	@Test
+	public void forcePlayButterflyOnFourthMove() throws HantoException
 	{
+		BetaHantoGame beta = BetaHantoGame.createBetaGameState(HantoPlayerColor.BLUE);
+		//move 1
+		assertEquals(beta.makeMove(HantoPieceType.SPARROW, new InventoryPosition(), new BetaPosition(0, 0)), MoveResult.OK);
+		assertEquals(beta.makeMove(HantoPieceType.SPARROW, new InventoryPosition(), new BetaPosition(0, 1)), MoveResult.OK);
 		
+		//move 2
+		assertEquals(beta.makeMove(HantoPieceType.SPARROW, new InventoryPosition(), new BetaPosition(1, 1)), MoveResult.OK);
+		assertEquals(beta.makeMove(HantoPieceType.SPARROW, new InventoryPosition(), new BetaPosition(1, 0)), MoveResult.OK);
+		
+		//move 3
+		assertEquals(beta.makeMove(HantoPieceType.SPARROW, new InventoryPosition(), new BetaPosition(2, 1)), MoveResult.OK);
+		assertEquals(beta.makeMove(HantoPieceType.SPARROW, new InventoryPosition(), new BetaPosition(2, 0)), MoveResult.OK);
+		
+		//move 4
+		try {
+			beta.makeMove(HantoPieceType.SPARROW, new InventoryPosition(), new BetaPosition(2, 2));
+			fail();
+		}
+		catch(HantoException e)
+		{
+			assertEquals(beta.makeMove(HantoPieceType.BUTTERFLY, new InventoryPosition(), new BetaPosition(2, 2)), MoveResult.OK);
+		}
 	}
 }

@@ -83,6 +83,11 @@ public abstract class Position implements HantoCoordinate {
 		};
 	}
 
+	/**
+	 * 
+	 * @param check the piece to check for adjacency
+	 * @return whether this piece is adjacent to the provided one
+	 */
 	public boolean isAdjacentTo(Position check) {
 		return check.getDistanceTo(this) == 1;
 	}
