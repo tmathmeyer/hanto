@@ -107,11 +107,11 @@ public class BetaGameStateTests
 	{
 		BetaHantoGame beta = BetaHantoGame.createBetaGameState(HantoPlayerColor.BLUE);
 		beta.makeMove(HantoPieceType.BUTTERFLY, new InventoryPosition(), new HexPosition(0, 0));
-		beta.makeMove(HantoPieceType.BUTTERFLY, new InventoryPosition(), new HexPosition(1, 1));
+		beta.makeMove(HantoPieceType.BUTTERFLY, new InventoryPosition(), new HexPosition(1, 0));
 		assertEquals(beta.makeMove(HantoPieceType.BUTTERFLY, new InventoryPosition(), new HexPosition(0, 0)), MoveResult.OK);
 		assertEquals(beta.makeMove(HantoPieceType.BUTTERFLY, new InventoryPosition(), new HexPosition(0, 1)), MoveResult.OK);
 		assertEquals(beta.makeMove(HantoPieceType.SPARROW, new InventoryPosition(), new HexPosition(1, 1)), MoveResult.OK);
-		assertEquals(beta.makeMove(HantoPieceType.SPARROW, new InventoryPosition(), new HexPosition(1, 0)), MoveResult.OK);
+		assertEquals(beta.makeMove(HantoPieceType.SPARROW, new InventoryPosition(), new HexPosition(2, 1)), MoveResult.OK);
 	}
 	
 	@Test
@@ -119,25 +119,25 @@ public class BetaGameStateTests
 	{
 		BetaHantoGame beta = BetaHantoGame.createBetaGameState(HantoPlayerColor.BLUE);
 		//move 1
-		assertEquals(beta.makeMove(HantoPieceType.SPARROW, new InventoryPosition(), new BetaPosition(0, 0)), MoveResult.OK);
-		assertEquals(beta.makeMove(HantoPieceType.SPARROW, new InventoryPosition(), new BetaPosition(0, 1)), MoveResult.OK);
+		assertEquals(beta.makeMove(HantoPieceType.SPARROW, new InventoryPosition(), new HexPosition(0, 0)), MoveResult.OK);
+		assertEquals(beta.makeMove(HantoPieceType.SPARROW, new InventoryPosition(), new HexPosition(0, 1)), MoveResult.OK);
 		
 		//move 2
-		assertEquals(beta.makeMove(HantoPieceType.SPARROW, new InventoryPosition(), new BetaPosition(1, 1)), MoveResult.OK);
-		assertEquals(beta.makeMove(HantoPieceType.SPARROW, new InventoryPosition(), new BetaPosition(1, 0)), MoveResult.OK);
+		assertEquals(beta.makeMove(HantoPieceType.SPARROW, new InventoryPosition(), new HexPosition(1, 1)), MoveResult.OK);
+		assertEquals(beta.makeMove(HantoPieceType.SPARROW, new InventoryPosition(), new HexPosition(1, 0)), MoveResult.OK);
 		
 		//move 3
-		assertEquals(beta.makeMove(HantoPieceType.SPARROW, new InventoryPosition(), new BetaPosition(2, 1)), MoveResult.OK);
-		assertEquals(beta.makeMove(HantoPieceType.SPARROW, new InventoryPosition(), new BetaPosition(2, 0)), MoveResult.OK);
+		assertEquals(beta.makeMove(HantoPieceType.SPARROW, new InventoryPosition(), new HexPosition(2, 1)), MoveResult.OK);
+		assertEquals(beta.makeMove(HantoPieceType.SPARROW, new InventoryPosition(), new HexPosition(2, 0)), MoveResult.OK);
 		
 		//move 4
 		try {
-			beta.makeMove(HantoPieceType.SPARROW, new InventoryPosition(), new BetaPosition(2, 2));
+			beta.makeMove(HantoPieceType.SPARROW, new InventoryPosition(), new HexPosition(2, 2));
 			fail();
 		}
 		catch(HantoException e)
 		{
-			assertEquals(beta.makeMove(HantoPieceType.BUTTERFLY, new InventoryPosition(), new BetaPosition(2, 2)), MoveResult.OK);
+			assertEquals(beta.makeMove(HantoPieceType.BUTTERFLY, new InventoryPosition(), new HexPosition(2, 2)), MoveResult.OK);
 		}
 	}
 }
