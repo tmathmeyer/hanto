@@ -7,7 +7,19 @@ import hanto.otnah.common.util.CollectionUtils;
 
 public class RedHantoPlayer extends HantoPlayer
 {
+	
+	private HantoPlayer nextPlayer;
+	
+	@Override
+	public HantoPlayer getNextPlayer() {
+		return nextPlayer;
+	}
 
+	@Override
+	public void setNextPlayer(HantoPlayer next) {
+		nextPlayer = next;
+	}
+	
 	public RedHantoPlayer()
 	{
 		super(HantoPlayerColor.RED, CollectionUtils.toSetFromArray(

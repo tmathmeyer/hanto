@@ -2,6 +2,7 @@ package hanto.otnah.common;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 import hanto.common.HantoCoordinate;
 import hanto.common.HantoGame;
@@ -15,7 +16,7 @@ import hanto.common.HantoPieceType;
  */
 public abstract class GameState implements HantoGame
 {
-	private final Map<HantoCoordinate, HantoTile> gameBoard = new HashMap<>();
+	private final Map<Position, HantoTile> gameBoard = new HashMap<>();
 	
 	/**
 	 * Dont let this class be created from outside (not that it can anyways)
@@ -66,5 +67,14 @@ public abstract class GameState implements HantoGame
 	public void setPieceAt(HantoTile piece, HantoCoordinate location)
 	{
 		gameBoard.put(Position.asPosition(location), piece);
+	}
+	
+	/**
+	 * 
+	 * @return the set of all occupied locations on the board
+	 */
+	protected Set<Position> filledLocations()
+	{
+		return gameBoard.keySet();
 	}
 }

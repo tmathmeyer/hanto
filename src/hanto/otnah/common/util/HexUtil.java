@@ -5,7 +5,6 @@ import java.util.HashSet;
 
 import hanto.common.HantoCoordinate;
 import hanto.otnah.alpha.AlphaPosition;
-import hanto.otnah.common.Position;
 
 public class HexUtil
 {

@@ -82,4 +82,8 @@ public abstract class Position implements HantoCoordinate {
 			}
 		};
 	}
+
+	public boolean isAdjacentTo(Position check) {
+		return check.getDistanceTo(this) == 1;
+	}
 }

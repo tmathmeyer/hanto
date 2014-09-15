@@ -27,7 +27,7 @@ public class AlphaGameState extends GameState
 	{
 		if (pieceType != HantoPieceType.BUTTERFLY)
 		{
-			throw new HantoException("piece: " + pieceType.getPrintableName() + " not recognized");
+			throw new HantoException("piece: " + (pieceType==null?"null":pieceType.getPrintableName()) + " not recognized");
 		}
 		
 		if (isMovePossible(from, to, pieceType))

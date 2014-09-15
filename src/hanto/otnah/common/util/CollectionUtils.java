@@ -2,17 +2,15 @@ package hanto.otnah.common.util;
 
 import hanto.common.HantoException;
 
-import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Set;
 
 public class CollectionUtils
 {
 	@SafeVarargs
-	public static <T, V extends T> Set<T> toSetFromArray(Class<T> as, V ... items)
+	public static <T, V extends T> List<T> toSetFromArray(Class<T> as, V ... items)
 	{
-		Set<T> result = new HashSet<>();
+		List<T> result = new LinkedList<>();
 		for(T each : items)
 		{
 			result.add(each);
@@ -21,9 +19,9 @@ public class CollectionUtils
 	}
 	
 	@SafeVarargs
-	public static <T> Set<T> toSetFromFactoryArray(Class<T> as, Factory<? extends T> ... items)
+	public static <T> List<T> toSetFromFactoryArray(Class<T> as, Factory<? extends T> ... items)
 	{
-		Set<T> result = new HashSet<>();
+		List<T> result = new LinkedList<>();
 		for(Factory<? extends T> each : items)
 		{
 			for(T v : each.getWrapped())
