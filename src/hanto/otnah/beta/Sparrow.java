@@ -19,8 +19,7 @@ public class Sparrow extends HantoTile
 
 	@Override
 	public HantoPieceType getType() {
-		// TODO Auto-generated method stub
-		return null;
+		return HantoPieceType.SPARROW;
 	}
 
 	@Override

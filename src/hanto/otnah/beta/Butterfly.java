@@ -13,14 +13,12 @@ public class Butterfly extends HantoTile
 
 	@Override
 	public HantoPlayerColor getColor() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public HantoPieceType getType() {
-		// TODO Auto-generated method stub
-		return null;
+		return HantoPieceType.BUTTERFLY;
 	}
 
 	@Override
@@ -31,13 +29,11 @@ public class Butterfly extends HantoTile
 
 	@Override
 	public boolean isValidMove(Position to) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
 	public Collection<HantoCoordinate> getAdjacentPositions() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 

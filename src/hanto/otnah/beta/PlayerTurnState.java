@@ -11,6 +11,8 @@ import hanto.otnah.common.HantoPlayer;
  */
 public enum PlayerTurnState
 {
+	
+	
 	RED(new RedPlayer()),
 	BLUE(new BluePlayer());
 	
@@ -46,6 +48,10 @@ public enum PlayerTurnState
 
 	public static PlayerTurnState fromColor(HantoPlayerColor firstPlayer) throws HantoException {
 		PlayerTurnState result;
+		if (firstPlayer == null)
+		{
+			throw new HantoException("invalid first player color");
+		}
 		switch(firstPlayer)
 		{
 			case BLUE:
