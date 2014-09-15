@@ -24,13 +24,13 @@ public class Sparrow extends HantoTile
 
 	@Override
 	public void move(HantoCoordinate to) {
-		// TODO Auto-generated method stub
+		// Empty, since the sparrow can't actually move
 		
 	}
 
 	@Override
 	public boolean isValidMove(Position to) {
-		// TODO Auto-generated method stub
+		// Always return false, since the sparrow can never move
 		return false;
 	}
 

@@ -32,6 +32,11 @@ public abstract class GameState implements HantoGame
 		return gameBoard.get(Position.asPosition(where));
 	}
 	
+	public HantoPiece getPieceAt(Position where)
+	{
+		return gameBoard.get(where);
+	}
+	
 	/**
 	 * get the player who's turn it is, IE, that they have not yet made a move
 	 * @return the current player

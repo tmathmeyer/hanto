@@ -1,7 +1,7 @@
 package hanto.otnah.beta;
 
 import java.util.Set;
-
+import java.util.Collection;
 import hanto.common.HantoCoordinate;
 import hanto.common.HantoException;
 import hanto.common.HantoPieceType;
@@ -16,9 +16,9 @@ import hanto.otnah.common.HexPosition;
 public class BetaHantoGame extends GameState
 {
 	private HantoPlayer current;
-	private final HantoPlayer red = new RedPlayer();
-	private final HantoPlayer blue = new BluePlayer();
-	
+	private final HantoPlayer red = new BetaPlayer(HantoPlayerColor.RED);
+	private final HantoPlayer blue = new BetaPlayer(HantoPlayerColor.BLUE);
+
 	public BetaHantoGame(HantoPlayerColor firstPlayer) throws HantoException {
 		red.setNextPlayer(blue);
 		blue.setNextPlayer(red);
@@ -49,10 +49,13 @@ public class BetaHantoGame extends GameState
 			//increment player count
 			current.increaseMoveCount();
 			
+			if(pieceType == HantoPieceType.BUTTERFLY)
+			{
+				((BetaPlayer)current).setButterflyPosition(new HexPosition(to));
+			}
 			//switch player
 			current = current.getNextPlayer();
-			
-			return MoveResult.OK;
+			return gameState();
 		}
 		
 		throw new HantoException("invalid move!");
@@ -66,7 +69,7 @@ public class BetaHantoGame extends GameState
 	@Override
 	public boolean isMovePossible(HantoCoordinate from, HantoCoordinate to, HantoPieceType type) {
 		Position toPos = Position.asPosition(to);
-
+		boolean movePossible = true;
 		if (!hasPieceInInventory(type))
 		{
 			return false;
@@ -74,10 +77,11 @@ public class BetaHantoGame extends GameState
 		
 		if (forcedToPlayButterfly())
 		{
-			return HantoPieceType.BUTTERFLY == type;
+			movePossible = HantoPieceType.BUTTERFLY == type;
 		}
 		
-		return isFirstMove(toPos) || (piecePlaceContinuityCheck(toPos) && isLocationUnoccupied(toPos));
+		return movePossible && (isFirstMove(toPos) || 
+				(piecePlaceContinuityCheck(toPos) && isLocationUnoccupied(toPos)));
 	}
 
 	/**
@@ -140,4 +144,35 @@ public class BetaHantoGame extends GameState
 		return getCurrentPlayer().getMovesPlayed() >= 3
 				&& hasPieceInInventory(HantoPieceType.BUTTERFLY);
 	}
+	
+	private MoveResult gameState()
+	{
+		if(isSurrounded(((BetaPlayer)red).getButterflyPosition()))
+		{
+			return MoveResult.BLUE_WINS;
+		}
+		if(isSurrounded(((BetaPlayer)blue).getButterflyPosition()))
+		{
+			return MoveResult.RED_WINS;
+		}
+		if(red.getMovesPlayed() + blue.getMovesPlayed() == 12)
+		{
+			return MoveResult.DRAW;
+		}
+		return MoveResult.OK;
+	}
+	
+	private boolean isSurrounded(Position toCheck)
+	{
+		Collection<HantoCoordinate> positions = toCheck.adjacentPositions();
+		if(positions.size() < 6)
+			return false;
+		for(HantoCoordinate c : positions)
+		{
+			if(this.getPieceAt(c) == null)
+				return false;
+		}
+		return true;
+	}
+	
 }

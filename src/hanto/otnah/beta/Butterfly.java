@@ -23,7 +23,7 @@ public class Butterfly extends HantoTile
 
 	@Override
 	public void move(HantoCoordinate to) {
-		// TODO Auto-generated method stub
+		// Does nothing since the Butterfly can't actually move
 		
 	}
 

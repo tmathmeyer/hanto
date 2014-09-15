@@ -2,6 +2,9 @@ package hanto.otnah.common;
 
 import hanto.common.HantoCoordinate;
 import hanto.otnah.common.util.HexUtil;
+
+import java.util.Collection;
+
 /**
  * Does various geometric work for determining distances and
  * position relative to other pieces.
@@ -80,6 +83,12 @@ public abstract class Position implements HantoCoordinate {
 			public int distanceFrom(Position other) {
 				return HexUtil.distance(this, other);
 			}
+			
+			@Override
+			public Collection<HantoCoordinate> adjacentPositions(){
+				return HexUtil.locationsSurrounding(this);
+			}
+
 		};
 	}
 
@@ -91,4 +100,10 @@ public abstract class Position implements HantoCoordinate {
 	public boolean isAdjacentTo(Position check) {
 		return check.getDistanceTo(this) == 1;
 	}
+	
+	/**
+	 * Gets the list of positions that are adjacent to the given position.
+	 * @return the list of adjacent positions
+	 */
+	public abstract Collection<HantoCoordinate> adjacentPositions();
 }
