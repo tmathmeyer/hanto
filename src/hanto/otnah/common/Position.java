@@ -83,11 +83,6 @@ public abstract class Position implements HantoCoordinate {
 			public int distanceFrom(Position other) {
 				return HexUtil.distance(this, other);
 			}
-			
-			@Override
-			public Collection<HantoCoordinate> adjacentPositions(){
-				return HexUtil.locationsSurrounding(this);
-			}
 
 		};
 	}
@@ -105,5 +100,8 @@ public abstract class Position implements HantoCoordinate {
 	 * Gets the list of positions that are adjacent to the given position.
 	 * @return the list of adjacent positions
 	 */
-	public abstract Collection<HantoCoordinate> adjacentPositions();
+	public Collection<HantoCoordinate> adjacentPositions()
+	{
+		return HexUtil.locationsSurrounding(this);
+	}
 }

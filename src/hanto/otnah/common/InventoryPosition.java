@@ -1,7 +1,8 @@
 package hanto.otnah.common;
 
 import hanto.common.HantoCoordinate;
-import java.util.HashSet;
+
+import java.util.Collections;
 import java.util.Collection;
 
 public class InventoryPosition extends Position
@@ -42,8 +43,7 @@ public class InventoryPosition extends Position
 	@Override
 	public Collection<HantoCoordinate> adjacentPositions()
 	{
-		
-		return (Collection<HantoCoordinate>)new HashSet<HantoCoordinate>();
+		return Collections.emptyList();
 	}
 
 }

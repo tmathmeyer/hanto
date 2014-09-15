@@ -15,11 +15,6 @@ public class HexPosition extends Position
 		y = yLoc;
 	}
 	
-	public HexPosition(HantoCoordinate c)
-	{
-		this(c.getX(),c.getY());
-	}
-	
 	@Override
 	public int getX()
 	{

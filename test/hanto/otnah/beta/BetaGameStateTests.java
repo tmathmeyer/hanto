@@ -13,7 +13,7 @@ import org.junit.Test;
 
 public class BetaGameStateTests
 {
-	private int[] inventoryCounts(HantoPlayer p)
+	private int[] inventoryCounts(HantoPlayer<?> p)
 	{
 		int[] result = new int[3];
 		for(HantoTile t : p.getInventory())
@@ -63,7 +63,7 @@ public class BetaGameStateTests
 	public void firstPlayerPlaysFirst() throws HantoException
 	{
 		BetaHantoGame beta = BetaHantoGame.createBetaGameState(HantoPlayerColor.BLUE);
-		HantoPlayer first = beta.getCurrentPlayer();
+		HantoPlayer<?> first = beta.getCurrentPlayer();
 		assertEquals(beta.makeMove(HantoPieceType.BUTTERFLY, new InventoryPosition(), new HexPosition(0, 0)), MoveResult.OK);
 		assertEquals(inventoryCounts(first)[0], 0);
 	}

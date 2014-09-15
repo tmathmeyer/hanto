@@ -13,7 +13,7 @@ import java.util.Set;
  * @author otnah
  *
  */
-public abstract class HantoPlayer
+public abstract class HantoPlayer<T extends HantoPlayer<T>>
 {
 	private final HantoPlayerColor playerColor;
 	private final Set<Position> currentPositions = new HashSet<>();
@@ -85,14 +85,19 @@ public abstract class HantoPlayer
 	/**
 	 * @return the player who's turn it is next
 	 */
-	public abstract HantoPlayer getNextPlayer();
+	public abstract T getNextPlayer();
+	
+	/**
+	 * @return implicitly casted self reference
+	 */
+	public abstract T getSelf();
 	
 	/**
 	 * re-arrange the order of players
 	 * 
 	 * @param next the next player
 	 */
-	public abstract void setNextPlayer(HantoPlayer next);
+	public abstract void setNextPlayer(T next);
 
 	/**
 	 * 

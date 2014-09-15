@@ -15,9 +15,9 @@ import hanto.otnah.common.HexPosition;
 
 public class BetaHantoGame extends GameState
 {
-	private HantoPlayer current;
-	private final HantoPlayer red = new BetaPlayer(HantoPlayerColor.RED);
-	private final HantoPlayer blue = new BetaPlayer(HantoPlayerColor.BLUE);
+	private BetaPlayer current;
+	private final BetaPlayer red = new BetaPlayer(HantoPlayerColor.RED);
+	private final BetaPlayer blue = new BetaPlayer(HantoPlayerColor.BLUE);
 
 	public BetaHantoGame(HantoPlayerColor firstPlayer) throws HantoException {
 		red.setNextPlayer(blue);
@@ -44,15 +44,16 @@ public class BetaHantoGame extends GameState
 			HantoTile played = getCurrentPlayer().play(pieceType);
 			
 			//put piece on board
-			this.setPieceAt(played, to);
+			setPieceAt(played, to);
 			
 			//increment player count
 			current.increaseMoveCount();
 			
 			if(pieceType == HantoPieceType.BUTTERFLY)
 			{
-				((BetaPlayer)current).setButterflyPosition(new HexPosition(to));
+				getCurrentPlayer().getSelf().setButterflyPosition(Position.asPosition(to));
 			}
+			
 			//switch player
 			current = current.getNextPlayer();
 			return gameState();
@@ -62,7 +63,7 @@ public class BetaHantoGame extends GameState
 	}
 
 	@Override
-	public HantoPlayer getCurrentPlayer() {
+	public HantoPlayer<BetaPlayer> getCurrentPlayer() {
 		return current;
 	}
 
@@ -77,7 +78,7 @@ public class BetaHantoGame extends GameState
 		
 		if (forcedToPlayButterfly())
 		{
-			movePossible = HantoPieceType.BUTTERFLY == type;
+			movePossible = (HantoPieceType.BUTTERFLY == type);
 		}
 		
 		return movePossible && (isFirstMove(toPos) || 
@@ -102,7 +103,7 @@ public class BetaHantoGame extends GameState
 	
 	private boolean piecePlaceContinuityCheck(Position check)
 	{
-		Set<Position> occupied = this.filledLocations();
+		Set<Position> occupied = filledLocations();
 		
 		for(Position p : occupied)
 		{
@@ -123,7 +124,7 @@ public class BetaHantoGame extends GameState
 	
 	private boolean isLocationUnoccupied(Position check)
 	{
-		return this.getPieceAt(check) == null;
+		return getPieceAt(check) == null;
 	}
 	
 	private boolean hasPieceInInventory(HantoPieceType hpt)
@@ -147,11 +148,11 @@ public class BetaHantoGame extends GameState
 	
 	private MoveResult gameState()
 	{
-		if(isSurrounded(((BetaPlayer)red).getButterflyPosition()))
+		if(isSurrounded(red.getButterflyPosition()))
 		{
 			return MoveResult.BLUE_WINS;
 		}
-		if(isSurrounded(((BetaPlayer)blue).getButterflyPosition()))
+		if(isSurrounded(blue.getButterflyPosition()))
 		{
 			return MoveResult.RED_WINS;
 		}
@@ -166,11 +167,15 @@ public class BetaHantoGame extends GameState
 	{
 		Collection<HantoCoordinate> positions = toCheck.adjacentPositions();
 		if(positions.size() < 6)
+		{
 			return false;
+		}
 		for(HantoCoordinate c : positions)
 		{
-			if(this.getPieceAt(c) == null)
+			if(getPieceAt(c) == null)
+			{
 				return false;
+			}
 		}
 		return true;
 	}

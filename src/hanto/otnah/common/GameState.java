@@ -41,7 +41,7 @@ public abstract class GameState implements HantoGame
 	 * get the player who's turn it is, IE, that they have not yet made a move
 	 * @return the current player
 	 */
-	public abstract HantoPlayer getCurrentPlayer();
+	public abstract HantoPlayer<?> getCurrentPlayer();
 	
 	/**
 	 * 
