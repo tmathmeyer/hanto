@@ -17,7 +17,7 @@ import hanto.common.HantoGameID;
 import hanto.common.HantoPiece;
 import hanto.common.HantoPlayerColor;
 import hanto.common.MoveResult;
-import hanto.otnah.alpha.AlphaGameState;
+import hanto.otnah.alpha.AlphaHantoGame;
 import static hanto.common.HantoPieceType.*;
 import static hanto.common.MoveResult.*;
 
@@ -51,13 +51,13 @@ public class AlphaHantoMasterTest {
 	}
 
 	@Before
-	public void setup() {
+	public void setup() throws HantoException {
 		game = factory.makeHantoGame(HantoGameID.ALPHA_HANTO);
 	}
 
 	@Test
 	public void getAnAlphaHantoGameFromTheFactory() {
-		assertTrue(game instanceof AlphaGameState);
+		assertTrue(game instanceof AlphaHantoGame);
 	}
 
 	@Test

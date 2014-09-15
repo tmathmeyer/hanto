@@ -12,7 +12,8 @@ package hanto;
 
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 import hanto.common.*;
-import hanto.otnah.alpha.AlphaGameState;
+import hanto.otnah.alpha.AlphaHantoGame;
+import hanto.otnah.beta.BetaHantoGame;
 
 /**
  * This is a singleton class that provides a factory to create an instance of any version
@@ -46,8 +47,9 @@ public class HantoGameFactory
 	 * first.
 	 * @param gameId the version desired.
 	 * @return the game instance
+	 * @throws HantoException 
 	 */
-	public HantoGame makeHantoGame(HantoGameID gameId)
+	public HantoGame makeHantoGame(HantoGameID gameId) throws HantoException
 	{
 		return makeHantoGame(gameId, HantoPlayerColor.BLUE);
 	}
@@ -57,13 +59,16 @@ public class HantoGameFactory
 	 * @param gameId the version desired.
 	 * @param movesFirst the player color that moves first
 	 * @return the game instance
+	 * @throws HantoException 
 	 */
-	public HantoGame makeHantoGame(HantoGameID gameId, HantoPlayerColor movesFirst) {
+	public HantoGame makeHantoGame(HantoGameID gameId, HantoPlayerColor movesFirst) throws HantoException {
 		final HantoGame game;
 		switch (gameId) {
 			case ALPHA_HANTO:
-				game = AlphaGameState.defaultAGS();
+				game = AlphaHantoGame.defaultAGS();
 				break;
+			case BETA_HANTO:
+				game = BetaHantoGame.createBetaGameState(movesFirst);
 			default:
 				throw new NotImplementedException();
 		}
