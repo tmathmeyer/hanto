@@ -102,12 +102,14 @@ public class BetaGameStateTests
 		beta.makeMove(HantoPieceType.SPARROW, new InventoryPosition(), new BetaPosition(0, 0));
 	}
 	
-	
+	@Test
 	public void playFourMoves() throws HantoException
 	{
 		BetaHantoGame beta = BetaHantoGame.createBetaGameState(HantoPlayerColor.BLUE);
-		beta.makeMove(HantoPieceType.BUTTERFLY, new InventoryPosition(), new BetaPosition(0, 0));
-		beta.makeMove(HantoPieceType.BUTTERFLY, new InventoryPosition(), new BetaPosition(1, 1));
+		assertEquals(beta.makeMove(HantoPieceType.BUTTERFLY, new InventoryPosition(), new BetaPosition(0, 0)), MoveResult.OK);
+		assertEquals(beta.makeMove(HantoPieceType.BUTTERFLY, new InventoryPosition(), new BetaPosition(0, 1)), MoveResult.OK);
+		assertEquals(beta.makeMove(HantoPieceType.SPARROW, new InventoryPosition(), new BetaPosition(1, 1)), MoveResult.OK);
+		assertEquals(beta.makeMove(HantoPieceType.SPARROW, new InventoryPosition(), new BetaPosition(1, 0)), MoveResult.OK);
 	}
 	
 	
