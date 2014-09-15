@@ -162,7 +162,7 @@ public class AlphaGameStateTests {
 	
 	@Test(expected=HantoException.class)
 	public void doInvalidSecondMove() throws HantoException{
-			freshGame.makeMove(HantoPieceType.BUTTERFLY, new InventoryPosition(), new HexPosition(0, 0));
+			unfreshGame.makeMove(HantoPieceType.BUTTERFLY, new InventoryPosition(), new HexPosition(0, 0));
 	}
 	
 	@Test(expected=HantoException.class)
@@ -172,7 +172,7 @@ public class AlphaGameStateTests {
 	
 	@Test(expected=HantoException.class)
 	public void doInvalidStandardSecondMove() throws HantoException{
-			freshGame.makeMove(HantoPieceType.BUTTERFLY, null, new HexPosition(0, 0));
+			unfreshGame.makeMove(HantoPieceType.BUTTERFLY, null, new HexPosition(0, 0));
 	}
 	
 	
