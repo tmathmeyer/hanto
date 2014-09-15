@@ -11,6 +11,7 @@ import hanto.otnah.common.GameState;
 import hanto.otnah.common.HantoPlayer;
 import hanto.otnah.common.HantoTile;
 import hanto.otnah.common.Position;
+import hanto.otnah.common.HexPosition;
 
 public class BetaHantoGame extends GameState
 {
@@ -105,7 +106,7 @@ public class BetaHantoGame extends GameState
 	private boolean isFirstMove(Position check)
 	{
 		return filledLocations().size() == 0
-				&& check.getDistanceTo(new BetaPosition(0, 0)) == 0;
+				&& check.getDistanceTo(new HexPosition(0, 0)) == 0;
 	}
 	
 	private boolean isLocationUnoccupied(Position check)

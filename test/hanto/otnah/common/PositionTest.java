@@ -1,7 +1,7 @@
 package hanto.otnah.common;
 
 import static org.junit.Assert.*;
-import hanto.otnah.alpha.AlphaPosition;
+import hanto.otnah.common.HexPosition;
 
 import org.junit.Test;
 
@@ -11,10 +11,10 @@ public class PositionTest
 	@Test
 	public void testNormaldistances()
 	{
-		Position hc1 = new AlphaPosition(0, 0);
-		Position hc2 = new AlphaPosition(1, 1);
-		Position hc3 = new AlphaPosition(2, 2);
-		Position hc4 = new AlphaPosition(3, 5);
+		Position hc1 = new HexPosition(0, 0);
+		Position hc2 = new HexPosition(1, 1);
+		Position hc3 = new HexPosition(2, 2);
+		Position hc4 = new HexPosition(3, 5);
 		
 		assertEquals(hc1.getDistanceTo(hc2), 2);
 		assertEquals(hc1.getDistanceTo(hc3), 4);
@@ -31,9 +31,9 @@ public class PositionTest
 	public void testInventorydistances()
 	{
 		Position i = new InventoryPosition();
-		Position hc1 = new AlphaPosition(1, 1);
-		Position hc2 = new AlphaPosition(2, 2);
-		Position hc3 = new AlphaPosition(3, 5);
+		Position hc1 = new HexPosition(1, 1);
+		Position hc2 = new HexPosition(2, 2);
+		Position hc3 = new HexPosition(3, 5);
 		
 		assertEquals(i.getDistanceTo(hc1), 0);
 		assertEquals(i.getDistanceTo(hc2), 0);

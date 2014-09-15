@@ -1,13 +1,13 @@
-package hanto.otnah.beta;
+package hanto.otnah.common;
 
 import hanto.otnah.common.Position;
 import hanto.otnah.common.util.HexUtil;
 
-public class BetaPosition extends Position
+public class HexPosition extends Position
 {
 	private final int x, y;
 	
-	public BetaPosition(int xLoc, int yLoc)
+	public HexPosition(int xLoc, int yLoc)
 	{
 		x = xLoc;
 		y = yLoc;
