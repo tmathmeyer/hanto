@@ -183,4 +183,11 @@ public class AlphaGameStateTests {
 	{
 		AlphaHantoGame.defaultAGS().makeMove(null, null, null);
 	}
+	
+	@Test
+	public void testPrintableBoardIsEmpty()
+	{
+		assertEquals("",freshGame.getPrintableBoard());
+		assertEquals("",unfreshGame.getPrintableBoard());
+	}
 }

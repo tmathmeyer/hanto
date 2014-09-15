@@ -60,7 +60,7 @@ public class BetaHantoGame extends GameState
 			
 			if(pieceType == HantoPieceType.BUTTERFLY)
 			{
-				getCurrentPlayer().getSelf().setButterflyPosition(Position.asPosition(to));
+				current.setButterflyPosition(Position.asPosition(to));
 			}
 			
 			//switch player

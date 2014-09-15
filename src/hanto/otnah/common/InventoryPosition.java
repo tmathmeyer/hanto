@@ -46,5 +46,10 @@ public class InventoryPosition extends Position
 	{
 		return Collections.emptyList();
 	}
+	
+	@Override public boolean equals(Object other)
+	{
+		return other instanceof InventoryPosition;
+	}
 
 }
