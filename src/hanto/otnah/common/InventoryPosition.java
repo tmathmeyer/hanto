@@ -14,6 +14,11 @@ import hanto.common.HantoCoordinate;
 import java.util.Collections;
 import java.util.Collection;
 
+/**
+ * 
+ * @author otnah
+ *
+ */
 public class InventoryPosition extends Position
 {
 	@Override
@@ -47,9 +52,16 @@ public class InventoryPosition extends Position
 		return Collections.emptyList();
 	}
 	
-	@Override public boolean equals(Object other)
+	@Override
+	public boolean equals(Object other)
 	{
 		return other instanceof InventoryPosition;
+	}
+	
+	@Override
+	public int hashCode()
+	{
+		return 655678901;
 	}
 
 }

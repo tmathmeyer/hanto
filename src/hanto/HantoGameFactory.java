@@ -47,9 +47,8 @@ public class HantoGameFactory
 	 * first.
 	 * @param gameId the version desired.
 	 * @return the game instance
-	 * @throws HantoException 
 	 */
-	public HantoGame makeHantoGame(HantoGameID gameId) throws HantoException
+	public HantoGame makeHantoGame(HantoGameID gameId)
 	{
 		return makeHantoGame(gameId, HantoPlayerColor.BLUE);
 	}
@@ -59,7 +58,6 @@ public class HantoGameFactory
 	 * @param gameId the version desired.
 	 * @param movesFirst the player color that moves first
 	 * @return the game instance
-	 * @throws HantoException 
 	 */
 	public HantoGame makeHantoGame(HantoGameID gameId, HantoPlayerColor movesFirst) {
 		final HantoGame game;

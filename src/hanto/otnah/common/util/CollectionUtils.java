@@ -11,12 +11,26 @@ package hanto.otnah.common.util;
 
 import hanto.common.HantoException;
 
+import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ * 
+ * @author otnah
+ *
+ */
 public class CollectionUtils
 {
+	
+	/**
+	 * @param <T> the type of resulting collection
+	 * @param <V> The actual types
+	 * @param as the type of list to get back
+	 * @param items the Items to add to the list
+	 * @return a list of items as a parent type
+	 */
 	@SafeVarargs
 	public static <T, V extends T> List<T> toSetFromArray(Class<T> as, V ... items)
 	{
@@ -28,6 +42,12 @@ public class CollectionUtils
 		return result;
 	}
 	
+	/**
+	 * @param <T> the collection type
+	 * @param as the type of collection
+	 * @param items the items to be in the collection
+	 * @return a list of items as the super type
+	 */
 	@SafeVarargs
 	public static <T> List<T> toSetFromFactoryArray(Class<T> as, Factory<? extends T> ... items)
 	{
@@ -44,12 +64,20 @@ public class CollectionUtils
 	
 	/**
 	 * it creates things
-	 * @param <T>
+	 * @param <T> the type of factory
 	 */
 	public static class Factory<T>
 	{
 		private final List<T> inner = new LinkedList<>();
 		
+		/**
+		 * Wrapper for creating N instances of a type, where that type
+		 * has a 0 parameter default constructor
+		 * 
+		 * @param type the type of object
+		 * @param count how many of them
+		 * @throws HantoException if there was an error creating them
+		 */
 		public Factory(Class<T> type, int count) throws HantoException
 		{
 			for(int i = 0; i < count; i++)
@@ -64,27 +92,53 @@ public class CollectionUtils
 			}
 		}
 		
-		private <B> Factory(Class<T> type, int count, B arg1) throws HantoException
+		/**
+		 * Wrapper for creating N instances of a type, where that type
+		 * has a 1 parameter default constructor
+		 * 
+		 * @param type the type of object
+		 * @param count the number of them
+		 * @param arg1 the actual parameter to the type constructor
+		 */
+		private <B> Factory(Class<T> type, int count, B arg1)
 		{
 			for(int i = 0; i < count; i++)
 			{
+				Constructor<T> cons;
 				try {
-					inner.add(type.getConstructor(arg1.getClass()).newInstance(arg1));
-				} catch (InstantiationException | IllegalAccessException
-						| IllegalArgumentException | InvocationTargetException
-						| NoSuchMethodException | SecurityException e) {
+					cons = type.getConstructor(arg1.getClass());
+					if (cons != null) {
+						inner.add(cons.newInstance(arg1));
+					}
+				} catch (NoSuchMethodException
+						| SecurityException
+						| InstantiationException
+						| IllegalAccessException
+						| IllegalArgumentException
+						| InvocationTargetException e) {
 					e.printStackTrace();
 				}
+				
 			}
 		}
 		
 		private Factory(){}
 		
+		/**
+		 * 
+		 * @return get the list of items
+		 */
 		public List<T> getWrapped()
 		{
 			return inner;
 		}
 		
+		/**
+		 * @param <A> the type of factory
+		 * @param type the type
+		 * @param count the number
+		 * @return a Factory of type, count
+		 */
 		public static <A> Factory<A> norm(Class<A> type, int count)
 		{
 			try {
@@ -94,13 +148,17 @@ public class CollectionUtils
 			}
 		}
 		
+		/**
+		 * @param <A> the type of factory
+		 * @param <B> the type for the constructor of A
+		 * @param type the type
+		 * @param count the count
+		 * @param ob the actual param
+		 * @return a factory of type, count, ob
+		 */
 		public static <A, B> Factory<A> makes(Class<A> type, int count, B ob)
 		{
-			try {
-				return new Factory<A> (type, count, ob);
-			} catch (HantoException e) {
-				return new Factory<A>();
-			}
+			return new Factory<A> (type, count, ob);
 		}
 	}
 }

@@ -21,6 +21,7 @@ import java.util.Set;
  * 
  * @author otnah
  *
+ * @param <T> the subclass of HantoPlayer
  */
 public abstract class HantoPlayer<T extends HantoPlayer<T>>
 {
@@ -32,7 +33,8 @@ public abstract class HantoPlayer<T extends HantoPlayer<T>>
 	
 	/**
 	 * 
-	 * @param hpc the color of this player
+	 * @param hpc the player color of this player
+	 * @param defaultInventory the default inventory of the player
 	 */
 	protected HantoPlayer(HantoPlayerColor hpc, List<HantoTile> defaultInventory)
 	{
@@ -75,6 +77,11 @@ public abstract class HantoPlayer<T extends HantoPlayer<T>>
 		movesPlayed ++;
 	}
 
+	/**
+	 * removes a single piece of this type from the inventory
+	 * @param pieceType the piece type to remove from the inventory
+	 * @return the piece removed
+	 */
 	public HantoTile play(HantoPieceType pieceType)
 	{
 		int index = 0, assumed = 0;

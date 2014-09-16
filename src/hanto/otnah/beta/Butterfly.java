@@ -17,10 +17,19 @@ import hanto.common.HantoPlayerColor;
 import hanto.otnah.common.HantoTile;
 import hanto.otnah.common.Position;
 
+/**
+ * 
+ * @author otnah
+ *
+ */
 public class Butterfly extends HantoTile
 {
 	private final HantoPlayerColor myColor;
 	
+	/**
+	 * Default constructor
+	 * @param hpc the Color of the butterfly
+	 */
 	public Butterfly(HantoPlayerColor hpc)
 	{
 		myColor = hpc;

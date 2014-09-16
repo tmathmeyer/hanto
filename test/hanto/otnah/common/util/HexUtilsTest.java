@@ -18,6 +18,11 @@ import hanto.otnah.common.HexPosition;
 
 import org.junit.Test;
 
+/**
+ * 
+ * @author otnah
+ *
+ */
 public class HexUtilsTest {
 
 	HantoCoordinate HC0 = new HexPosition(0, 0);
@@ -28,6 +33,9 @@ public class HexUtilsTest {
 	HantoCoordinate HC5 = new HexPosition(-1, 0);
 	HantoCoordinate HC6 = new HexPosition(0, -1);
 	
+	/**
+	 * test that vertical distances are correct
+	 */
 	@Test
 	public void verticalDistance()
 	{
@@ -37,6 +45,9 @@ public class HexUtilsTest {
 		assertEquals(HexUtil.distance(HC6, HC2), 2);
 	}
 	
+	/**
+	 * test positive slope distances
+	 */
 	@Test
 	public void positiveSlopeDistance()
 	{
@@ -46,6 +57,9 @@ public class HexUtilsTest {
 		assertEquals(HexUtil.distance(HC5, HC1), 2);
 	}
 	
+	/**
+	 * test negative slope distances
+	 */
 	@Test
 	public void negativeSlopeDistance()
 	{
@@ -55,6 +69,9 @@ public class HexUtilsTest {
 		assertEquals(HexUtil.distance(HC4, HC3), 2);
 	}
 	
+	/**
+	 * test surrounding code
+	 */
 	@Test
 	public void testSurrounding()
 	{

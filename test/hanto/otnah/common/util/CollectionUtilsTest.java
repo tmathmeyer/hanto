@@ -16,16 +16,24 @@ import java.util.Set;
 
 import org.junit.Test;
 
+/**
+ * 
+ * @author otnah
+ *
+ */
 public class CollectionUtilsTest {
-
+	/** */
 	public static class A {
 
 	}
-
+	/** */
 	public static class B extends A {
 
 	}
 
+	/**
+	 * test the Factory stuff
+	 */
 	@Test
 	public void testDoesCreate() {
 		B one = new B();

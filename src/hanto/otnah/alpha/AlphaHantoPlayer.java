@@ -14,6 +14,11 @@ import hanto.otnah.common.HantoPlayer;
 import hanto.otnah.common.HantoTile;
 import hanto.otnah.common.util.CollectionUtils;
 
+/**
+ * 
+ * @author otnah
+ *
+ */
 public class AlphaHantoPlayer extends HantoPlayer<AlphaHantoPlayer>
 {
 	
@@ -29,6 +34,10 @@ public class AlphaHantoPlayer extends HantoPlayer<AlphaHantoPlayer>
 		nextPlayer = next;
 	}
 	
+	/**
+	 * default constructor for an alpha player
+	 * @param playerColor the player's color
+	 */
 	public AlphaHantoPlayer(HantoPlayerColor playerColor)
 	{
 		super(playerColor, CollectionUtils.toSetFromArray(

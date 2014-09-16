@@ -16,8 +16,19 @@ import java.util.HashSet;
 import hanto.common.HantoCoordinate;
 import hanto.otnah.common.HexPosition;
 
+/**
+ * 
+ * @author otnah
+ *
+ */
 public class HexUtil
 {
+	/**
+	 * 
+	 * @param from start
+	 * @param to end
+	 * @return the destance between the start and end
+	 */
 	public static int distance(HantoCoordinate from, HantoCoordinate to)
 	{
 		int deltax = from.getX() - to.getX();
@@ -29,6 +40,11 @@ public class HexUtil
 		return Math.max(Math.abs(deltax), Math.abs(deltay));
 	}
 	
+	/**
+	 * 
+	 * @param position the position
+	 * @return the positions surrounding the provided position
+	 */
 	public static Collection<HantoCoordinate> locationsSurrounding(HantoCoordinate position)
 	{
 		Collection<HantoCoordinate> surrounding = new HashSet<>();

@@ -19,11 +19,21 @@ import hanto.otnah.common.HantoPlayer;
 import hanto.otnah.common.Position;
 import hanto.otnah.common.HexPosition;
 
+/**
+ * 
+ * @author otnah
+ *
+ */
 public class AlphaHantoGame extends GameState
 {
 	private final AlphaHantoPlayer redPlayer, bluePlayer;
 	private boolean which;
 	
+	/**
+	 * normal constructor for AlphaHantoGame
+	 * @param red the red player
+	 * @param blue the blue player
+	 */
 	public AlphaHantoGame(final AlphaHantoPlayer red, final AlphaHantoPlayer blue)
 	{
 		redPlayer = red;
@@ -86,7 +96,7 @@ public class AlphaHantoGame extends GameState
 
 	/**
 	 * get the default alpha game state
-	 * @return
+	 * @return the default game
 	 */
 	public static AlphaHantoGame defaultAGS()
 	{

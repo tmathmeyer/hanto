@@ -23,12 +23,22 @@ import hanto.otnah.common.HantoTile;
 import hanto.otnah.common.Position;
 import hanto.otnah.common.HexPosition;
 
+/**
+ * 
+ * @author otnah
+ *
+ */
 public class BetaHantoGame extends GameState
 {
 	private BetaPlayer current;
 	private final BetaPlayer red = new BetaPlayer(HantoPlayerColor.RED);
 	private final BetaPlayer blue = new BetaPlayer(HantoPlayerColor.BLUE);
 
+	/**
+	 * default constructor
+	 * 
+	 * @param firstPlayer the color pf the player that goes first
+	 */
 	public BetaHantoGame(HantoPlayerColor firstPlayer)
 	{
 		red.setNextPlayer(blue);

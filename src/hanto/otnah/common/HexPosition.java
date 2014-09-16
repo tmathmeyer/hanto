@@ -14,10 +14,21 @@ import java.util.Collection;
 import hanto.common.HantoCoordinate;
 import hanto.otnah.common.util.HexUtil;
 
+/**
+ * 
+ * @author otnah
+ *
+ */
 public class HexPosition extends Position
 {
 	private final int x, y;
 	
+	/**
+	 * Default Constructor
+	 * 
+	 * @param xLoc the x coord
+	 * @param yLoc the y coord
+	 */
 	public HexPosition(int xLoc, int yLoc)
 	{
 		x = xLoc;

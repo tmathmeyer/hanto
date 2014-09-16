@@ -14,9 +14,17 @@ import java.util.Collection;
 import org.junit.Test;
 import hanto.common.HantoCoordinate;
 
+/**
+ * 
+ * @author otnah
+ *
+ */
 public class PositionTest
 {
-
+	
+	/**
+	 * test distances work
+	 */
 	@Test
 	public void testNormaldistances()
 	{
@@ -35,7 +43,9 @@ public class PositionTest
 		
 	}
 	
-	
+	/**
+	 * test inventory distances work
+	 */
 	@Test
 	public void testInventorydistances()
 	{
@@ -54,6 +64,10 @@ public class PositionTest
 		
 	}
 	
+	/**
+	 * make sure that inventories fail cood checks
+	 * @throws UnsupportedOperationException
+	 */
 	@Test(expected=UnsupportedOperationException.class)
 	public void testInventoryHasNoX() throws UnsupportedOperationException
 	{
@@ -61,6 +75,10 @@ public class PositionTest
 		i.getX();
 	}
 	
+	/**
+	 * make sure inventories fail coord checks
+	 * @throws UnsupportedOperationException
+	 */
 	@Test(expected=UnsupportedOperationException.class)
 	public void testInventoryHasNoY() throws UnsupportedOperationException
 	{
@@ -68,20 +86,25 @@ public class PositionTest
 		i.getY();
 	}
 
+	/**
+	 * check adjacent positions
+	 */
 	@Test
 	public void testAdjacentPositions(){
-		Position around = new HexPosition(0,0);
+		Position around = new HexPosition(0, 0);
 		Collection<HantoCoordinate> col = around.adjacentPositions();
-		assertTrue(col.contains(new HexPosition(0,1)));
-		assertTrue(col.contains(new HexPosition(1,-1)));
-		assertTrue(col.contains(new HexPosition(1,0)));
-		assertTrue(col.contains(new HexPosition(0,-1)));
-		assertTrue(col.contains(new HexPosition(-1,0)));
-		assertTrue(col.contains(new HexPosition(-1,1)));
-		assertEquals(col.size(),6);
+		assertTrue(col.contains(new HexPosition(0, 1)));
+		assertTrue(col.contains(new HexPosition(1, -1)));
+		assertTrue(col.contains(new HexPosition(1, 0)));
+		assertTrue(col.contains(new HexPosition(0, -1)));
+		assertTrue(col.contains(new HexPosition(-1, 0)));
+		assertTrue(col.contains(new HexPosition(-1, 1)));
+		assertEquals(col.size(), 6);
 	}
 	
-	
+	/**
+	 * check all inventories are the same
+	 */
 	@Test
 	public void allInventoryPositionsEqualTest(){
 		Position one = new InventoryPosition();

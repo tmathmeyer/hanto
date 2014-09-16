@@ -35,8 +35,7 @@ public abstract class HantoTile implements HantoPiece
 	/**
 	 * Checks whether a given position is a valid position for the tile to move to.
 	 * @param to The position to check against.
-	 * @param game The current GameState object.
-	 * @return
+	 * @return whether the move is valid
 	 */
 	public abstract boolean isValidMove(Position to);
 	

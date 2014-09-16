@@ -18,8 +18,14 @@ import hanto.otnah.common.HantoPlayer;
 import hanto.otnah.common.HantoTile;
 import hanto.otnah.common.InventoryPosition;
 import hanto.otnah.common.HexPosition;
+
 import org.junit.Test;
 
+/**
+ * 
+ * @author otnah
+ *
+ */
 public class BetaGameStateTests
 {
 	private int[] inventoryCounts(HantoPlayer<?> p)
@@ -43,6 +49,10 @@ public class BetaGameStateTests
 		return result;
 	}
 	
+	/**
+	 * make sure Beta isn't null
+	 * @throws HantoException on failure
+	 */
 	@Test
 	public void canStartTest() throws HantoException
 	{
@@ -50,12 +60,20 @@ public class BetaGameStateTests
 		assertNotNull(BetaHantoGame.createBetaGameState(HantoPlayerColor.BLUE));
 	}
 
+	/**
+	 * fail on lack of color
+	 * @throws HantoException on failure
+	 */
 	@Test(expected=HantoException.class)
 	public void needsValidPlayerColor() throws HantoException
 	{
 		BetaHantoGame.createBetaGameState(null);
 	}
 	
+	/**
+	 * check inventories
+	 * @throws HantoException on failure
+	 */
 	@Test
 	public void hasProperStartingInventoryTest() throws HantoException
 	{
@@ -68,6 +86,10 @@ public class BetaGameStateTests
 		assertEquals(inventoryCounts[2], 0);
 	}
 	
+	/**
+	 * make sure teh first player is first
+	 * @throws HantoException
+	 */
 	@Test
 	public void firstPlayerPlaysFirst() throws HantoException
 	{
@@ -77,6 +99,10 @@ public class BetaGameStateTests
 		assertEquals(inventoryCounts(first)[0], 0);
 	}
 	
+	/**
+	 * make sure a move actually happens on move
+	 * @throws HantoException
+	 */
 	@Test
 	public void pieceMoveHappens() throws HantoException
 	{
@@ -86,6 +112,10 @@ public class BetaGameStateTests
 		assertEquals(beta.getPieceAt(new HexPosition(0, 0)).getColor(), HantoPlayerColor.BLUE);
 	}
 	
+	/**
+	 * make sure a move happens for red too
+	 * @throws HantoException
+	 */
 	@Test
 	public void pieceMoveHappensRed() throws HantoException
 	{
@@ -95,6 +125,10 @@ public class BetaGameStateTests
 		assertEquals(beta.getPieceAt(new HexPosition(0, 0)).getColor(), HantoPlayerColor.RED);
 	}
 	
+	/**
+	 * make sure that you cant play disconnected pieces
+	 * @throws HantoException
+	 */
 	@Test(expected=HantoException.class)
 	public void disconnectedPieceFail() throws HantoException
 	{
@@ -103,6 +137,10 @@ public class BetaGameStateTests
 		beta.makeMove(HantoPieceType.SPARROW, new InventoryPosition(), new HexPosition(1, 1));
 	}
 	
+	/**
+	 * make sure a player cant play more of any tile than they have
+	 * @throws HantoException
+	 */
 	@Test(expected=HantoException.class)
 	public void doublePlayButterfly() throws HantoException
 	{
@@ -112,6 +150,10 @@ public class BetaGameStateTests
 		beta.makeMove(HantoPieceType.BUTTERFLY, new InventoryPosition(), new HexPosition(1, 1));
 	}
 	
+	/**
+	 * make sure that two plays cant be to the same location
+	 * @throws HantoException
+	 */
 	@Test(expected=HantoException.class)
 	public void playOnSameLocation() throws HantoException
 	{
@@ -121,6 +163,10 @@ public class BetaGameStateTests
 		beta.makeMove(HantoPieceType.SPARROW, new InventoryPosition(), new HexPosition(0, 0));
 	}
 	
+	/**
+	 * play four correct moves and make sure they works
+	 * @throws HantoException
+	 */
 	@Test
 	public void playFourMoves() throws HantoException
 	{
@@ -133,6 +179,10 @@ public class BetaGameStateTests
 		assertEquals(beta.makeMove(HantoPieceType.SPARROW, new InventoryPosition(), new HexPosition(2, 2)), MoveResult.OK);
 	}
 	
+	/**
+	 * make sure that a butterfly is forced to play on the fourth move
+	 * @throws HantoException
+	 */
 	@Test
 	public void forcePlayButterflyOnFourthMove() throws HantoException
 	{
@@ -160,6 +210,10 @@ public class BetaGameStateTests
 		}
 	}
 	
+	/**
+	 * make sure that the game ends in a draw when it is supposed to
+	 * @throws HantoException
+	 */
 	@Test
 	public void gameEndsInDraw() throws HantoException
 	{
@@ -190,6 +244,10 @@ public class BetaGameStateTests
 
 	}
 	
+	/**
+	 * make sure a red win is a red win
+	 * @throws HantoException
+	 */
 	@Test
 	public void gameEndsInRedWin() throws HantoException
 	{
@@ -210,6 +268,10 @@ public class BetaGameStateTests
 		assertEquals(beta.makeMove(HantoPieceType.SPARROW, new InventoryPosition(), new HexPosition(-1, 1)), MoveResult.RED_WINS);
 	}
 	
+	/**
+	 * make sure a blue win is a blue win
+	 * @throws HantoException
+	 */
 	@Test
 	public void gameEndsInBlueWin() throws HantoException
 	{

@@ -17,6 +17,11 @@ import hanto.otnah.common.util.CollectionUtils.Factory;
 import hanto.otnah.common.InventoryPosition;
 import hanto.otnah.common.Position;
 
+/**
+ * 
+ * @author otnah
+ *
+ */
 public class BetaPlayer extends HantoPlayer<BetaPlayer>
 {
 	private BetaPlayer nextPlayer;

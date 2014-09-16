@@ -24,10 +24,22 @@ import hanto.otnah.common.GameState;
 import hanto.otnah.common.InventoryPosition;
 import hanto.otnah.common.HexPosition;
 
+/**
+ * 
+ * @author otnah
+ *
+ */
 public class AlphaGameStateTests {
 	private GameState freshGame;
 	private GameState unfreshGame;
 
+	/**
+	 * setup for tests
+	 * @throws SecurityException reflection issue
+	 * @throws NoSuchFieldException reflection issue
+	 * @throws IllegalArgumentException reflection issue
+	 * @throws IllegalAccessException reflection issue
+	 */
 	@Before
 	public void init() throws SecurityException, NoSuchFieldException, IllegalArgumentException, IllegalAccessException {
 		freshGame = AlphaHantoGame.defaultAGS();
@@ -38,12 +50,18 @@ public class AlphaGameStateTests {
 		f.setBoolean(unfreshGame, false);
 	}
 
+	/**
+	 * test that Blue goes first
+	 */
 	@Test
 	public void firstPlayerGoesFirst() {
 		assertEquals(freshGame.getCurrentPlayer().getColor(),
 				HantoPlayerColor.BLUE);
 	}
 	
+	/**
+	 * test that Red goes second
+	 */
 	@Test
 	public void secondPlayerGoesSecond() {
 		assertEquals(unfreshGame.getCurrentPlayer().getColor(),
@@ -53,24 +71,36 @@ public class AlphaGameStateTests {
 	
 	
 
+	/**
+	 * test whether the first move that must be played is in fact a legal move
+	 */
 	@Test
 	public void isFirstMovePossible() {
 		assertTrue(freshGame.isMovePossible(new InventoryPosition(),
 				new HexPosition(0, 0), HantoPieceType.BUTTERFLY));
 	}
 	
+	/**
+	 * test whether the second move that must be played is legal
+	 */
 	@Test
 	public void isSecondMovePossible() {
 		assertTrue(unfreshGame.isMovePossible(new InventoryPosition(),
 				new HexPosition(1, 0), HantoPieceType.BUTTERFLY));
 	}
 	
+	/**
+	 * test whether the first move is legal, using "standard" args
+	 */
 	@Test
 	public void isFirstStandardMovePossible() {
 		assertTrue(freshGame.isMovePossible(null,
 				new HexPosition(0, 0), HantoPieceType.BUTTERFLY));
 	}
 	
+	/**
+	 * test whether the second move is legal, using "standard args"
+	 */
 	@Test
 	public void isSecondStandardMovePossible() {
 		assertTrue(unfreshGame.isMovePossible(null,
@@ -79,25 +109,36 @@ public class AlphaGameStateTests {
 
 	
 	
-	
+	/**
+	 * test that a bad move fails
+	 */
 	@Test
 	public void failOnBadFirstMove() {
 		assertFalse(freshGame.isMovePossible(new InventoryPosition(),
 				new HexPosition(1, 0), HantoPieceType.BUTTERFLY));
 	}
 	
+	/**
+	 * test that a bad move fails
+	 */
 	@Test
 	public void failOnBadSecondMove() {
 		assertFalse(unfreshGame.isMovePossible(new InventoryPosition(),
 				new HexPosition(0, 0), HantoPieceType.BUTTERFLY));
 	}
 	
+	/**
+	 * test that a "standard" bad move fails
+	 */
 	@Test
 	public void failOnBadStandardFirstMove() {
 		assertFalse(freshGame.isMovePossible(null,
 				new HexPosition(1, 0), HantoPieceType.BUTTERFLY));
 	}
 	
+	/**
+	 * test that a "standard" bad move fails
+	 */
 	@Test
 	public void failOnBadStandardSecondMove() {
 		assertFalse(unfreshGame.isMovePossible(null,
@@ -106,7 +147,9 @@ public class AlphaGameStateTests {
 	
 	
 	
-
+	/**
+	 * make a first move, and succede
+	 */
 	@Test
 	public void doFirstMove() {
 		try {
@@ -118,6 +161,9 @@ public class AlphaGameStateTests {
 		}
 	}
 	
+	/**
+	 * make a first "standard" move, and succede
+	 */
 	@Test
 	public void doStandardFirstMove() {
 		try {
@@ -129,6 +175,9 @@ public class AlphaGameStateTests {
 		}
 	}
 	
+	/**
+	 * make second move, and succede
+	 */
 	@Test
 	public void doSecondMove() {
 		try {
@@ -140,6 +189,9 @@ public class AlphaGameStateTests {
 		}
 	}
 	
+	/**
+	 * make second "standard" move, and succede
+	 */
 	@Test
 	public void doStandardSecondMove() {
 		try {
@@ -154,22 +206,37 @@ public class AlphaGameStateTests {
 	
 	
 	
-
+	/**
+	 * make invalid move, and fail
+	 * @throws HantoException on failure
+	 */
 	@Test(expected=HantoException.class)
 	public void doInvalidFirstMove()  throws HantoException{
 			freshGame.makeMove(HantoPieceType.BUTTERFLY, new InventoryPosition(), new HexPosition(1, 0));
 	}
 	
+	/**
+	 * make invalid move, and fail
+	 * @throws HantoException on failure
+	 */
 	@Test(expected=HantoException.class)
 	public void doInvalidSecondMove() throws HantoException{
 			unfreshGame.makeMove(HantoPieceType.BUTTERFLY, new InventoryPosition(), new HexPosition(0, 0));
 	}
 	
+	/**
+	 * make invalid move and fail
+	 * @throws HantoException on failure
+	 */
 	@Test(expected=HantoException.class)
 	public void doInvalidStandardFirstMove() throws HantoException{
 			freshGame.makeMove(HantoPieceType.BUTTERFLY, null, new HexPosition(1, 0));
 	}
 	
+	/**
+	 * make invalid move and fail
+	 * @throws HantoException on failure
+	 */
 	@Test(expected=HantoException.class)
 	public void doInvalidStandardSecondMove() throws HantoException{
 			unfreshGame.makeMove(HantoPieceType.BUTTERFLY, null, new HexPosition(0, 0));
@@ -177,17 +244,23 @@ public class AlphaGameStateTests {
 	
 	
 	
-	
+	/**
+	 * test that a very bad move can't happen
+	 * @throws HantoException on failure
+	 */
 	@Test(expected=HantoException.class)
 	public void veryInvalidMove() throws HantoException
 	{
 		AlphaHantoGame.defaultAGS().makeMove(null, null, null);
 	}
 	
+	/**
+	 * test printable boards
+	 */
 	@Test
 	public void testPrintableBoardIsEmpty()
 	{
-		assertEquals("",freshGame.getPrintableBoard());
-		assertEquals("",unfreshGame.getPrintableBoard());
+		assertEquals("", freshGame.getPrintableBoard());
+		assertEquals("", unfreshGame.getPrintableBoard());
 	}
 }

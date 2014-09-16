@@ -42,11 +42,6 @@ public abstract class GameState implements HantoGame
 		return gameBoard.get(Position.asPosition(where));
 	}
 	
-	public HantoPiece getPieceAt(Position where)
-	{
-		return gameBoard.get(where);
-	}
-	
 	/**
 	 * get the player who's turn it is, IE, that they have not yet made a move
 	 * @return the current player
@@ -56,9 +51,9 @@ public abstract class GameState implements HantoGame
 	/**
 	 * 
 	 * @param from the place the piece is moving from (null in the case of 
-	 * @param to
-	 * @param type
-	 * @return
+	 * @param to the location to where the piece might go
+	 * @param type the type of piece
+	 * @return if there a move is possible
 	 */
 	public abstract boolean isMovePossible(HantoCoordinate from, HantoCoordinate to, HantoPieceType type);
 	

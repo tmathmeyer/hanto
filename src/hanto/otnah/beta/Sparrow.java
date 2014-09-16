@@ -17,10 +17,19 @@ import hanto.common.HantoPlayerColor;
 import hanto.otnah.common.HantoTile;
 import hanto.otnah.common.Position;
 
+/**
+ * 
+ * @author otnah
+ *
+ */
 public class Sparrow extends HantoTile
 {
 	private final HantoPlayerColor myColor;
 	
+	/**
+	 * The default constructor
+	 * @param hpc the color of this piece
+	 */
 	public Sparrow(HantoPlayerColor hpc)
 	{
 		myColor = hpc;
