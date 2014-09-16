@@ -81,4 +81,11 @@ public class PositionTest
 		assertEquals(col.size(),6);
 	}
 	
+	
+	@Test
+	public void allInventoryPositionsEqualTest(){
+		Position one = new InventoryPosition();
+		Position two = new InventoryPosition();
+		assertTrue(one.equals(two));
+	}
 }

@@ -157,19 +157,27 @@ public class BetaHantoGame extends GameState
 	
 	private MoveResult gameState()
 	{
+		MoveResult returnValue = MoveResult.OK;
 		if(isSurrounded(red.getButterflyPosition()))
 		{
-			return MoveResult.BLUE_WINS;
+			returnValue = MoveResult.BLUE_WINS;
 		}
 		if(isSurrounded(blue.getButterflyPosition()))
 		{
-			return MoveResult.RED_WINS;
+			if(returnValue == MoveResult.BLUE_WINS)
+			{
+				returnValue = MoveResult.DRAW;
+			}
+			else
+			{
+				returnValue = MoveResult.RED_WINS;
+			}
 		}
 		if(red.getMovesPlayed() + blue.getMovesPlayed() == 12)
 		{
-			return MoveResult.DRAW;
+			returnValue = MoveResult.DRAW;
 		}
-		return MoveResult.OK;
+		return returnValue;
 	}
 	
 	private boolean isSurrounded(Position toCheck)
