@@ -10,6 +10,7 @@
 package hanto.otnah.common;
 
 import hanto.common.HantoCoordinate;
+import hanto.common.HantoPieceType;
 import hanto.otnah.common.util.HexUtil;
 
 import java.util.Collection;
@@ -112,5 +113,16 @@ public abstract class Position implements HantoCoordinate {
 	public Collection<HantoCoordinate> adjacentPositions()
 	{
 		return HexUtil.locationsSurrounding(this);
+	}
+	
+	/**
+	 *  remove a piece from a place and return it.
+	 * @param gameState the state of the game (for access to board and players)
+	 * @param type the type of piece that the caller is looking for
+	 * @return the piece removed from this powition
+	 */
+	public HantoTile removePieceAt(GameState gameState, HantoPieceType type)
+	{
+		return gameState.removePieceFrom(this);	
 	}
 }

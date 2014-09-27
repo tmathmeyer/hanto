@@ -49,7 +49,7 @@ public class CollectionUtils
 	 * @return a list of items as the super type
 	 */
 	@SafeVarargs
-	public static <T> List<T> toSetFromFactoryArray(Class<T> as, Factory<? extends T> ... items)
+	public static <T> List<T> makeInventory(Class<T> as, Factory<? extends T> ... items)
 	{
 		List<T> result = new LinkedList<>();
 		for(Factory<? extends T> each : items)
@@ -60,6 +60,17 @@ public class CollectionUtils
 			}
 		}
 		return result;
+	}
+	
+
+	
+	
+	
+	
+	
+	public static <A> Factory<A> with(Class<A> type, int count, Object ... args)
+	{
+		return new Factory<A>(type, count, args);
 	}
 	
 	/**
@@ -121,6 +132,44 @@ public class CollectionUtils
 				
 			}
 		}
+		
+		
+		
+		private Factory(Class<T> type, int count, Object... args)
+		{
+			for(int i = 0; i < count; i++)
+			{
+				try
+				{
+					Constructor<T> cons = type.getConstructor(classMap(args));
+					if (cons != null)
+					{
+						inner.add(cons.newInstance(args));
+					}
+				}
+				catch (NoSuchMethodException
+						| SecurityException
+						| InstantiationException
+						| IllegalAccessException
+						| IllegalArgumentException
+						| InvocationTargetException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		
+		private static Class<?>[] classMap(Object... impls)
+		{
+			Class<?>[] types = new Class<?>[impls.length];
+			for(int i = 0; i < impls.length; i++)
+			{
+				types[i] = impls[i].getClass();
+			}
+			return types;
+		}
+		
+		
+		
 		
 		private Factory(){}
 		

@@ -50,7 +50,7 @@ public class AlphaHantoGame extends GameState
 			throw new HantoException("piece: " + (pieceType==null?"null":pieceType.getPrintableName()) + " not recognized");
 		}
 		
-		if (isMovePossible(from, to, pieceType))
+		if (isMovePossible(Position.asPosition(from), Position.asPosition(to), pieceType))
 		{
 			if (which)
 			{ // blue: red can go
@@ -75,7 +75,7 @@ public class AlphaHantoGame extends GameState
 	}
 
 	@Override
-	public boolean isMovePossible(HantoCoordinate from, HantoCoordinate to, HantoPieceType type)
+	public boolean isMovePossible(Position from, Position to, HantoPieceType type)
 	{
 		final int distance = Position.asPosition(from).getDistanceTo(Position.asPosition(to));
 		boolean result = false;

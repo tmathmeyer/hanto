@@ -10,6 +10,7 @@
 package hanto.otnah.common;
 
 import hanto.common.HantoCoordinate;
+import hanto.common.HantoPieceType;
 
 import java.util.Collections;
 import java.util.Collection;
@@ -62,6 +63,12 @@ public class InventoryPosition extends Position
 	public int hashCode()
 	{
 		return 655678901;
+	}
+	
+	@Override
+	public HantoTile removePieceAt(GameState state, HantoPieceType type)
+	{
+		return state.getCurrentPlayer().play(type);
 	}
 
 }

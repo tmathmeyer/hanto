@@ -8,7 +8,7 @@
  *******************************************************************************/
 
 
-package hanto.otnah.beta;
+package hanto.otnah.gamma;
 
 import java.util.Set;
 import java.util.Collection;
@@ -30,9 +30,9 @@ import hanto.otnah.common.HexPosition;
  */
 public class BetaHantoGame extends GameState
 {
-	private BetaPlayer current;
-	private final BetaPlayer red = new BetaPlayer(HantoPlayerColor.RED);
-	private final BetaPlayer blue = new BetaPlayer(HantoPlayerColor.BLUE);
+	private GammaPlayer current;
+	private final GammaPlayer red = new GammaPlayer(HantoPlayerColor.RED);
+	private final GammaPlayer blue = new GammaPlayer(HantoPlayerColor.BLUE);
 
 	/**
 	 * default constructor
@@ -55,12 +55,16 @@ public class BetaHantoGame extends GameState
 	}
 
 	@Override
-	public MoveResult makeMove(HantoPieceType pieceType, HantoCoordinate from,
-			HantoCoordinate to) throws HantoException {
-		if(isMovePossible(Position.asPosition(from), Position.asPosition(to), pieceType))
+	public MoveResult makeMove(HantoPieceType pieceType, HantoCoordinate fromHC,
+			HantoCoordinate toHC) throws HantoException {
+		
+		Position   to = Position.asPosition(toHC);
+		Position from = Position.asPosition(fromHC);
+		
+		if(isMovePossible(from, to, pieceType))
 		{
 			//remove piece from inventory
-			HantoTile played = getCurrentPlayer().play(pieceType);
+			HantoTile played = removeFrom(from, pieceType);
 			
 			//put piece on board
 			setPieceAt(played, to);
@@ -70,7 +74,7 @@ public class BetaHantoGame extends GameState
 			
 			if(pieceType == HantoPieceType.BUTTERFLY)
 			{
-				current.setButterflyPosition(Position.asPosition(to));
+				current.setButterflyPosition(to);
 			}
 			
 			//switch player
@@ -80,14 +84,24 @@ public class BetaHantoGame extends GameState
 		
 		throw new HantoException("invalid move!");
 	}
-
+	
+	public HantoTile removeFrom(Position pos, HantoPieceType type)
+	{
+		return pos.removePieceAt(this, type);
+	}
+	
+	
+	
+	
 	@Override
-	public HantoPlayer<BetaPlayer> getCurrentPlayer() {
+	public HantoPlayer<GammaPlayer> getCurrentPlayer()
+	{
 		return current;
 	}
 
 	@Override
-	public boolean isMovePossible(Position from, Position to, HantoPieceType type) {
+	public boolean isMovePossible(Position from, Position to, HantoPieceType type)
+	{
 		Position toPos = Position.asPosition(to);
 		boolean movePossible = true;
 		if (!hasPieceInInventory(type))

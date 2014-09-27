@@ -7,36 +7,36 @@
  * are therefore granted only to course staff.
  *******************************************************************************/
 
-package hanto.otnah.beta;
+package hanto.otnah.gamma;
 
 import hanto.common.HantoPlayerColor;
 import hanto.otnah.common.HantoPlayer;
 import hanto.otnah.common.HantoTile;
-import hanto.otnah.common.pieces.Butterfly;
-import hanto.otnah.common.pieces.Sparrow;
-import hanto.otnah.common.util.CollectionUtils;
-import hanto.otnah.common.util.CollectionUtils.Factory;
 import hanto.otnah.common.InventoryPosition;
 import hanto.otnah.common.Position;
+import hanto.otnah.common.pieces.Butterfly;
+import hanto.otnah.common.pieces.Sparrow;
+import static hanto.otnah.common.util.CollectionUtils.makeInventory;
+import static hanto.otnah.common.util.CollectionUtils.with;
 
 /**
  * 
  * @author otnah
  *
  */
-public class BetaPlayer extends HantoPlayer<BetaPlayer>
+public class GammaPlayer extends HantoPlayer<GammaPlayer>
 {
-	private BetaPlayer nextPlayer;
+	private GammaPlayer nextPlayer;
 	private Position butterflyPosition = new InventoryPosition();
 	
 	@Override
-	public BetaPlayer getNextPlayer()
+	public GammaPlayer getNextPlayer()
 	{
 		return nextPlayer;
 	}
 
 	@Override
-	public void setNextPlayer(BetaPlayer next)
+	public void setNextPlayer(GammaPlayer next)
 	{
 		nextPlayer = next;
 	}
@@ -44,10 +44,11 @@ public class BetaPlayer extends HantoPlayer<BetaPlayer>
 	/**
 	 * @param color the color of this player
 	 */
-	public BetaPlayer(HantoPlayerColor color)
+	public GammaPlayer(HantoPlayerColor color)
 	{
-		super(color, CollectionUtils.makeInventory(
-				HantoTile.class, Factory.makes(Butterfly.class, 1, color), Factory.makes(Sparrow.class, 5, color)));
+		 super(color, makeInventory(HantoTile.class,
+				 with(Butterfly.class, 1, color),
+				 with(Sparrow.class, 1, color)));
 	}
 	
 	/**
@@ -69,7 +70,7 @@ public class BetaPlayer extends HantoPlayer<BetaPlayer>
 	}
 
 	@Override
-	public BetaPlayer getSelf()
+	public GammaPlayer getSelf()
 	{
 		return this;
 	}

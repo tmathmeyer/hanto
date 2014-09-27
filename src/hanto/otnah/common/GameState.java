@@ -55,7 +55,7 @@ public abstract class GameState implements HantoGame
 	 * @param type the type of piece
 	 * @return if there a move is possible
 	 */
-	public abstract boolean isMovePossible(HantoCoordinate from, HantoCoordinate to, HantoPieceType type);
+	public abstract boolean isMovePossible(Position from, Position to, HantoPieceType type);
 	
 	@Override
 	public String getPrintableBoard()
@@ -71,6 +71,16 @@ public abstract class GameState implements HantoGame
 	public void setPieceAt(HantoTile piece, HantoCoordinate location)
 	{
 		gameBoard.put(Position.asPosition(location), piece);
+	}
+	
+	/**
+	 * remove a piece from the board and return it
+	 * @param location the location to return from
+	 * @return the piece removed from that lcoation
+	 */
+	public HantoTile removePieceFrom(HantoCoordinate location)
+	{
+		return gameBoard.remove(location);
 	}
 	
 	/**
