@@ -13,6 +13,7 @@ import hanto.common.HantoException;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
+import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -23,6 +24,41 @@ import java.util.List;
  */
 public class CollectionUtils
 {
+
+	/**
+	 * @param <A> the result type
+	 * @param <B> the input type
+	 * @param input the collection of inputs
+	 * @param func the anonymous function
+	 * @param an empty collection to fill
+	 * @return a mapped collection
+	 */
+	public static <A, B, C extends Collection<A>> C map(Collection<B> input, Lambda<B, A> func, C empty)
+	{
+		for(B b : input)
+		{
+			A val = func.apply(b);
+			if (val != null)
+			{
+				empty.add(val);
+			}
+		}
+		return empty;
+	}
+	
+	/**
+	 * An anonymous lambda class to make up for not being able to use java 8
+	 * @param <I>
+	 * @param <O>
+	 */
+	public static interface Lambda<I, O>
+	{
+		/**
+		 * @param in the input
+		 * @return the output
+		 */
+		public O apply(I in);
+	}
 	
 	/**
 	 * @param <T> the type of resulting collection

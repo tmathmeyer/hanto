@@ -12,6 +12,7 @@ package hanto.otnah.common;
 import hanto.common.HantoCoordinate;
 import hanto.common.HantoPieceType;
 import hanto.otnah.common.util.HexUtil;
+import hanto.otnah.common.util.graph.Adjacency;
 
 import java.util.Collection;
 
@@ -20,7 +21,7 @@ import java.util.Collection;
  * position relative to other pieces.
  * 
  */
-public abstract class Position implements HantoCoordinate {
+public abstract class Position implements HantoCoordinate, Adjacency<HantoCoordinate>{
 	
 	/**
 	 * Gets the distance to another position, as in the number of single moves

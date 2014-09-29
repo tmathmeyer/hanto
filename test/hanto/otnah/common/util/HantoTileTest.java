@@ -11,8 +11,8 @@ package hanto.otnah.common.util;
 
 import static org.junit.Assert.*;
 import hanto.otnah.common.HantoTile;
-import hanto.otnah.beta.Butterfly;
-import hanto.otnah.beta.Sparrow;
+import hanto.otnah.common.pieces.Butterfly;
+import hanto.otnah.common.pieces.Sparrow;
 import hanto.common.HantoPlayerColor;
 
 import org.junit.Test;

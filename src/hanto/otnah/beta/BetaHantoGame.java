@@ -57,7 +57,7 @@ public class BetaHantoGame extends GameState
 	@Override
 	public MoveResult makeMove(HantoPieceType pieceType, HantoCoordinate from,
 			HantoCoordinate to) throws HantoException {
-		if(isMovePossible(Position.asPosition(from), Position.asPosition(to), pieceType))
+		if(isMovePossible(Position.asPosition(from), Position.asPosition(to), pieceType, null))
 		{
 			//remove piece from inventory
 			HantoTile played = getCurrentPlayer().play(pieceType);
@@ -87,7 +87,7 @@ public class BetaHantoGame extends GameState
 	}
 
 	@Override
-	public boolean isMovePossible(Position from, Position to, HantoPieceType type) {
+	public boolean isMovePossible(Position from, Position to, HantoPieceType type, HantoPlayerColor color) {
 		Position toPos = Position.asPosition(to);
 		boolean movePossible = true;
 		if (!hasPieceInInventory(type))

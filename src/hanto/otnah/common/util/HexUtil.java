@@ -10,8 +10,8 @@
 
 package hanto.otnah.common.util;
 
-import java.util.Collection;
 import java.util.HashSet;
+import java.util.Set;
 
 import hanto.common.HantoCoordinate;
 import hanto.otnah.common.HexPosition;
@@ -45,9 +45,9 @@ public class HexUtil
 	 * @param position the position
 	 * @return the positions surrounding the provided position
 	 */
-	public static Collection<HantoCoordinate> locationsSurrounding(HantoCoordinate position)
+	public static Set<HantoCoordinate> locationsSurrounding(HantoCoordinate position)
 	{
-		Collection<HantoCoordinate> surrounding = new HashSet<>();
+		Set<HantoCoordinate> surrounding = new HashSet<>();
 		if (position == null)
 		{
 			return surrounding;
@@ -64,5 +64,14 @@ public class HexUtil
 		surrounding.add(new HexPosition(x, y-1));
 		
 		return surrounding;
+	}
+	
+	public static Set<HantoCoordinate> slideBlockers(HantoCoordinate a, HantoCoordinate b)
+	{
+		Set<HantoCoordinate> aSurrounds = locationsSurrounding(a);
+		Set<HantoCoordinate> bSurrounds = locationsSurrounding(b);
+		
+		aSurrounds.retainAll(bSurrounds);
+		return aSurrounds;
 	}
 }

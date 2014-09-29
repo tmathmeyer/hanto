@@ -10,10 +10,14 @@
 
 package hanto.otnah.gamma;
 
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Set;
 import java.util.Collection;
+
 import hanto.common.HantoCoordinate;
 import hanto.common.HantoException;
+import hanto.common.HantoPiece;
 import hanto.common.HantoPieceType;
 import hanto.common.HantoPlayerColor;
 import hanto.common.MoveResult;
@@ -22,13 +26,17 @@ import hanto.otnah.common.HantoPlayer;
 import hanto.otnah.common.HantoTile;
 import hanto.otnah.common.Position;
 import hanto.otnah.common.HexPosition;
+import static hanto.otnah.common.util.CollectionUtils.map;
+import static hanto.otnah.common.util.HexUtil.slideBlockers;
+import static hanto.otnah.common.util.CollectionUtils.Lambda;
+
 
 /**
  * 
  * @author otnah
  *
  */
-public class BetaHantoGame extends GameState
+public class GammaHantoGame extends GameState
 {
 	private GammaPlayer current;
 	private final GammaPlayer red = new GammaPlayer(HantoPlayerColor.RED);
@@ -39,7 +47,7 @@ public class BetaHantoGame extends GameState
 	 * 
 	 * @param firstPlayer the color pf the player that goes first
 	 */
-	public BetaHantoGame(HantoPlayerColor firstPlayer)
+	public GammaHantoGame(HantoPlayerColor firstPlayer)
 	{
 		red.setNextPlayer(blue);
 		blue.setNextPlayer(red);
@@ -61,7 +69,7 @@ public class BetaHantoGame extends GameState
 		Position   to = Position.asPosition(toHC);
 		Position from = Position.asPosition(fromHC);
 		
-		if(isMovePossible(from, to, pieceType))
+		if(isMovePossible(from, to, pieceType, getCurrentPlayer().getColor()))
 		{
 			//remove piece from inventory
 			HantoTile played = removeFrom(from, pieceType);
@@ -70,11 +78,11 @@ public class BetaHantoGame extends GameState
 			setPieceAt(played, to);
 			
 			//increment player count
-			current.increaseMoveCount();
+			getCurrentPlayer().increaseMoveCount();
 			
 			if(pieceType == HantoPieceType.BUTTERFLY)
 			{
-				current.setButterflyPosition(to);
+				getCurrentPlayer().getSelf().setButterflyPosition(to);
 			}
 			
 			//switch player
@@ -85,14 +93,17 @@ public class BetaHantoGame extends GameState
 		throw new HantoException("invalid move!");
 	}
 	
+	/**
+	 * 
+	 * @param pos the position from which to remove the piece
+	 * @param type the type of piece to remove
+	 * @return the piece that has been removed
+	 */
 	public HantoTile removeFrom(Position pos, HantoPieceType type)
 	{
 		return pos.removePieceAt(this, type);
 	}
-	
-	
-	
-	
+
 	@Override
 	public HantoPlayer<GammaPlayer> getCurrentPlayer()
 	{
@@ -100,47 +111,87 @@ public class BetaHantoGame extends GameState
 	}
 
 	@Override
-	public boolean isMovePossible(Position from, Position to, HantoPieceType type)
+	public boolean isMovePossible(Position from, Position to, HantoPieceType type, HantoPlayerColor color)
 	{
-		Position toPos = Position.asPosition(to);
-		boolean movePossible = true;
-		if (!hasPieceInInventory(type))
+		/*
+		 * the rules for moving are as follows:
+		 * 		if the piece is moving from the inventory, it must be placed
+		 * 		next to a piece of the same color, and not next to a piece of
+		 * 		the opposing player's color. If the player has not played the
+		 * 		butterfly by the fourth move, then that player will be forced to.
+		 * 
+		 * 		if the move is from one board location to another, then the
+		 * 		continuity of the board must be preserved, the distance moved
+		 * 		must be exactly one, and the move must not be blocked from
+		 *  	sliding by other pieces, including allied ones
+		 */
+		int moveDistance = from.getDistanceTo(to);
+		boolean result = isLocationUnoccupied(to);
+		if (moveDistance == 1)
 		{
-			return false;
+			// the move is on the board
+			result &= (isWalkingBlocked(to, from) &&
+					   isGraphContinuityPreservedSans(from));
+		}
+		else if (moveDistance == 0)
+		{
+			// the move is onto the board from the player's inventory
+			
+			result &= (hasPieceInInventory(type) &&
+					   checkButterflyLegality(type, 4) &&
+					   isValidNewPlaceLocation(to, color));
 		}
 		
-		if (forcedToPlayButterfly())
-		{
-			movePossible = (HantoPieceType.BUTTERFLY == type);
-		}
-		
-		return movePossible && (isFirstMove(toPos) || 
-				(piecePlaceContinuityCheck(toPos) && isLocationUnoccupied(toPos)));
-	}
-
-	/**
-	 * 
-	 * @param firstPlayer the color of the first player to go
-	 * @return the BetaGameState with firstPlayer going first
-	 * @throws HantoException if there is a problem creating the game
-	 */
-	public static BetaHantoGame createBetaGameState(HantoPlayerColor firstPlayer) throws HantoException
-	{
-		if (firstPlayer == null)
-		{
-			throw new HantoException("invalid starting user color");
-		}
-		return new BetaHantoGame(firstPlayer);
+		return result;
 	}
 	
-	
-	private boolean piecePlaceContinuityCheck(Position check)
+	private boolean isValidNewPlaceLocation(Position pos, HantoPlayerColor color)
 	{
-		Set<Position> occupied = filledLocations();
-		
-		for(Position p : occupied)
+		/*
+		 * the piece must be next to a piece of it's own color, and not next to
+		 * a piece of the opposing color
+		 */
+		boolean result = isFirstMove(pos);
+		for(HantoCoordinate each : pos.adjacentPositions())
 		{
-			if (p.isAdjacentTo(check))
+			HantoPiece tile = getPieceAt(each);
+			
+			if (tile != null)
+			{
+				if (tile.getColor() != color)
+				{
+					return false;
+				} 
+				else
+				{
+					result = true;
+				}
+			}
+		}
+		return result;
+	}
+	
+	private boolean checkButterflyLegality(HantoPieceType type, int limit)
+	{
+		/*
+		 * if the butterfly has been played, or is the current piece to be played, all good
+		 * otherwise, the move count must be less than the limit
+		 */
+		if (type == HantoPieceType.BUTTERFLY || hasPieceInInventory(HantoPieceType.BUTTERFLY))
+		{
+			return true;
+		}
+		else
+		{
+			return getCurrentPlayer().getMovesPlayed() < limit;
+		}
+	}
+	
+	private boolean hasPieceInInventory(HantoPieceType hpt)
+	{
+		for(HantoTile ht : getCurrentPlayer().getInventory())
+		{
+			if (ht.getType().equals(hpt))
 			{
 				return true;
 			}
@@ -160,24 +211,30 @@ public class BetaHantoGame extends GameState
 		return getPieceAt(check) == null;
 	}
 	
-	private boolean hasPieceInInventory(HantoPieceType hpt)
+	private boolean isWalkingBlocked(Position from, Position to)
 	{
-		for(HantoTile ht : getCurrentPlayer().getInventory())
-		{
-			if (ht.getType().equals(hpt))
-			{
-				return true;
+		List<HantoPiece> blockingPieces = map(slideBlockers(from, to), new Lambda<HantoCoordinate, HantoPiece>(){
+			@Override
+			public HantoPiece apply(HantoCoordinate in) {
+				return getPieceAt(in);
 			}
-		}
+		}, new LinkedList<HantoPiece>());
 		
-		return false;
+		return blockingPieces.size() < 2;
 	}
 	
-	private boolean forcedToPlayButterfly()
-	{
-		return getCurrentPlayer().getMovesPlayed() >= 3
-				&& hasPieceInInventory(HantoPieceType.BUTTERFLY);
-	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
 	
 	private MoveResult gameState()
 	{

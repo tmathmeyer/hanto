@@ -18,6 +18,7 @@ import hanto.common.HantoCoordinate;
 import hanto.common.HantoGame;
 import hanto.common.HantoPiece;
 import hanto.common.HantoPieceType;
+import hanto.common.HantoPlayerColor;
 
 /**
  * 
@@ -55,7 +56,7 @@ public abstract class GameState implements HantoGame
 	 * @param type the type of piece
 	 * @return if there a move is possible
 	 */
-	public abstract boolean isMovePossible(Position from, Position to, HantoPieceType type);
+	public abstract boolean isMovePossible(Position from, Position to, HantoPieceType type, HantoPlayerColor color);
 	
 	@Override
 	public String getPrintableBoard()

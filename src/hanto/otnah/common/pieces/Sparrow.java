@@ -1,3 +1,12 @@
+/*******************************************************************************
+ * All sources under the hanto.otnah package were developed by
+ * Ted Meyer and Nilesh Patel for the term project in CS4233
+ * at Worcester Polytechnic Institute. Since WPI holds all other forms
+ * of ownership to this software, we have decided to not make this
+ * software available under any license. Evaluation or compilation rights
+ * are therefore granted only to course staff.
+ *******************************************************************************/
+
 package hanto.otnah.common.pieces;
 
 import java.util.Collection;
@@ -8,30 +17,43 @@ import hanto.common.HantoPlayerColor;
 import hanto.otnah.common.HantoTile;
 import hanto.otnah.common.Position;
 
+/**
+ * 
+ * @author otnah
+ *
+ */
 public class Sparrow extends HantoTile
 {
-
+	private final HantoPlayerColor myColor;
+	
+	/**
+	 * The default constructor
+	 * @param hpc the color of this piece
+	 */
+	public Sparrow(HantoPlayerColor hpc)
+	{
+		myColor = hpc;
+	}
+	
 	@Override
 	public HantoPlayerColor getColor() {
-		// TODO Auto-generated method stub
-		return null;
+		return myColor;
 	}
 
 	@Override
 	public HantoPieceType getType() {
-		// TODO Auto-generated method stub
-		return null;
+		return HantoPieceType.SPARROW;
 	}
 
 	@Override
 	public void move(HantoCoordinate to) {
-		// TODO Auto-generated method stub
+		// Empty, since the sparrow can't actually move
 		
 	}
 
 	@Override
 	public boolean isValidMove(Position to) {
-		// TODO Auto-generated method stub
+		// Always return false, since the sparrow can never move
 		return false;
 	}
 
@@ -40,5 +62,5 @@ public class Sparrow extends HantoTile
 		// TODO Auto-generated method stub
 		return null;
 	}
-
+	
 }

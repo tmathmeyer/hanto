@@ -77,7 +77,7 @@ public class AlphaGameStateTests {
 	@Test
 	public void isFirstMovePossible() {
 		assertTrue(freshGame.isMovePossible(new InventoryPosition(),
-				new HexPosition(0, 0), HantoPieceType.BUTTERFLY));
+				new HexPosition(0, 0), HantoPieceType.BUTTERFLY, null));
 	}
 	
 	/**
@@ -86,7 +86,7 @@ public class AlphaGameStateTests {
 	@Test
 	public void isSecondMovePossible() {
 		assertTrue(unfreshGame.isMovePossible(new InventoryPosition(),
-				new HexPosition(1, 0), HantoPieceType.BUTTERFLY));
+				new HexPosition(1, 0), HantoPieceType.BUTTERFLY, null));
 	}
 	
 	/**
@@ -95,7 +95,7 @@ public class AlphaGameStateTests {
 	@Test
 	public void isFirstStandardMovePossible() {
 		assertTrue(freshGame.isMovePossible(null,
-				new HexPosition(0, 0), HantoPieceType.BUTTERFLY));
+				new HexPosition(0, 0), HantoPieceType.BUTTERFLY, null));
 	}
 	
 	/**
@@ -104,7 +104,7 @@ public class AlphaGameStateTests {
 	@Test
 	public void isSecondStandardMovePossible() {
 		assertTrue(unfreshGame.isMovePossible(null,
-				new HexPosition(1, 0), HantoPieceType.BUTTERFLY));
+				new HexPosition(1, 0), HantoPieceType.BUTTERFLY, null));
 	}
 
 	
@@ -115,7 +115,7 @@ public class AlphaGameStateTests {
 	@Test
 	public void failOnBadFirstMove() {
 		assertFalse(freshGame.isMovePossible(new InventoryPosition(),
-				new HexPosition(1, 0), HantoPieceType.BUTTERFLY));
+				new HexPosition(1, 0), HantoPieceType.BUTTERFLY, null));
 	}
 	
 	/**
@@ -124,7 +124,7 @@ public class AlphaGameStateTests {
 	@Test
 	public void failOnBadSecondMove() {
 		assertFalse(unfreshGame.isMovePossible(new InventoryPosition(),
-				new HexPosition(0, 0), HantoPieceType.BUTTERFLY));
+				new HexPosition(0, 0), HantoPieceType.BUTTERFLY, null));
 	}
 	
 	/**
@@ -133,7 +133,7 @@ public class AlphaGameStateTests {
 	@Test
 	public void failOnBadStandardFirstMove() {
 		assertFalse(freshGame.isMovePossible(null,
-				new HexPosition(1, 0), HantoPieceType.BUTTERFLY));
+				new HexPosition(1, 0), HantoPieceType.BUTTERFLY, null));
 	}
 	
 	/**
@@ -142,7 +142,7 @@ public class AlphaGameStateTests {
 	@Test
 	public void failOnBadStandardSecondMove() {
 		assertFalse(unfreshGame.isMovePossible(null,
-				new HexPosition(0, 0), HantoPieceType.BUTTERFLY));
+				new HexPosition(0, 0), HantoPieceType.BUTTERFLY, null));
 	}
 	
 	
