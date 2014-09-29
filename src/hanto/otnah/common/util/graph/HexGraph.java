@@ -82,4 +82,9 @@ public class HexGraph
 		}
 		points.remove(key);
 	}
+
+	public boolean isContinuousSans(Position p) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }

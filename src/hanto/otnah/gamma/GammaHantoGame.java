@@ -12,7 +12,6 @@ package hanto.otnah.gamma;
 
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Set;
 import java.util.Collection;
 
 import hanto.common.HantoCoordinate;

@@ -102,6 +102,6 @@ public abstract class GameState implements HantoGame
 	 */
 	protected boolean isGraphContinuityPreservedSans(Position p)
 	{
-		return false;
+		return gameGraph.isContinuousSans(p);
 	}
 }
