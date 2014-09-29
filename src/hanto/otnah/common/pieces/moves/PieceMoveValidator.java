@@ -103,8 +103,8 @@ public abstract class PieceMoveValidator
 		return gameInstance().getCurrentPlayer().getColor();
 	}
 	
-	protected boolean isGraphContinuityPreservedSans(Position pos)
+	protected boolean isGraphContinuityPreservedAfter(Position from, Position to)
 	{
-		return gameInstance().isGraphContinuityPreservedSans(pos);
+		return gameInstance().isGraphContinuityPreservedAfter(from, to);
 	}
 }

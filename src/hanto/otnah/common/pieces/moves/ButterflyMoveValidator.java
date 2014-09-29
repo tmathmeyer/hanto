@@ -16,7 +16,7 @@ public class ButterflyMoveValidator extends PieceMoveValidator
 			// the move is on the board
 			result &= (isWalkingBlocked(to, from) &&
 					   isValidNewPlaceLocation(to, null) &&
-					   isGraphContinuityPreservedSans(from));
+					   isGraphContinuityPreservedAfter(from, to));
 					   
 		}
 		else if (moveDistance == 0)

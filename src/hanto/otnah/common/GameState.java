@@ -100,8 +100,8 @@ public abstract class GameState implements HantoGame
 	 * @param p the position that we are pretending does not exist
 	 * @return whether the graph is still continuous without that piece
 	 */
-	public boolean isGraphContinuityPreservedSans(Position p)
+	public boolean isGraphContinuityPreservedAfter(Position from, Position to)
 	{
-		return gameGraph.isContinuousSans(p);
+		return gameGraph.isContinuousAfter(from, to);
 	}
 }
