@@ -90,7 +90,7 @@ public abstract class GameState implements HantoGame
 	 * 
 	 * @return the set of all occupied locations on the board
 	 */
-	protected Set<Position> filledLocations()
+	public Set<Position> filledLocations()
 	{
 		return gameBoard.keySet();
 	}
@@ -100,7 +100,7 @@ public abstract class GameState implements HantoGame
 	 * @param p the position that we are pretending does not exist
 	 * @return whether the graph is still continuous without that piece
 	 */
-	protected boolean isGraphContinuityPreservedSans(Position p)
+	public boolean isGraphContinuityPreservedSans(Position p)
 	{
 		return gameGraph.isContinuousSans(p);
 	}

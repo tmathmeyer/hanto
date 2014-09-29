@@ -34,7 +34,7 @@ public class GameStateSingleton
 	/**
 	 * @return the one and only game state
 	 */
-	public static GameState getInstance()
+	public static GameState gameInstance()
 	{
 		return getSingleton().getGameState();
 	}
