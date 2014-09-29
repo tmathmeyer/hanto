@@ -19,6 +19,7 @@ import hanto.common.HantoGame;
 import hanto.common.HantoPiece;
 import hanto.common.HantoPieceType;
 import hanto.common.HantoPlayerColor;
+import hanto.otnah.common.util.graph.HexGraph;
 
 /**
  * 
@@ -28,6 +29,7 @@ import hanto.common.HantoPlayerColor;
 public abstract class GameState implements HantoGame
 {
 	private final Map<Position, HantoTile> gameBoard = new HashMap<>();
+	private final HexGraph gameGraph = new HexGraph();
 	
 	/**
 	 * Dont let this class be created from outside (not that it can anyways)
@@ -91,5 +93,15 @@ public abstract class GameState implements HantoGame
 	protected Set<Position> filledLocations()
 	{
 		return gameBoard.keySet();
+	}
+	
+	/**
+	 * checks a graph to make sure it is continuous
+	 * @param p the position that we are pretending does not exist
+	 * @return whether the graph is still continuous without that piece
+	 */
+	protected boolean isGraphContinuityPreservedSans(Position p)
+	{
+		return false;
 	}
 }

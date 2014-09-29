@@ -131,7 +131,9 @@ public class GammaHantoGame extends GameState
 		{
 			// the move is on the board
 			result &= (isWalkingBlocked(to, from) &&
+					   isValidNewPlaceLocation(to, null) &&
 					   isGraphContinuityPreservedSans(from));
+					   
 		}
 		else if (moveDistance == 0)
 		{

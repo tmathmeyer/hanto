@@ -1,5 +1,8 @@
 package hanto.otnah.common.util.graph;
 
+import hanto.common.HantoCoordinate;
+import hanto.otnah.common.Position;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -7,21 +10,16 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-public class HexGraph<K extends Adjacency<K>, J>
+import static hanto.otnah.common.Position.asPosition;
+
+public class HexGraph
 {
 	
-	private final Map<J, Node> points = new HashMap<>();
-	private final Implementer<J, K> implementer;
-	
-	public HexGraph(Implementer<J, K> transformer)
-	{
-		implementer = transformer;
-	}
+	private final Map<Position, Node> points = new HashMap<>();
 	
 	static class Node implements Iterable<Edge>
 	{
 		private final List<Edge> edges = new ArrayList<>();
-		
 		
 		public void addEdge(Edge e)
 		{
@@ -60,29 +58,28 @@ public class HexGraph<K extends Adjacency<K>, J>
 		}
 	}
 	
-	public void insertNodeAt(K key)
+	public void insertNodeAt(Position key)
 	{
 		Node n = new Node();
-		Collection<K> adjacent = key.adjacentPositions();
-		for(K k : adjacent)
+		Collection<HantoCoordinate> adjacent = key.adjacentPositions();
+		for(HantoCoordinate coord : adjacent)
 		{
-			Node lookup = points.get(implementer.transform(k));
+			Node lookup = points.get(asPosition(coord));
 			if (lookup != null)
 			{
 				n.addEdge(new Edge(n, lookup));
 			}
 		}
-		points.put(implementer.transform(key), n);
+		points.put(key, n);
 	}
 	
-	public void removeNodeAt(K key)
+	public void removeNodeAt(Position key)
 	{
-		Node n = points.get(implementer.transform(key));
+		Node n = points.get(key);
 		for(Edge e : n)
 		{
 			e.getOtherEnd(n).removeEdge(e);
 		}
-		points.remove(implementer.transform(key));
+		points.remove(key);
 	}
-	
 }
