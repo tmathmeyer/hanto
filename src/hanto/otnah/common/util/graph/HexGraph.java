@@ -20,12 +20,21 @@ import java.util.Map;
 
 import static hanto.otnah.common.Position.asPosition;
 
+/**
+ * 
+ * @author otnah
+ *
+ * A class for wrapping the graph structure
+ */
 public class HexGraph
 {
 	
 	private final Map<Position, Node> points = new HashMap<>();
 	
 	/**
+	 * 
+	 * @author otnah
+	 *
 	 * Node class for the graph, holds the node and it's edges.
 	 *
 	 */
@@ -33,11 +42,19 @@ public class HexGraph
 	{
 		private final List<Edge> edges = new ArrayList<>();
 		
+		/**
+		 * 
+		 * @param e the edge to add
+		 */
 		public void addEdge(Edge e)
 		{
 			edges.add(e);
 		}
 		
+		/**
+		 * 
+		 * @param e the edge to remove
+		 */
 		public void removeEdge(Edge e)
 		{
 			edges.remove(e);
@@ -49,19 +66,32 @@ public class HexGraph
 			return edges.iterator();
 		} 
 	}
+	
 	/**
+	 * @author otnah
+	 * 
 	 * Edge class for the graph. Holds the nodes on either end.
 	 */
 	static class Edge
 	{
 		private final Node a, b;
 		
-		public Edge(Node one, Node two)
+		/**
+		 * 
+		 * @param one the first node
+		 * @param two the second node
+		 */
+		private Edge(Node one, Node two)
 		{
 			a = one;
 			b = two;
 		}
 		
+		/**
+		 * 
+		 * @param n one end of this edge
+		 * @return the node at the other end
+		 */
 		public Node getOtherEnd(Node n)
 		{
 			if (a.equals(n))

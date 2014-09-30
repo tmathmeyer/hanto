@@ -19,6 +19,11 @@ import hanto.common.HantoPieceType;
  */
 public class PieceMoveValidatorFactory
 {
+	/**
+	 * 
+	 * @param type the piece type to which a validator should be gotten
+	 * @return the move validator for that type
+	 */
 	public static PieceMoveValidator getMoveValidator(HantoPieceType type)
 	{
 		switch(type)

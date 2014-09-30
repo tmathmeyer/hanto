@@ -28,9 +28,10 @@ public class CollectionUtils
 	/**
 	 * @param <A> the result type
 	 * @param <B> the input type
+	 * @param <C> the type of collection to return
 	 * @param input the collection of inputs
 	 * @param func the anonymous function
-	 * @param an empty collection to fill
+	 * @param empty an empty collection to fill
 	 * @return a mapped collection
 	 */
 	public static <A, B, C extends Collection<A>> C map(Collection<B> input, Lambda<B, A> func, C empty)
@@ -57,7 +58,7 @@ public class CollectionUtils
 		 * @param in the input
 		 * @return the output
 		 */
-		public O apply(I in);
+		O apply(I in);
 	}
 	
 	/**
@@ -103,7 +104,13 @@ public class CollectionUtils
 	
 	
 	
-	
+	/**
+	 * @param <A> the type of factory
+	 * @param type the type of factory
+	 * @param count the number of things the factory will produce
+	 * @param args the arguments the factory will use to produce each
+	 * @return the factory that makes count types
+	 */
 	public static <A> Factory<A> with(Class<A> type, int count, Object ... args)
 	{
 		return new Factory<A>(type, count, args);
@@ -188,7 +195,8 @@ public class CollectionUtils
 						| InstantiationException
 						| IllegalAccessException
 						| IllegalArgumentException
-						| InvocationTargetException e) {
+						| InvocationTargetException
+						| NullPointerException e) {
 					e.printStackTrace();
 				}
 			}

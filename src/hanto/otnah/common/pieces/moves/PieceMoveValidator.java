@@ -34,8 +34,20 @@ import hanto.otnah.common.util.CollectionUtils.Lambda;
  */
 public abstract class PieceMoveValidator
 {
+	/**
+	 * 
+	 * @param to the position to which the piece is moving
+	 * @param from the position from which the piece is moving
+	 * @return whether that move is valid
+	 */
 	public abstract boolean isValidMove(Position to, Position from);
 	
+	/**
+	 * 
+	 * @param pos the position to check
+	 * @param color the color of the player
+	 * @return whether the piece can be played here
+	 */
 	protected boolean isValidNewPlaceLocation(Position pos, HantoPlayerColor color)
 	{
 		/*
@@ -62,6 +74,12 @@ public abstract class PieceMoveValidator
 		return result;
 	}
 	
+	/**
+	 * Check whether the butterfly has been played by a certain turn number
+	 * @param type the type of piece being played
+	 * @param limit the limit number of moves during which the player must play the butterfly
+	 * @return whether or not this move is legal with respect to the move count
+	 */
 	protected boolean checkButterflyLegality(HantoPieceType type, int limit)
 	{
 		/*
@@ -78,6 +96,11 @@ public abstract class PieceMoveValidator
 		}
 	}
 	
+	/**
+	 * 
+	 * @param hpt the piece type
+	 * @return whether the player has the piece type in his inventory
+	 */
 	protected boolean hasPieceInInventory(HantoPieceType hpt)
 	{
 		for(HantoTile ht : gameInstance().getCurrentPlayer().getInventory())
@@ -91,17 +114,33 @@ public abstract class PieceMoveValidator
 		return false;
 	}
 	
+	/**
+	 * 
+	 * @param check the position being played
+	 * @return whether this is the first move
+	 */
 	protected boolean isFirstMove(Position check)
 	{
 		return gameInstance().filledLocations().size() == 0
 				&& check.getDistanceTo(new HexPosition(0, 0)) == 0;
 	}
 	
+	/**
+	 * 
+	 * @param check the location
+	 * @return whether that location is unoccupied
+	 */
 	protected boolean isLocationUnoccupied(Position check)
 	{
 		return gameInstance().getPieceAt(check) == null;
 	}
 	
+	/**
+	 * 
+	 * @param from the location from where the piece originates
+	 * @param to the position to where teh piece is walking
+	 * @return whether this piece is walking bloked
+	 */
 	protected boolean isWalkingBlocked(Position from, Position to)
 	{
 		List<HantoPiece> blockingPieces = map(slideBlockers(from, to), new Lambda<HantoCoordinate, HantoPiece>(){
@@ -114,11 +153,21 @@ public abstract class PieceMoveValidator
 		return blockingPieces.size() < 2;
 	}
 	
+	/**
+	 * 
+	 * @return the color of the current player
+	 */
 	protected HantoPlayerColor currentPlayerColor()
 	{
 		return gameInstance().getCurrentPlayer().getColor();
 	}
 	
+	/**
+	 * 
+	 * @param from the position to which the piece is being moved
+	 * @param to the position to which the piece is being moves
+	 * @return whether the continuity is perserved without from and with to
+	 */
 	protected boolean isGraphContinuityPreservedAfter(Position from, Position to)
 	{
 		return gameInstance().isGraphContinuityPreservedAfter(from, to);

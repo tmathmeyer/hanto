@@ -29,6 +29,9 @@ public class Butterfly extends HantoTile
 
 	private final HantoPlayerColor color;
 	
+	/**
+	 * @param myColor the color of the butterfly
+	 */
 	public Butterfly(HantoPlayerColor myColor)
 	{
 		color = myColor;

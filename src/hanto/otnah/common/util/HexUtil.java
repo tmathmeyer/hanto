@@ -66,6 +66,12 @@ public class HexUtil
 		return surrounding;
 	}
 	
+	/**
+	 * 
+	 * @param a a position
+	 * @param b another position
+	 * @return the two pieces that would block sliding from a to b if they were occupied
+	 */
 	public static Set<HantoCoordinate> slideBlockers(HantoCoordinate a, HantoCoordinate b)
 	{
 		Set<HantoCoordinate> aSurrounds = locationsSurrounding(a);

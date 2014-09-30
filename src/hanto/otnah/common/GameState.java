@@ -56,6 +56,7 @@ public abstract class GameState implements HantoGame
 	 * @param from the place the piece is moving from (null in the case of 
 	 * @param to the location to where the piece might go
 	 * @param type the type of piece
+	 * @param color the color of the piece
 	 * @return if there a move is possible
 	 */
 	public abstract boolean isMovePossible(Position from, Position to, HantoPieceType type, HantoPlayerColor color);
@@ -97,7 +98,8 @@ public abstract class GameState implements HantoGame
 	
 	/**
 	 * checks a graph to make sure it is continuous
-	 * @param p the position that we are pretending does not exist
+	 * @param from the position from which the piece is moving
+	 * @param to the position to which the piece is moving
 	 * @return whether the graph is still continuous without that piece
 	 */
 	public boolean isGraphContinuityPreservedAfter(Position from, Position to)
