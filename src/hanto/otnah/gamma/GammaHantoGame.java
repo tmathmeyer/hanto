@@ -109,19 +109,6 @@ public class GammaHantoGame extends GameState
 		return PieceMoveValidatorFactory.getMoveValidator(type).isValidMove(to, from);
 	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-
-	
 	private MoveResult gameState()
 	{
 		MoveResult returnValue = MoveResult.OK;
