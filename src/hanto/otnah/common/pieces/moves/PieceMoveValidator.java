@@ -1,3 +1,12 @@
+/*******************************************************************************
+ * All sources under the hanto.otnah package were developed by
+ * Ted Meyer and Nilesh Patel for the term project in CS4233
+ * at Worcester Polytechnic Institute. Since WPI holds all other forms
+ * of ownership to this software, we have decided to not make this
+ * software available under any license. Evaluation or compilation rights
+ * are therefore granted only to course staff.
+ *******************************************************************************/
+
 package hanto.otnah.common.pieces.moves;
 
 import static hanto.otnah.common.util.CollectionUtils.map;
@@ -16,6 +25,13 @@ import hanto.otnah.common.HexPosition;
 import hanto.otnah.common.Position;
 import hanto.otnah.common.util.CollectionUtils.Lambda;
 
+/**
+ * 
+ * @author otnah
+ *
+ * an abstract piece move validator, from which all piece move validators
+ * are defined. It contains helper methods that do math and hex magic
+ */
 public abstract class PieceMoveValidator
 {
 	public abstract boolean isValidMove(Position to, Position from);
