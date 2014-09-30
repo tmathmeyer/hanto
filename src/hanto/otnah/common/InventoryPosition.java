@@ -48,7 +48,7 @@ public class InventoryPosition extends Position
 	}
 	
 	@Override
-	public Collection<HantoCoordinate> adjacentPositions()
+	public Collection<HantoCoordinate> adjacentCoordinates()
 	{
 		return Collections.emptyList();
 	}

@@ -14,7 +14,9 @@ import hanto.common.HantoPieceType;
 import hanto.otnah.common.util.HexUtil;
 import hanto.otnah.common.util.graph.Adjacency;
 
+
 import java.util.Collection;
+import java.util.ArrayList;
 
 /**
  * Does various geometric work for determining distances and
@@ -108,12 +110,27 @@ public abstract class Position implements HantoCoordinate, Adjacency<HantoCoordi
 	}
 	
 	/**
+	 * Gets the list of coordinates that are adjacent to the given position.
+	 * @return the list of adjacent coordinates
+	 */
+	public Collection<HantoCoordinate> adjacentCoordinates()
+	{
+		return HexUtil.locationsSurrounding(this);
+	}
+	
+	/**
 	 * Gets the list of positions that are adjacent to the given position.
 	 * @return the list of adjacent positions
 	 */
-	public Collection<HantoCoordinate> adjacentPositions()
+	public Collection<Position> adjacentPositions()
 	{
-		return HexUtil.locationsSurrounding(this);
+		Collection<HantoCoordinate> coords = adjacentCoordinates();
+		Collection<Position> positions = new ArrayList<>();
+		for(HantoCoordinate n : coords)
+		{
+			positions.add(asPosition(n));
+		}
+		return positions;
 	}
 	
 	/**

@@ -192,7 +192,7 @@ public class BetaHantoGame extends GameState
 	
 	private boolean isSurrounded(Position toCheck)
 	{
-		Collection<HantoCoordinate> positions = toCheck.adjacentPositions();
+		Collection<HantoCoordinate> positions = toCheck.adjacentCoordinates();
 		if(positions.size() < 6)
 		{
 			return false;

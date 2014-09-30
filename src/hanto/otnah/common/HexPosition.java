@@ -59,7 +59,7 @@ public class HexPosition extends Position
 	}
 	
 	@Override
-	public Collection<HantoCoordinate> adjacentPositions(){
+	public Collection<HantoCoordinate> adjacentCoordinates(){
 		return HexUtil.locationsSurrounding(this);
 	}
 

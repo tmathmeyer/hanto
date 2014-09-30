@@ -2,6 +2,7 @@ package hanto.otnah.common.util.graph;
 
 import hanto.common.HantoCoordinate;
 import hanto.otnah.common.Position;
+import hanto.otnah.common.util.graph.HexGraph.Edge;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -61,7 +62,7 @@ public class HexGraph
 	public void insertNodeAt(Position key)
 	{
 		Node n = new Node();
-		Collection<HantoCoordinate> adjacent = key.adjacentPositions();
+		Collection<HantoCoordinate> adjacent = key.adjacentCoordinates();
 		for(HantoCoordinate coord : adjacent)
 		{
 			Node lookup = points.get(asPosition(coord));
@@ -84,7 +85,23 @@ public class HexGraph
 	}
 
 	public boolean isContinuousAfter(Position from, Position to) {
-		// TODO Auto-generated method stub
-		return false;
+		insertNodeAt(to);
+		removeNodeAt(from);
+		List<Node> visited = new ArrayList<>();
+		visited.add(points.get(from));
+		for(int i = 0; i < visited.size(); i++)
+		{
+			Iterator<Edge> it = visited.get(i).iterator();
+			while(it.hasNext())
+			{
+				Node tmp = it.next().getOtherEnd(visited.get(i));
+				if(visited.contains(tmp))
+				{
+					continue;
+				}
+				visited.add(tmp);
+			}
+		}
+		return visited.size() == points.size();
 	}
 }

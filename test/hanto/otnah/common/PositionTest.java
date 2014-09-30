@@ -92,7 +92,7 @@ public class PositionTest
 	@Test
 	public void testAdjacentPositions(){
 		Position around = new HexPosition(0, 0);
-		Collection<HantoCoordinate> col = around.adjacentPositions();
+		Collection<HantoCoordinate> col = around.adjacentCoordinates();
 		assertTrue(col.contains(new HexPosition(0, 1)));
 		assertTrue(col.contains(new HexPosition(1, -1)));
 		assertTrue(col.contains(new HexPosition(1, 0)));
