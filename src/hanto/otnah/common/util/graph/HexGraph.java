@@ -25,6 +25,10 @@ public class HexGraph
 	
 	private final Map<Position, Node> points = new HashMap<>();
 	
+	/**
+	 * Node class for the graph, holds the node and it's edges.
+	 *
+	 */
 	static class Node implements Iterable<Edge>
 	{
 		private final List<Edge> edges = new ArrayList<>();
@@ -45,7 +49,9 @@ public class HexGraph
 			return edges.iterator();
 		} 
 	}
-	
+	/**
+	 * Edge class for the graph. Holds the nodes on either end.
+	 */
 	static class Edge
 	{
 		private final Node a, b;
@@ -65,7 +71,10 @@ public class HexGraph
 			return a;
 		}
 	}
-	
+	/**
+	 * inserts a node at the given position.
+	 * @param key
+	 */
 	public void insertNodeAt(Position key)
 	{
 		Node n = new Node();
@@ -81,6 +90,10 @@ public class HexGraph
 		points.put(key, n);
 	}
 	
+	/**
+	 * Removes the node at the given position.
+	 * @param key
+	 */
 	public void removeNodeAt(Position key)
 	{
 		Node n = points.get(key);
@@ -90,7 +103,14 @@ public class HexGraph
 		}
 		points.remove(key);
 	}
-
+	
+	/**
+	 * Checks whether the given move would break the contiguity of the
+	 * pieces on the board. Essentially, a connectivity check.
+	 * @param from initial location
+	 * @param to destination
+	 * @return true if the graph is connected after the move is made.
+	 */
 	public boolean isContinuousAfter(Position from, Position to) {
 		insertNodeAt(to);
 		removeNodeAt(from);
