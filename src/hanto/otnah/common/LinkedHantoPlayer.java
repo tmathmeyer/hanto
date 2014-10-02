@@ -119,7 +119,7 @@ public class LinkedHantoPlayer extends HantoPlayer<LinkedHantoPlayer>
 	 * @return the total number of moves
 	 */
 	public List<LinkedHantoPlayer> collectAllUsers() {
-		return collectAllUsers(getColor());
+		return getNextPlayer().collectAllUsers(getColor());
 	}
 	
 	private List<LinkedHantoPlayer> collectAllUsers(HantoPlayerColor color) {

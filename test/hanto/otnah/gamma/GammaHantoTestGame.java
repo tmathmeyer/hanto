@@ -36,7 +36,7 @@ public class GammaHantoTestGame extends GammaHantoGame implements HantoTestGame
 				getCurrentPlayer().getSelf().skipTo(plp.getPlayer())
 				                  .setButterflyPosition(asPosition(plp.getLocation()));
 			}
-			this.setPieceAt(new HantoTile(){
+			setPieceAt(new HantoTile(){
 
 				@Override
 				public HantoPlayerColor getColor() {
