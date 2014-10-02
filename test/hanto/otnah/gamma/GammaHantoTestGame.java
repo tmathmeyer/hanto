@@ -12,7 +12,6 @@ package hanto.otnah.gamma;
 
 import hanto.common.*;
 import hanto.otnah.common.*;
-import hanto.otnah.common.HantoTestGame;
 
 /**
  * Test Gamma Hanto Game
@@ -25,24 +24,24 @@ public class GammaHantoTestGame extends GammaHantoGame implements HantoTestGame
 		super(movesFirst);
 	}
 	
-	/*
-	 * @see common.HantoTestGame#initializeBoard(common.HantoTestGame.PieceLocationPair[])
-	 */
 	@Override
 	public void initializeBoard(PieceLocationPair[] initialPieces)
 	{
-		board.clear();
-		for (PieceLocationPair plp : initialPieces) {
-			board.put(HantoCoordinateFactory.makeCoordinate(plp.location),
-					HantoPieceFactory.makePiece(plp.player, plp.pieceType));
-			final HantoPlayerState hps = plp.player == HantoPlayerColor.BLUE 
-					? bluePlayerState : redPlayerState;
-			try {
-				hps.getPieceFromInventory(plp.pieceType);
-			} catch (HantoException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+		for(final PieceLocationPair plp : initialPieces)
+		{
+			this.setPieceAt(new HantoTile(){
+
+				@Override
+				public HantoPlayerColor getColor() {
+					return plp.player;
+				}
+
+				@Override
+				public HantoPieceType getType() {
+					return plp.pieceType;
+				}
+				
+			}, plp.location);
 		}
 	}
 
@@ -52,7 +51,16 @@ public class GammaHantoTestGame extends GammaHantoGame implements HantoTestGame
 	@Override
 	public void setTurnNumber(int turnNumber)
 	{
-		gameTurn = turnNumber;
+		int count = turnNumber / 2;
+		int anticount = turnNumber - count;
+		for(int i = 0; i < count; i++)
+		{
+			getCurrentPlayer().increaseMoveCount();
+		}
+		for(int i = 0; i < anticount; i++)
+		{
+			getCurrentPlayer().getNextPlayer().increaseMoveCount();
+		}
 	}
 
 	/*
@@ -61,7 +69,7 @@ public class GammaHantoTestGame extends GammaHantoGame implements HantoTestGame
 	@Override
 	public void setPlayerMoving(HantoPlayerColor player)
 	{
-		playerOnMove = player;
+		
 	}
 
 }
