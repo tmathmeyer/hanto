@@ -12,12 +12,13 @@ package hanto.otnah.gamma;
 
 import static org.junit.Assert.*;
 import hanto.common.*;
+
 import org.junit.*;
+
 import hanto.otnah.common.*;
 import static hanto.common.HantoPieceType.*;
 import static hanto.common.MoveResult.*;
 import static hanto.common.HantoPlayerColor.*;
-import hanto.otnah.common.HantoTestGame.PieceLocationPair;
 
 /**
  * Description
@@ -29,15 +30,21 @@ public class GammaHantoMasterTest
 	 * Internal class for these test cases.
 	 * @version Sep 13, 2014
 	 */
-	class TestHantoCoordinate implements HantoCoordinate
+	public static class TestHantoCoordinate implements HantoCoordinate
 	{
 		private final int x, y;
 		
+		/**
+		 * this should have been provided to us javadoc'd
+		 * @param x no
+		 * @param y no
+		 */
 		public TestHantoCoordinate(int x, int y)
 		{
 			this.x = x;
 			this.y = y;
 		}
+		
 		/*
 		 * @see hanto.common.HantoCoordinate#getX()
 		 */
@@ -58,24 +65,25 @@ public class GammaHantoMasterTest
 
 	}
 	
-	private static HantoTestGameFactory factory;
+	private static final HantoTestGameFactory FACTORY = HantoTestGameFactory.getInstance();
 	private HantoGame game;
 	private HantoTestGame testGame;
 	
-	@BeforeClass
-	public static void initializeClass()
-	{
-		factory = HantoTestGameFactory.getInstance();
-	}
-	
+	/**
+	 * should have been provided as javadoc
+	 */
 	@Before
 	public void setup()
 	{
 		// By default, blue moves first.
-		testGame = factory.makeTestHantoGame(HantoGameID.GAMMA_HANTO);
+		testGame = FACTORY.makeTestHantoGame(HantoGameID.GAMMA_HANTO);
 		game = testGame;
 	}
 	
+	/**
+	 * should have been provided as javadoc
+	 * @throws HantoException if fails
+	 */
 	@Test
 	public void bluePlacesButterflyFirst() throws HantoException
 	{
@@ -86,6 +94,10 @@ public class GammaHantoMasterTest
 		assertEquals(BUTTERFLY, piece.getType());
 	}
 	
+	/**
+	 * should have been provided as javadoc
+	 * @throws HantoException if fails
+	 */
 	@Test
 	public void redPlacesSparrowFirst() throws HantoException
 	{
@@ -93,6 +105,10 @@ public class GammaHantoMasterTest
 		assertEquals(OK, mr);
 	}
 	
+	/**
+	 * should have been provided as javadoc
+	 * @throws HantoException if fails
+	 */
 	@Test
 	public void blueMovesSparrow() throws HantoException
 	{
@@ -107,6 +123,10 @@ public class GammaHantoMasterTest
 		assertEquals(SPARROW, piece.getType());
 	}
 	
+	/**
+	 * should have been provided as javadoc
+	 * @throws HantoException if fails
+	 */
 	@Test
 	public void blueMovesSparrowUsingTestGame() throws HantoException
 	{
@@ -125,6 +145,10 @@ public class GammaHantoMasterTest
 		assertEquals(SPARROW, piece.getType());
 	}
 	
+	/**
+	 * should have been provided as javadoc
+	 * @throws HantoException if fails
+	 */
 	@Test
 	public void gameEndsInDrawAfter20Moves() throws HantoException
 	{
@@ -139,6 +163,10 @@ public class GammaHantoMasterTest
 		assertEquals(DRAW, game.makeMove(SPARROW, makeCoordinate(0, 2), makeCoordinate(1, 1)));
 	}
 	
+	/**
+	 * should have been provided as javadoc
+	 * @throws HantoException if fails
+	 */
 	@Test
 	public void moveButterfly() throws HantoException
 	{
@@ -151,6 +179,10 @@ public class GammaHantoMasterTest
 		assertNull(game.getPieceAt(makeCoordinate(0, 0)));
 	}
 	
+	/**
+	 * should have been provided as javadoc
+	 * @throws HantoException if fails
+	 */
 	@Test(expected=HantoException.class)
 	public void moveToDisconnectConfiguration() throws HantoException
 	{
@@ -159,6 +191,10 @@ public class GammaHantoMasterTest
 		game.makeMove(BUTTERFLY, makeCoordinate(0, 0), makeCoordinate(0, -1));
 	}
 	
+	/**
+	 * should have been provided as javadoc
+	 * @throws HantoException if fails
+	 */
 	@Test(expected=HantoException.class)
 	public void attemptToMoveAPieceFromAnEmptyHex() throws HantoException
 	{
@@ -167,6 +203,10 @@ public class GammaHantoMasterTest
 		game.makeMove(BUTTERFLY, makeCoordinate(1, 0), makeCoordinate(0, -1));
 	}
 	
+	/**
+	 * should have been provided as javadoc
+	 * @throws HantoException if fails
+	 */
 	@Test(expected=HantoException.class)
 	public void attemptToMoveWrongPiece() throws HantoException
 	{

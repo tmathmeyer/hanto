@@ -33,19 +33,15 @@ public class GammaHantoTestGame extends GammaHantoGame implements HantoTestGame
 
 				@Override
 				public HantoPlayerColor getColor() {
-					return plp.player;
+					return plp.getPlayer();
 				}
 
 				@Override
 				public HantoPieceType getType() {
-					return plp.pieceType;
+					return plp.getPieceType();
 				}
 				
-			}, plp.location);
-			
-			// this method is not programming to an interface
-			// this does not fit well into our program.
-			//getCurrentPlayer().play(plp.pieceType);
+			}, plp.getLocation());
 		}
 	}
 
@@ -71,12 +67,7 @@ public class GammaHantoTestGame extends GammaHantoGame implements HantoTestGame
 	@Override
 	public void setPlayerMoving(HantoPlayerColor player)
 	{
-		if (!getCurrentPlayer().getColor().equals(player))
-		{
-			// nope
-		}
-		
-		//nope
+		//TODO: useless method
 	}
 
 }

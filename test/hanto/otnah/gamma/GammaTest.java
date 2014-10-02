@@ -1,3 +1,12 @@
+/*******************************************************************************
+ * All sources under the hanto.otnah package were developed by
+ * Ted Meyer and Nilesh Patel for the term project in CS4233
+ * at Worcester Polytechnic Institute. Since WPI holds all other forms
+ * of ownership to this software, we have decided to not make this
+ * software available under any license. Evaluation or compilation rights
+ * are therefore granted only to course staff.
+ *******************************************************************************/
+
 package hanto.otnah.gamma;
 
 import static org.junit.Assert.*;
@@ -10,6 +19,12 @@ import hanto.otnah.common.HantoTile;
 
 import org.junit.Test;
 
+/**
+ * 
+ * @author otnah
+ *
+ * test functions and movment sets in the gamma game
+ */
 public class GammaTest {
 
 	private int[] inventoryCounts(HantoPlayer<?> p)
@@ -33,7 +48,9 @@ public class GammaTest {
 		return result;
 	}
 	
-	
+	/**
+	 * test whether a gamma game can be made
+	 */
 	@Test
 	public void canGammaBeMade()
 	{
@@ -44,6 +61,9 @@ public class GammaTest {
 		assertTrue(blue.getCurrentPlayer().getColor().equals(HantoPlayerColor.BLUE));
 	}
 	
+	/**
+	 * test whether players have proper starting inventories
+	 */
 	@Test
 	public void properStartingInventories()
 	{

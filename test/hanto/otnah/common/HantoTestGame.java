@@ -19,31 +19,6 @@ import hanto.common.*;
 public interface HantoTestGame extends HantoGame
 {
 	/**
-	 * A data structure used in setting up the the initial configuration of a game
-	 * for testing.
-	 * @version Sep 21, 2014
-	 */
-	class PieceLocationPair {
-		public final HantoPlayerColor player;
-		public final HantoPieceType pieceType;
-		public final HantoCoordinate location;
-		
-		/**
-		 * Default constructor
-		 * @param player the player color
-		 * @param pieceType the piece type
-		 * @param location the coordinate where the piece is at the beginning of the test
-		 */
-		public PieceLocationPair(HantoPlayerColor player, HantoPieceType pieceType,
-				HantoCoordinate location)
-		{
-			this.player = player;
-			this.pieceType = pieceType;
-			this.location = location;
-		}
-	}
-	
-	/**
 	 * Initialize the pieces on the board. This will put the pieces on the board as
 	 * well as updating the store of pieces that are off the board.
 	 * @param initialPieces an array of initial pieces

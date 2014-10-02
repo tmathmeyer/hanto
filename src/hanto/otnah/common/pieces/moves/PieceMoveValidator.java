@@ -37,7 +37,12 @@ public abstract class PieceMoveValidator
 	
 	private GameState latest;
 	
-	
+	/**
+	 * @param to the position from which a piece is moving
+	 * @param from the position to which the piece is moving
+	 * @param state the current game state
+	 * @return whether the move is valid or not
+	 */
 	public boolean isValidMove(Position to, Position from, GameState state)
 	{
 		latest = state;
