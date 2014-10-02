@@ -127,7 +127,7 @@ public class GammaHantoGame extends GameState
 				returnValue = MoveResult.RED_WINS;
 			}
 		}
-		if(red.getMovesPlayed() + blue.getMovesPlayed() == 12)
+		if(red.getMovesPlayed() + blue.getMovesPlayed() >= 40)
 		{
 			returnValue = MoveResult.DRAW;
 		}

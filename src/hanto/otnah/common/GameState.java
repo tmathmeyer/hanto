@@ -36,9 +36,7 @@ public abstract class GameState implements HantoGame
 	 * Dont let this class be created from outside (not that it can anyways)
 	 */
 	protected GameState()
-	{
-		new GameStateSingleton(this);
-	}
+	{}
 	
 	@Override
 	public HantoPiece getPieceAt(HantoCoordinate where)

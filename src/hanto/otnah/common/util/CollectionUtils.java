@@ -126,28 +126,6 @@ public class CollectionUtils
 		
 		/**
 		 * Wrapper for creating N instances of a type, where that type
-		 * has a 0 parameter default constructor
-		 * 
-		 * @param type the type of object
-		 * @param count how many of them
-		 * @throws HantoException if there was an error creating them
-		 */
-		public Factory(Class<T> type, int count) throws HantoException
-		{
-			for(int i = 0; i < count; i++)
-			{
-				try {
-					inner.add(type.newInstance());
-				} catch (InstantiationException e) {
-					throw new HantoException("attempted to create instance of class with non-default constructor!");
-				} catch (IllegalAccessException e) {
-					throw new HantoException("attempted to create instance of non-instantiable class!");
-				}
-			}
-		}
-		
-		/**
-		 * Wrapper for creating N instances of a type, where that type
 		 * has a 1 parameter default constructor
 		 * 
 		 * @param type the type of object
@@ -224,21 +202,6 @@ public class CollectionUtils
 		public List<T> getWrapped()
 		{
 			return inner;
-		}
-		
-		/**
-		 * @param <A> the type of factory
-		 * @param type the type
-		 * @param count the number
-		 * @return a Factory of type, count
-		 */
-		public static <A> Factory<A> norm(Class<A> type, int count)
-		{
-			try {
-				return new Factory<A> (type, count);
-			} catch (HantoException e) {
-				return new Factory<A>();
-			}
 		}
 		
 		/**

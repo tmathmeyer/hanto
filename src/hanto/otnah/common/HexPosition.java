@@ -12,6 +12,8 @@ package hanto.otnah.common;
 import java.util.Collection;
 
 import hanto.common.HantoCoordinate;
+import hanto.common.HantoPiece;
+import hanto.common.HantoPieceType;
 import hanto.otnah.common.util.HexUtil;
 
 /**
@@ -61,6 +63,13 @@ public class HexPosition extends Position
 	@Override
 	public Collection<HantoCoordinate> adjacentCoordinates(){
 		return HexUtil.locationsSurrounding(this);
+	}
+	
+	@Override
+	public boolean hasPieceType(GameState state, HantoPieceType type)
+	{
+		HantoPiece piece = state.getPieceAt(this);
+		return piece != null && piece.getType() == type;
 	}
 
 }

@@ -64,7 +64,8 @@ public abstract class PieceMoveValidator
 		 * the piece must be next to a piece of it's own color, and not next to
 		 * a piece of the opposing color
 		 */
-		boolean result = isFirstMove(pos);
+		boolean myColor = false;
+		boolean theirColor = false;
 		for(HantoCoordinate each : pos.adjacentPositions())
 		{
 			HantoPiece tile = latest.getPieceAt(each);
@@ -73,15 +74,15 @@ public abstract class PieceMoveValidator
 			{
 				if (tile.getColor() != color)
 				{
-					return false;
+					theirColor = true;
 				} 
 				else
 				{
-					result = true;
+					myColor = true;
 				}
 			}
 		}
-		return result;
+		return (myColor && !theirColor) || (latest.filledLocations().size() <= 1) || (color == null);
 	}
 	
 	/**
@@ -181,5 +182,16 @@ public abstract class PieceMoveValidator
 	protected boolean isGraphContinuityPreservedAfter(Position from, Position to)
 	{
 		return latest.isGraphContinuityPreservedAfter(from, to);
+	}
+	
+	/**
+	 * 
+	 * @param pos the position to check
+	 * @param type the assumed type
+	 * @return whether the type of piece at this location is the provided type
+	 */
+	protected boolean isPieceAtPositionCorrectType(Position pos, HantoPieceType type)
+	{
+		return pos.hasPieceType(latest, type);
 	}
 }

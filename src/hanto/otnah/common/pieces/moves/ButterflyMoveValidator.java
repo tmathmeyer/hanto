@@ -25,7 +25,8 @@ public class ButterflyMoveValidator extends PieceMoveValidator
 	public boolean isValidMove(Position to, Position from)
 	{
 		int moveDistance = from.getDistanceTo(to);
-		boolean result = isLocationUnoccupied(to);
+		boolean result = isLocationUnoccupied(to) &&
+				         isPieceAtPositionCorrectType(from, HantoPieceType.BUTTERFLY);
 		if (moveDistance == 1)
 		{
 			// the move is on the board

@@ -42,6 +42,10 @@ public class GammaHantoTestGame extends GammaHantoGame implements HantoTestGame
 				}
 				
 			}, plp.location);
+			
+			// this method is not programming to an interface
+			// this does not fit well into our program.
+			//getCurrentPlayer().play(plp.pieceType);
 		}
 	}
 
@@ -51,13 +55,11 @@ public class GammaHantoTestGame extends GammaHantoGame implements HantoTestGame
 	@Override
 	public void setTurnNumber(int turnNumber)
 	{
-		int count = turnNumber / 2;
-		int anticount = turnNumber - count;
-		for(int i = 0; i < count; i++)
+		for(int i = 0; i < turnNumber; i++)
 		{
 			getCurrentPlayer().increaseMoveCount();
 		}
-		for(int i = 0; i < anticount; i++)
+		for(int i = 0; i < turnNumber; i++)
 		{
 			getCurrentPlayer().getNextPlayer().increaseMoveCount();
 		}
@@ -69,7 +71,12 @@ public class GammaHantoTestGame extends GammaHantoGame implements HantoTestGame
 	@Override
 	public void setPlayerMoving(HantoPlayerColor player)
 	{
+		if (!getCurrentPlayer().getColor().equals(player))
+		{
+			// nope
+		}
 		
+		//nope
 	}
 
 }

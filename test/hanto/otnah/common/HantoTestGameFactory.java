@@ -60,6 +60,8 @@ public class HantoTestGameFactory
 			case GAMMA_HANTO:
 				game = new GammaHantoTestGame(movesFirst);
 				break;
+			default:
+				game = null;
 		}
 		return game;
 	}

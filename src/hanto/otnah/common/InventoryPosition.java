@@ -71,4 +71,16 @@ public class InventoryPosition extends Position
 		return state.getCurrentPlayer().play(type);
 	}
 
+	@Override
+	public boolean hasPieceType(GameState state, HantoPieceType type)
+	{
+		for(HantoTile tile : state.getCurrentPlayer().getInventory())
+		{
+			if (tile.getType() == type)
+			{
+				return true;
+			}
+		}
+		return false;
+	}
 }

@@ -10,9 +10,9 @@
 package hanto.otnah.common;
 
 import hanto.common.HantoCoordinate;
+import hanto.common.HantoPiece;
 import hanto.common.HantoPieceType;
 import hanto.otnah.common.util.HexUtil;
-
 
 import java.util.Collection;
 import java.util.ArrayList;
@@ -97,6 +97,12 @@ public abstract class Position implements HantoCoordinate
 				return HexUtil.distance(this, other);
 			}
 
+			@Override
+			public boolean hasPieceType(GameState state, HantoPieceType type) {
+				HantoPiece piece = state.getPieceAt(this);
+				return piece != null && piece.getType() == type;
+			}
+
 		};
 	}
 
@@ -143,4 +149,12 @@ public abstract class Position implements HantoCoordinate
 	{
 		return gameState.removePieceFrom(this);	
 	}
+
+	/**
+	 * 
+	 * @param state the game state
+	 * @param type the type
+	 * @return whether this location has that type
+	 */
+	public abstract boolean hasPieceType(GameState state, HantoPieceType type);
 }
