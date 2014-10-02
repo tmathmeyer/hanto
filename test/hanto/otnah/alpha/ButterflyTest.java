@@ -40,22 +40,4 @@ public class ButterflyTest {
 	{
 		assertEquals(new Butterfly(HantoPlayerColor.RED).getType(), HantoPieceType.BUTTERFLY);
 	}
-	
-	/**
-	 * make sure that a move does nothing
-	 */
-	@Test
-	public void isValidMoveDoesNothing()
-	{
-		assertFalse(new Butterfly(null).isValidMove(null));
-	}
-	
-	/**
-	 * make sure that surrounging does nothing
-	 */
-	@Test
-	public void doesSurroundingMovedDoNothing()
-	{
-		assertNull(new Butterfly(null).getAdjacentPositions());
-	}
 }

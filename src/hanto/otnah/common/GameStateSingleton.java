@@ -30,27 +30,4 @@ public class GameStateSingleton
 			INSTANCE = this;
 		}
 	}
-	
-	/**
-	 * @return the one and only game state
-	 */
-	public static GameState gameInstance()
-	{
-		return getSingleton().getGameState();
-	}
-	
-	/**
-	 * @return the instance of this class
-	 */
-	public static GameStateSingleton getSingleton()
-	{
-		return INSTANCE;
-	}
-
-	/**
-	 * @return the gameState
-	 */
-	public GameState getGameState() {
-		return gameState;
-	}
 }

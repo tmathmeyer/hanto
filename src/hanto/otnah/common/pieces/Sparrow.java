@@ -44,23 +44,4 @@ public class Sparrow extends HantoTile
 	public HantoPieceType getType() {
 		return HantoPieceType.SPARROW;
 	}
-
-	@Override
-	public void move(HantoCoordinate to) {
-		// Empty, since the sparrow can't actually move
-		
-	}
-
-	@Override
-	public boolean isValidMove(Position to) {
-		// Always return false, since the sparrow can never move
-		return false;
-	}
-
-	@Override
-	public Collection<HantoCoordinate> getAdjacentPositions() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
 }

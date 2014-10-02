@@ -9,13 +9,9 @@
 
 package hanto.otnah.alpha;
 
-import java.util.Collection;
-
-import hanto.common.HantoCoordinate;
 import hanto.common.HantoPieceType;
 import hanto.common.HantoPlayerColor;
 import hanto.otnah.common.HantoTile;
-import hanto.otnah.common.Position;
 
 /**
  * 
@@ -45,23 +41,4 @@ public class Butterfly extends HantoTile
 	{
 		return HantoPieceType.BUTTERFLY;
 	}
-
-	@Override
-	public void move(HantoCoordinate to)
-	{
-		//TODO: not in alpha
-	}
-
-	@Override
-	public boolean isValidMove(Position to)
-	{
-		return false; // the butterfly can't move anywhere
-	}
-
-	@Override
-	public Collection<HantoCoordinate> getAdjacentPositions()
-	{
-		return null;
-	}
-
 }

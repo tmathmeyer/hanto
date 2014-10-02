@@ -21,6 +21,7 @@ import hanto.common.HantoPieceType;
 import hanto.common.HantoPlayerColor;
 import hanto.otnah.common.util.graph.HexGraph;
 
+import static hanto.otnah.common.Position.asPosition;
 /**
  * 
  * @author otnah
@@ -74,7 +75,8 @@ public abstract class GameState implements HantoGame
 	 */
 	public void setPieceAt(HantoTile piece, HantoCoordinate location)
 	{
-		gameBoard.put(Position.asPosition(location), piece);
+		gameBoard.put(asPosition(location), piece);
+		gameGraph.insertNodeAt(asPosition(location));
 	}
 	
 	/**
@@ -84,7 +86,8 @@ public abstract class GameState implements HantoGame
 	 */
 	public HantoTile removePieceFrom(HantoCoordinate location)
 	{
-		return gameBoard.remove(location);
+		gameGraph.removeNodeAt(asPosition(location));
+		return gameBoard.remove(asPosition(location));
 	}
 	
 	/**

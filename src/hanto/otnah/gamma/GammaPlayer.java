@@ -48,7 +48,7 @@ public class GammaPlayer extends HantoPlayer<GammaPlayer>
 	{
 		 super(color, makeInventory(HantoTile.class,
 				 with(Butterfly.class, 1, color),
-				 with(Sparrow.class, 1, color)));
+				 with(Sparrow.class, 5, color)));
 	}
 	
 	/**

@@ -11,7 +11,6 @@ package hanto.otnah.common.pieces.moves;
 
 import static hanto.otnah.common.util.CollectionUtils.map;
 import static hanto.otnah.common.util.HexUtil.slideBlockers;
-import static hanto.otnah.common.GameStateSingleton.gameInstance;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -20,6 +19,7 @@ import hanto.common.HantoCoordinate;
 import hanto.common.HantoPiece;
 import hanto.common.HantoPieceType;
 import hanto.common.HantoPlayerColor;
+import hanto.otnah.common.GameState;
 import hanto.otnah.common.HantoTile;
 import hanto.otnah.common.HexPosition;
 import hanto.otnah.common.Position;
@@ -34,13 +34,23 @@ import hanto.otnah.common.util.CollectionUtils.Lambda;
  */
 public abstract class PieceMoveValidator
 {
+	
+	private GameState latest;
+	
+	
+	public boolean isValidMove(Position to, Position from, GameState state)
+	{
+		latest = state;
+		return isValidMove(to, from);
+	}
+	
 	/**
 	 * 
 	 * @param to the position to which the piece is moving
 	 * @param from the position from which the piece is moving
 	 * @return whether that move is valid
 	 */
-	public abstract boolean isValidMove(Position to, Position from);
+	protected abstract boolean isValidMove(Position to, Position from);
 	
 	/**
 	 * 
@@ -57,7 +67,7 @@ public abstract class PieceMoveValidator
 		boolean result = isFirstMove(pos);
 		for(HantoCoordinate each : pos.adjacentPositions())
 		{
-			HantoPiece tile = gameInstance().getPieceAt(each);
+			HantoPiece tile = latest.getPieceAt(each);
 			
 			if (tile != null)
 			{
@@ -92,7 +102,7 @@ public abstract class PieceMoveValidator
 		}
 		else
 		{
-			return gameInstance().getCurrentPlayer().getMovesPlayed() < limit;
+			return latest.getCurrentPlayer().getMovesPlayed() < limit;
 		}
 	}
 	
@@ -103,7 +113,7 @@ public abstract class PieceMoveValidator
 	 */
 	protected boolean hasPieceInInventory(HantoPieceType hpt)
 	{
-		for(HantoTile ht : gameInstance().getCurrentPlayer().getInventory())
+		for(HantoTile ht : latest.getCurrentPlayer().getInventory())
 		{
 			if (ht.getType().equals(hpt))
 			{
@@ -121,7 +131,7 @@ public abstract class PieceMoveValidator
 	 */
 	protected boolean isFirstMove(Position check)
 	{
-		return gameInstance().filledLocations().size() == 0
+		return latest.filledLocations().size() == 0
 				&& check.getDistanceTo(new HexPosition(0, 0)) == 0;
 	}
 	
@@ -132,7 +142,7 @@ public abstract class PieceMoveValidator
 	 */
 	protected boolean isLocationUnoccupied(Position check)
 	{
-		return gameInstance().getPieceAt(check) == null;
+		return latest.getPieceAt(check) == null;
 	}
 	
 	/**
@@ -146,7 +156,7 @@ public abstract class PieceMoveValidator
 		List<HantoPiece> blockingPieces = map(slideBlockers(from, to), new Lambda<HantoCoordinate, HantoPiece>(){
 			@Override
 			public HantoPiece apply(HantoCoordinate in) {
-				return gameInstance().getPieceAt(in);
+				return latest.getPieceAt(in);
 			}
 		}, new LinkedList<HantoPiece>());
 		
@@ -159,7 +169,7 @@ public abstract class PieceMoveValidator
 	 */
 	protected HantoPlayerColor currentPlayerColor()
 	{
-		return gameInstance().getCurrentPlayer().getColor();
+		return latest.getCurrentPlayer().getColor();
 	}
 	
 	/**
@@ -170,6 +180,6 @@ public abstract class PieceMoveValidator
 	 */
 	protected boolean isGraphContinuityPreservedAfter(Position from, Position to)
 	{
-		return gameInstance().isGraphContinuityPreservedAfter(from, to);
+		return latest.isGraphContinuityPreservedAfter(from, to);
 	}
 }

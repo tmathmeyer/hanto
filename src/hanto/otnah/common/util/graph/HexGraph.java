@@ -14,9 +14,11 @@ import hanto.otnah.common.Position;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import static hanto.otnah.common.Position.asPosition;
 
@@ -32,18 +34,15 @@ public class HexGraph
 	private final Map<Position, Node> points = new HashMap<>();
 	
 	/**
-	 * 
 	 * @author otnah
-	 *
 	 * Node class for the graph, holds the node and it's edges.
-	 *
 	 */
 	static class Node implements Iterable<Edge>
 	{
 		private final List<Edge> edges = new ArrayList<>();
+		private final Set<String> tracers = new HashSet<>();
 		
 		/**
-		 * 
 		 * @param e the edge to add
 		 */
 		public void addEdge(Edge e)
@@ -52,7 +51,6 @@ public class HexGraph
 		}
 		
 		/**
-		 * 
 		 * @param e the edge to remove
 		 */
 		public void removeEdge(Edge e)
@@ -64,7 +62,45 @@ public class HexGraph
 		public Iterator<Edge> iterator()
 		{
 			return edges.iterator();
-		} 
+		}
+		
+		/**
+		 * marks nodes for searching processessessessessess
+		 * @param name the name of the marker
+		 * @return the number of nodes marked
+		 */
+		public int mark(String name)
+		{
+			int count = 1;
+			tracers.add(name);
+			for(Edge e : edges)
+			{
+				Node n = e.getOtherEnd(this);
+				if (!n.isMarked(name))
+				{
+					count += n.mark(name);
+				}
+			}
+			return count;
+		}
+		
+		/**
+		 * @param name the name of the marker
+		 * @return whether this node is marked already
+		 */
+		public boolean isMarked(String name)
+		{
+			return tracers.contains(name);
+		}
+		
+		/**
+		 * removes a marker from this node
+		 * @param name the name of the makrer
+		 */
+		public void unmark(String name)
+		{
+			tracers.remove(name);
+		}
 	}
 	
 	/**
@@ -100,7 +136,33 @@ public class HexGraph
 			}
 			return a;
 		}
+		
+		@Override
+		public int hashCode()
+		{
+			return a.hashCode() ^ b.hashCode();
+		}
+		
+		@Override
+		public boolean equals(Object other)
+		{
+			if (other == null)
+			{
+				return false;
+			}
+			if (other == this)
+			{
+				return true;
+			}
+			if (other instanceof Edge)
+			{
+				Edge o = (Edge) other;
+				return o.b.equals(b) && o.a.equals(a);
+			}
+			return false;
+		}
 	}
+	
 	/**
 	 * inserts a node at the given position.
 	 * @param key
@@ -114,7 +176,9 @@ public class HexGraph
 			Node lookup = points.get(asPosition(coord));
 			if (lookup != null)
 			{
-				n.addEdge(new Edge(n, lookup));
+				Edge e = new Edge(n, lookup);
+				n.addEdge(e);
+				lookup.addEdge(e);
 			}
 		}
 		points.put(key, n);
@@ -127,11 +191,14 @@ public class HexGraph
 	public void removeNodeAt(Position key)
 	{
 		Node n = points.get(key);
-		for(Edge e : n)
+		if (n != null)
 		{
-			e.getOtherEnd(n).removeEdge(e);
+			for(Edge e : n)
+			{
+				e.getOtherEnd(n).removeEdge(e);
+			}
+			points.remove(key);
 		}
-		points.remove(key);
 	}
 	
 	/**
@@ -141,24 +208,33 @@ public class HexGraph
 	 * @param to destination
 	 * @return true if the graph is connected after the move is made.
 	 */
-	public boolean isContinuousAfter(Position from, Position to) {
+	public boolean isContinuousAfter(Position from, Position to)
+	{
 		insertNodeAt(to);
 		removeNodeAt(from);
-		List<Node> visited = new ArrayList<>();
-		visited.add(points.get(from));
-		for(int i = 0; i < visited.size(); i++)
+		
+		boolean result = isContinuous();
+		
+		insertNodeAt(from);
+		removeNodeAt(to);
+		
+		return result;
+	}
+	
+	/**
+	 * @return whether the graph in its current state is continuous
+	 */
+	public boolean isContinuous()
+	{
+		if (points.size() == 0)
 		{
-			Iterator<Edge> it = visited.get(i).iterator();
-			while(it.hasNext())
-			{
-				Node tmp = it.next().getOtherEnd(visited.get(i));
-				if(visited.contains(tmp))
-				{
-					continue;
-				}
-				visited.add(tmp);
-			}
+			return false;
 		}
-		return visited.size() == points.size();
+		int continuity = points.values().iterator().next().mark("search");
+		for(Node n : points.values())
+		{
+			n.unmark("search");
+		}
+		return continuity == points.size();
 	}
 }
