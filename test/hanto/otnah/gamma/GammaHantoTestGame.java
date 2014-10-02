@@ -13,6 +13,8 @@ package hanto.otnah.gamma;
 import hanto.common.*;
 import hanto.otnah.common.*;
 
+import static hanto.otnah.common.Position.asPosition;
+
 /**
  * Test Gamma Hanto Game
  * @version Sep 22, 2014
@@ -29,6 +31,11 @@ public class GammaHantoTestGame extends GammaHantoGame implements HantoTestGame
 	{
 		for(final PieceLocationPair plp : initialPieces)
 		{
+			if (plp.getPieceType() == HantoPieceType.BUTTERFLY)
+			{
+				getCurrentPlayer().getSelf().skipTo(plp.getPlayer())
+				                  .setButterflyPosition(asPosition(plp.getLocation()));
+			}
 			this.setPieceAt(new HantoTile(){
 
 				@Override

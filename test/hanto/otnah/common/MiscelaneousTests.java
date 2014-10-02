@@ -13,7 +13,6 @@ import static org.junit.Assert.*;
 import hanto.common.HantoPlayerColor;
 import hanto.otnah.common.pieces.Butterfly;
 import hanto.otnah.gamma.GammaHantoGame;
-import hanto.otnah.gamma.GammaPlayer;
 
 import org.junit.Test;
 
@@ -67,13 +66,13 @@ public class MiscelaneousTests {
 	@Test
 	public void testCurrentPositions()
 	{
-		GammaPlayer ghp = new GammaPlayer(HantoPlayerColor.RED);
+		LinkedHantoPlayer ghp = LinkedHantoPlayerFactory.makeGammaPlayers(HantoPlayerColor.RED);
 		
 		assertEquals(ghp.getCurrentPositions().size(), 0);
 		
 		Position b = new HexPosition(0, 0);
 		
-		assertEquals(b.adjacentPositions().size(), 0);
+		assertEquals(b.adjacentPositions().size(), 6);
 	}
 	
 	/**

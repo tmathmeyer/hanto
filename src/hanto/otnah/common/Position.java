@@ -140,6 +140,25 @@ public abstract class Position implements HantoCoordinate
 	}
 	
 	/**
+	 * Gets the list of tiles adjacent to this position in the given game state
+	 * @return the list of adjacent tiles
+	 */
+	public Collection<HantoPiece> adjacentTiles(GameState state)
+	{
+		Collection<HantoCoordinate> coords = adjacentCoordinates();
+		Collection<HantoPiece> positions = new ArrayList<>();
+		for(HantoCoordinate n : coords)
+		{
+			HantoPiece t = state.getPieceAt(n);
+			if (t != null)
+			{
+				positions.add(t);
+			}
+		}
+		return positions;
+	}
+	
+	/**
 	 *  remove a piece from a place and return it.
 	 * @param gameState the state of the game (for access to board and players)
 	 * @param type the type of piece that the caller is looking for

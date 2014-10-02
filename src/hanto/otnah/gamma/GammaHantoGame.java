@@ -10,8 +10,6 @@
 
 package hanto.otnah.gamma;
 
-import java.util.Collection;
-
 import hanto.common.HantoCoordinate;
 import hanto.common.HantoException;
 import hanto.common.HantoPieceType;
@@ -20,8 +18,13 @@ import hanto.common.MoveResult;
 import hanto.otnah.common.GameState;
 import hanto.otnah.common.HantoPlayer;
 import hanto.otnah.common.HantoTile;
+import hanto.otnah.common.LinkedHantoPlayer;
 import hanto.otnah.common.Position;
 import hanto.otnah.common.pieces.moves.PieceMoveValidatorFactory;
+
+import static hanto.common.HantoPlayerColor.RED;
+import static hanto.common.HantoPlayerColor.BLUE;
+import static hanto.otnah.common.LinkedHantoPlayerFactory.makeGammaPlayers;
 
 
 /**
@@ -31,9 +34,7 @@ import hanto.otnah.common.pieces.moves.PieceMoveValidatorFactory;
  */
 public class GammaHantoGame extends GameState
 {
-	private GammaPlayer current;
-	private final GammaPlayer red = new GammaPlayer(HantoPlayerColor.RED);
-	private final GammaPlayer blue = new GammaPlayer(HantoPlayerColor.BLUE);
+	private LinkedHantoPlayer current = makeGammaPlayers(RED, BLUE);
 
 	/**
 	 * default constructor
@@ -42,17 +43,7 @@ public class GammaHantoGame extends GameState
 	 */
 	public GammaHantoGame(HantoPlayerColor firstPlayer)
 	{
-		red.setNextPlayer(blue);
-		blue.setNextPlayer(red);
-		switch (firstPlayer)
-		{
-			case BLUE:
-				current = blue;
-				break;
-			case RED:
-				current = red;
-				break;	
-		}
+		current = current.skipTo(firstPlayer);
 	}
 
 	@Override
@@ -98,7 +89,7 @@ public class GammaHantoGame extends GameState
 	}
 
 	@Override
-	public HantoPlayer<GammaPlayer> getCurrentPlayer()
+	public HantoPlayer<LinkedHantoPlayer> getCurrentPlayer()
 	{
 		return current;
 	}
@@ -111,44 +102,28 @@ public class GammaHantoGame extends GameState
 	
 	private MoveResult gameState()
 	{
-		MoveResult returnValue = MoveResult.OK;
-		if(isSurrounded(red.getButterflyPosition()))
-		{
-			returnValue = MoveResult.BLUE_WINS;
-		}
-		if(isSurrounded(blue.getButterflyPosition()))
-		{
-			if(returnValue == MoveResult.BLUE_WINS)
-			{
-				returnValue = MoveResult.DRAW;
-			}
-			else
-			{
-				returnValue = MoveResult.RED_WINS;
-			}
-		}
-		if(red.getMovesPlayed() + blue.getMovesPlayed() >= 40)
+		MoveResult returnValue = checkSurrounded();
+		if (getCurrentPlayer().getSelf().getTotalMoves() >= 40)
 		{
 			returnValue = MoveResult.DRAW;
 		}
 		return returnValue;
 	}
 	
-	private boolean isSurrounded(Position toCheck)
+	private MoveResult checkSurrounded()
 	{
-		Collection<HantoCoordinate> positions = toCheck.adjacentCoordinates();
-		if(positions.size() < 6)
+		MoveResult result = MoveResult.OK;
+		for(LinkedHantoPlayer player : getCurrentPlayer().getSelf().collectAllUsers())
 		{
-			return false;
-		}
-		for(HantoCoordinate c : positions)
-		{
-			if(getPieceAt(c) == null)
+			if (player.isSurrounded(this))
 			{
-				return false;
+				if (result != MoveResult.OK){
+					return MoveResult.DRAW;
+				}
+				result = player.getWinningState();
 			}
 		}
-		return true;
+		return result;
 	}
 	
 }
