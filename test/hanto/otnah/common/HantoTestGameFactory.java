@@ -54,8 +54,8 @@ public class HantoTestGameFactory
 	 * @param movesFirst the player color that moves first
 	 * @return the game instance
 	 */
-	public HantoGame makeHantoTestGame(HantoGameID gameId, HantoPlayerColor movesFirst) {
-		HantoGame game = null;
+	public HantoTestGame makeHantoTestGame(HantoGameID gameId, HantoPlayerColor movesFirst) {
+		HantoTestGame game = null;
 		switch (gameId) {
 			case GAMMA_HANTO:
 				game = new GammaHantoTestGame(movesFirst);
