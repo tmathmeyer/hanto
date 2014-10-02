@@ -42,5 +42,24 @@ public class MiscelaneousTests {
 		GammaPlayer ghp = new GammaPlayer(HantoPlayerColor.RED);
 		
 		assertEquals(ghp.getCurrentPositions().size(), 0);
+		
+		Position b = new HexPosition(0, 0);
+		
+		assertEquals(b.adjacentPositions().size(), 0);
+	}
+	
+	@Test
+	public void testPositionEquality()
+	{
+		Position a = new HexPosition(0, 0);
+		Position b = new HexPosition(0, 0);
+		Position c = new HexPosition(1, 0);
+		Position d = new HexPosition(0, 1);
+		
+		assertFalse(a.equals(null));
+		assertTrue(a.equals(a));
+		assertTrue(a.equals(b));
+		assertFalse(a.equals(c));
+		assertFalse(a.equals(d));
 	}
 }

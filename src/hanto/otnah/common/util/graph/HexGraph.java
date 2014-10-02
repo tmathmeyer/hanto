@@ -73,7 +73,7 @@ public class HexGraph
 		{
 			int count = 1;
 			tracers.add(name);
-			for(Edge e : edges)
+			for(Edge e : this)
 			{
 				Node n = e.getOtherEnd(this);
 				if (!n.isMarked(name))
@@ -228,7 +228,7 @@ public class HexGraph
 	{
 		if (points.size() == 0)
 		{
-			return false;
+			return true;
 		}
 		int continuity = points.values().iterator().next().mark("search");
 		for(Node n : points.values())
