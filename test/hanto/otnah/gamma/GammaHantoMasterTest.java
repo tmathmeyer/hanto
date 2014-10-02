@@ -72,7 +72,7 @@ public class GammaHantoMasterTest
 	public void setup()
 	{
 		// By default, blue moves first.
-		testGame = factory.makeHantoTestGame(HantoGameID.GAMMA_HANTO);
+		testGame = factory.makeTestHantoGame(HantoGameID.GAMMA_HANTO);
 		game = testGame;
 	}
 	
