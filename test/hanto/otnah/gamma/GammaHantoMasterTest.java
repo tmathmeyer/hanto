@@ -17,7 +17,6 @@ import hanto.otnah.common.*;
 import static hanto.common.HantoPieceType.*;
 import static hanto.common.MoveResult.*;
 import static hanto.common.HantoPlayerColor.*;
-import hanto.otnah.common.HantoTestGame.PieceLocationPair;
 
 /**
  * Description
