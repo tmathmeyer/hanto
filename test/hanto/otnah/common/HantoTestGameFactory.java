@@ -11,9 +11,6 @@
 package hanto.otnah.common;
 
 import hanto.common.*;
-import hanto.otnah.HantoGameFactory;
-import hanto.otnah.alpha.AlphaHantoGame;
-import hanto.otnah.beta.BetaHantoGame;
 import hanto.otnah.gamma.GammaHantoTestGame;
 
 /**
@@ -22,7 +19,7 @@ import hanto.otnah.gamma.GammaHantoTestGame;
  */
 public class HantoTestGameFactory
 {
-	private static final HantoTestGameFactory instance = new HantoTestGameFactory();
+	private static final HantoTestGameFactory INSTANCE = new HantoTestGameFactory();
 	
 	/**
 	 * Default private descriptor.
@@ -37,7 +34,7 @@ public class HantoTestGameFactory
 	 */
 	public static HantoTestGameFactory getInstance()
 	{
-		return instance;
+		return INSTANCE;
 	}
 	
 	/**
@@ -57,7 +54,7 @@ public class HantoTestGameFactory
 	 * @param movesFirst the player color that moves first
 	 * @return the game instance
 	 */
-	public  HantoGame makeHantoTestGame(HantoGameID gameId, HantoPlayerColor movesFirst) {
+	public HantoGame makeHantoTestGame(HantoGameID gameId, HantoPlayerColor movesFirst) {
 		HantoGame game = null;
 		switch (gameId) {
 			case GAMMA_HANTO:
