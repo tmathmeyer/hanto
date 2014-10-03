@@ -11,6 +11,7 @@
 package hanto.otnah.common;
 
 import hanto.common.*;
+import hanto.otnah.delta.DeltaHantoTestGame;
 import hanto.otnah.gamma.GammaHantoTestGame;
 
 /**
@@ -59,6 +60,9 @@ public class HantoTestGameFactory
 		switch (gameId) {
 			case GAMMA_HANTO:
 				game = new GammaHantoTestGame(movesFirst);
+				break;
+			case DELTA_HANTO:
+				game = new DeltaHantoTestGame(movesFirst);
 				break;
 			default:
 				game = null;
