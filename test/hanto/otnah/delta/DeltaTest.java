@@ -49,10 +49,10 @@ public class DeltaTest {
 	}
 	
 	/**
-	 * test whether a gamma game can be made
+	 * test whether a delta game can be made
 	 */
 	@Test
-	public void canGammaBeMade()
+	public void canDeltaBeMade()
 	{
 		GameState red = (GameState) HantoGameFactory.getInstance().makeHantoGame(HantoGameID.DELTA_HANTO, HantoPlayerColor.RED);
 		GameState blue = (GameState) HantoGameFactory.getInstance().makeHantoGame(HantoGameID.DELTA_HANTO, HantoPlayerColor.BLUE);
