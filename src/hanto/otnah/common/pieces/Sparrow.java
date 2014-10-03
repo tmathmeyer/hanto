@@ -40,4 +40,5 @@ public class Sparrow extends HantoTile
 	public HantoPieceType getType() {
 		return HantoPieceType.SPARROW;
 	}
+
 }

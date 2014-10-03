@@ -9,7 +9,6 @@
 
 package hanto.otnah.common.pieces.moves;
 
-import hanto.common.HantoGameID;
 import hanto.common.HantoPieceType;
 import hanto.otnah.common.Position;
 
@@ -19,47 +18,15 @@ import hanto.otnah.common.Position;
  *
  * a move validator for sparrows
  */
-public class SparrowMoveValidator extends PieceMoveValidator
+public class CrabMoveValidator extends PieceMoveValidator
 {
-	private HantoGameID version;
-	
-	public SparrowMoveValidator(HantoGameID version)
-	{
-		this.version = version;
-	}
 	
 	@Override
 	public boolean isValidMove(Position to, Position from)
 	{
-		switch(version)
-		{
-			case DELTA_HANTO:
-				return deltaSparrowValidator(to,from);
-			default:
-				return defaultSparrowValidator(to, from);
-		}
-	}
-	
-	private boolean deltaSparrowValidator(Position to, Position from)
-	{
-		boolean result = isLocationUnoccupied(to);
-		int moveDistance = from.getDistanceTo(to);
-		
-		if(moveDistance == 0)
-		{
-			return result && hasPieceInInventory(HantoPieceType.SPARROW) &&
-					checkButterflyLegality(HantoPieceType.BUTTERFLY, 4) &&
-					isValidNewPlaceLocation(to,currentPlayerColor());
-		}
-		return result && isGraphContinuityPreservedAfter(to, from) &&
-				isValidNewPlaceLocation(to,null);
-	}
-	
-	private boolean defaultSparrowValidator(Position to, Position from)
-	{
 		int moveDistance = from.getDistanceTo(to);
 		boolean result = isLocationUnoccupied(to) &&
-		         isPieceAtPositionCorrectType(from, HantoPieceType.SPARROW);
+		         isPieceAtPositionCorrectType(from, HantoPieceType.CRAB);
 		
 		if (moveDistance == 1)
 		{
@@ -75,7 +42,7 @@ public class SparrowMoveValidator extends PieceMoveValidator
 			// the move is onto the board from the player's inventory
 			
 			return result &&
-				   hasPieceInInventory(HantoPieceType.SPARROW) &&
+				   hasPieceInInventory(HantoPieceType.CRAB) &&
 				   checkButterflyLegality(HantoPieceType.BUTTERFLY, 4) &&
 				   isValidNewPlaceLocation(to, currentPlayerColor());
 		}

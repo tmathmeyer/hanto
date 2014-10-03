@@ -12,6 +12,7 @@ package hanto.otnah.gamma;
 
 import hanto.common.HantoCoordinate;
 import hanto.common.HantoException;
+import hanto.common.HantoGameID;
 import hanto.common.HantoPieceType;
 import hanto.common.HantoPlayerColor;
 import hanto.common.MoveResult;
@@ -21,7 +22,6 @@ import hanto.otnah.common.HantoTile;
 import hanto.otnah.common.LinkedHantoPlayer;
 import hanto.otnah.common.Position;
 import hanto.otnah.common.pieces.moves.PieceMoveValidatorFactory;
-
 import static hanto.common.HantoPlayerColor.RED;
 import static hanto.common.HantoPlayerColor.BLUE;
 import static hanto.otnah.common.LinkedHantoPlayerFactory.makeGammaPlayers;
@@ -97,7 +97,8 @@ public class GammaHantoGame extends GameState
 	@Override
 	public boolean isMovePossible(Position from, Position to, HantoPieceType type, HantoPlayerColor color)
 	{
-		return PieceMoveValidatorFactory.getMoveValidator(type).isValidMove(to, from, this);
+		return PieceMoveValidatorFactory.getMoveValidator(HantoGameID.GAMMA_HANTO,type)
+				.isValidMove(to, from, this);
 	}
 	
 	private MoveResult gameState()

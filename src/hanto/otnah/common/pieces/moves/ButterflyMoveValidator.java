@@ -21,6 +21,7 @@ import hanto.otnah.common.Position;
  */
 public class ButterflyMoveValidator extends PieceMoveValidator
 {
+	
 	@Override
 	public boolean isValidMove(Position to, Position from)
 	{

@@ -8,6 +8,7 @@
  *******************************************************************************/
 package hanto.otnah.common.pieces.moves;
 
+import hanto.common.HantoGameID;
 import hanto.common.HantoPieceType;
 
 /**
@@ -24,22 +25,16 @@ public class PieceMoveValidatorFactory
 	 * @param type the piece type to which a validator should be gotten
 	 * @return the move validator for that type
 	 */
-	public static PieceMoveValidator getMoveValidator(HantoPieceType type)
+	public static PieceMoveValidator getMoveValidator(HantoGameID game, HantoPieceType type)
 	{
 		switch(type)
 		{
 			case BUTTERFLY:
 				return new ButterflyMoveValidator();
-			case CRAB:
-				break;
-			case CRANE:
-				break;
-			case DOVE:
-				break;
-			case HORSE:
-				break;
 			case SPARROW:
-				return new SparrowMoveValidator();
+				return new SparrowMoveValidator(game);
+			case CRAB:
+				return new CrabMoveValidator();
 			default:
 				break;
 		}

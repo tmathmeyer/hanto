@@ -15,12 +15,13 @@ import java.util.Map;
 import java.util.Set;
 
 import hanto.common.HantoCoordinate;
+import hanto.common.HantoException;
 import hanto.common.HantoGame;
 import hanto.common.HantoPiece;
 import hanto.common.HantoPieceType;
 import hanto.common.HantoPlayerColor;
+import hanto.common.MoveResult;
 import hanto.otnah.common.util.graph.HexGraph;
-
 import static hanto.otnah.common.Position.asPosition;
 /**
  * 
@@ -31,9 +32,9 @@ public abstract class GameState implements HantoGame
 {
 	private final Map<Position, HantoTile> gameBoard = new HashMap<>();
 	private final HexGraph gameGraph = new HexGraph();
-	
+	private boolean gameOver = false;
 	/**
-	 * Dont let this class be created from outside (not that it can anyways)
+	 * Don't let this class be created from outside (not that it can anyways)
 	 */
 	protected GameState()
 	{}
@@ -106,5 +107,22 @@ public abstract class GameState implements HantoGame
 	public boolean isGraphContinuityPreservedAfter(Position from, Position to)
 	{
 		return gameGraph.isContinuousAfter(from, to);
+	}
+	
+	/**
+	 * Marks the game complete
+	 */
+	public void gameOver()
+	{
+		gameOver = true;
+	}
+	
+	/**
+	 * Returns whether the game is over or not.
+	 * @return whether the game is over or not.
+	 */
+	public boolean isGameOver()
+	{
+		return gameOver;
 	}
 }
