@@ -150,24 +150,6 @@ public class DeltaHantoMasterTest
 	 * @throws HantoException if fails
 	 */
 	@Test
-	public void gameEndsInDrawAfter20Moves() throws HantoException
-	{
-		final PieceLocationPair[] board = new PieceLocationPair[] {
-			    plPair(BLUE, BUTTERFLY, 0, 0), plPair(RED, BUTTERFLY, 0, 1),
-			    plPair(BLUE, SPARROW, 0, -1), plPair(RED, SPARROW, 0, 2)
-			    
-		};
-		testGame.initializeBoard(board);
-		testGame.setPlayerMoving(RED);
-		testGame.setTurnNumber(20);
-		assertEquals(DRAW, game.makeMove(SPARROW, makeCoordinate(0, 2), makeCoordinate(1, 1)));
-	}
-	
-	/**
-	 * should have been provided as javadoc
-	 * @throws HantoException if fails
-	 */
-	@Test
 	public void moveButterfly() throws HantoException
 	{
 		game.makeMove(BUTTERFLY, null, makeCoordinate(0, 0));
@@ -213,6 +195,45 @@ public class DeltaHantoMasterTest
 		game.makeMove(BUTTERFLY, null, makeCoordinate(0, 0));
 		game.makeMove(BUTTERFLY, null, makeCoordinate(0, 1));
 		game.makeMove(SPARROW, makeCoordinate(0, 0), makeCoordinate(1, 0));
+	}
+	
+	/**
+	 * Red wins on blue surrender
+	 * @throws HantoException if fails
+	 */
+	@Test
+	public void redWinsOnBlueSurrender() throws HantoException
+	{
+		game.makeMove(BUTTERFLY, null, makeCoordinate(0, 0));
+		game.makeMove(BUTTERFLY, null, makeCoordinate(0, 1));
+		assertEquals(RED_WINS, game.makeMove(null, null, null));
+	}
+	
+	
+	
+	/**
+	 * Blue wins on red surrender
+	 * @throws HantoException if fails
+	 */
+	@Test
+	public void blueWinsOnRedSurrender() throws HantoException
+	{
+		game.makeMove(BUTTERFLY, null, makeCoordinate(0, 0));
+		assertEquals(BLUE_WINS, game.makeMove(null, null, null));
+	}
+	
+	/**
+	 * makes sure crabs move like crabs
+	 * @throws HantoException if fails
+	 */
+	@Test
+	public void crabsDoCrabWalk() throws HantoException
+	{
+		game.makeMove(BUTTERFLY, null, makeCoordinate(0, 0));
+		game.makeMove(BUTTERFLY, null, makeCoordinate(1, 0));
+		assertEquals(OK, game.makeMove(CRAB, null, makeCoordinate(-1, 0)));
+		assertEquals(OK, game.makeMove(CRAB, null, makeCoordinate(2, 0)));
+		assertEquals(OK, game.makeMove(CRAB, makeCoordinate(-1,0), makeCoordinate(0, -1)));
 	}
 	
 	// Helper methods
