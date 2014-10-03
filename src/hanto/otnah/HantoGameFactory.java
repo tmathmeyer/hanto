@@ -14,6 +14,7 @@ import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 import hanto.common.*;
 import hanto.otnah.alpha.AlphaHantoGame;
 import hanto.otnah.beta.BetaHantoGame;
+import hanto.otnah.delta.DeltaHantoGame;
 import hanto.otnah.gamma.GammaHantoGame;
 
 /**
@@ -71,6 +72,9 @@ public class HantoGameFactory
 				break;
 			case GAMMA_HANTO:
 				game = new GammaHantoGame(movesFirst);
+				break;
+			case DELTA_HANTO:
+				game = new DeltaHantoGame(movesFirst);
 				break;
 			default:
 				throw new NotImplementedException();

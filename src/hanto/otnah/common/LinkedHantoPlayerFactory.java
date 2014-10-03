@@ -32,7 +32,7 @@ public class LinkedHantoPlayerFactory
 			@Override
 			public LinkedHantoPlayer gen(HantoPlayerColor each) {
 				return makePlayer(each, makeInventory(HantoTile.class,
-						 		 		with(Crab.class, 1, each),
+						 		 		with(Crab.class, 4, each),
 						 		 		with(Butterfly.class, 1, each),
 						 		 		with(Sparrow.class, 4, each)));
 			}
