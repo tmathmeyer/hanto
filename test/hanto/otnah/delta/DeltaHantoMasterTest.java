@@ -233,7 +233,7 @@ public class DeltaHantoMasterTest
 		game.makeMove(BUTTERFLY, null, makeCoordinate(1, 0));
 		assertEquals(OK, game.makeMove(CRAB, null, makeCoordinate(-1, 0)));
 		assertEquals(OK, game.makeMove(CRAB, null, makeCoordinate(2, 0)));
-		assertEquals(OK, game.makeMove(CRAB, makeCoordinate(-1,0), makeCoordinate(0, -1)));
+		assertEquals(OK, game.makeMove(CRAB, makeCoordinate(-1, 0), makeCoordinate(0, -1)));
 	}
 	
 	/**
@@ -245,8 +245,8 @@ public class DeltaHantoMasterTest
 	@Test
 	public void surroundRed() throws HantoException
 	{
-		game.makeMove(BUTTERFLY, null, makeCoordinate(0,0));
-		game.makeMove(BUTTERFLY, null, makeCoordinate(1,0));
+		game.makeMove(BUTTERFLY, null, makeCoordinate(0, 0));
+		game.makeMove(BUTTERFLY, null, makeCoordinate(1, 0));
 		game.makeMove(SPARROW, null, makeCoordinate(0, -1));
 		game.makeMove(SPARROW, null, makeCoordinate(2, 0));
 		game.makeMove(SPARROW, null, makeCoordinate(-1, 0));

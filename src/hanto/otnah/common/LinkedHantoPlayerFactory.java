@@ -64,14 +64,16 @@ public class LinkedHantoPlayerFactory
 				first = current;
 			}
 		}
-		
-		first.setNextPlayer(last);
+		if (first != null)
+		{
+			first.setNextPlayer(last);
+		}
 		
 		return first;
 	}
 	
 	private static interface PlayerGen
 	{
-		public LinkedHantoPlayer gen(HantoPlayerColor hpc);
+		LinkedHantoPlayer gen(HantoPlayerColor hpc);
 	}
 }
