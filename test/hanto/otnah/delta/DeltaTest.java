@@ -29,7 +29,7 @@ public class DeltaTest {
 
 	private int[] inventoryCounts(HantoPlayer<?> p)
 	{
-		int[] result = new int[3];
+		int[] result = new int[4];
 		for(HantoTile t : p.getInventory())
 		{
 			switch(t.getType())
@@ -40,8 +40,11 @@ public class DeltaTest {
 				case SPARROW:
 					result[1] ++;
 					break;
-				default:
+				case CRAB:
 					result[2] ++;
+					break;
+				default:
+					result[3] ++;
 					break;
 			}
 		}
@@ -76,11 +79,14 @@ public class DeltaTest {
 		assertEquals(redInv[0], 1);
 		assertEquals(blueInv[0], 1);
 		
-		assertEquals(redInv[1], 5);
-		assertEquals(blueInv[1], 5);
+		assertEquals(redInv[1], 4);
+		assertEquals(blueInv[1], 4);
 		
-		assertEquals(redInv[2], 0);
-		assertEquals(blueInv[2], 0);
+		assertEquals(redInv[2], 4);
+		assertEquals(blueInv[2], 4);
+		
+		assertEquals(redInv[3], 0);
+		assertEquals(blueInv[3], 0);
 	}
 	 
 	

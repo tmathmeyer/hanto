@@ -42,7 +42,8 @@ public class SparrowMoveValidator extends PieceMoveValidator
 	
 	private boolean deltaSparrowValidator(Position to, Position from)
 	{
-		boolean result = isLocationUnoccupied(to);
+		boolean result = isLocationUnoccupied(to) &&
+		         isPieceAtPositionCorrectType(from, HantoPieceType.SPARROW);;
 		int moveDistance = from.getDistanceTo(to);
 		
 		if(moveDistance == 0)
