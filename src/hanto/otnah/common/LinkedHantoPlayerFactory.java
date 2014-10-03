@@ -19,7 +19,7 @@ public class LinkedHantoPlayerFactory
 						 				with(Butterfly.class, 1, each),
 						 				with(Sparrow.class, 5, each)));
 			}
-		});
+		}, colors);
 		
 		
 		
@@ -36,7 +36,7 @@ public class LinkedHantoPlayerFactory
 						 		 		with(Butterfly.class, 1, each),
 						 		 		with(Sparrow.class, 4, each)));
 			}
-		});
+		}, colors);
 		
 	}
 	

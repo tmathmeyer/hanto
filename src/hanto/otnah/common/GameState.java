@@ -15,12 +15,10 @@ import java.util.Map;
 import java.util.Set;
 
 import hanto.common.HantoCoordinate;
-import hanto.common.HantoException;
 import hanto.common.HantoGame;
 import hanto.common.HantoPiece;
 import hanto.common.HantoPieceType;
 import hanto.common.HantoPlayerColor;
-import hanto.common.MoveResult;
 import hanto.otnah.common.util.graph.HexGraph;
 import static hanto.otnah.common.Position.asPosition;
 /**

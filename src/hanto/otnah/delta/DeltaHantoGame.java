@@ -24,7 +24,7 @@ import hanto.otnah.common.Position;
 import hanto.otnah.common.pieces.moves.PieceMoveValidatorFactory;
 import static hanto.common.HantoPlayerColor.RED;
 import static hanto.common.HantoPlayerColor.BLUE;
-import static hanto.otnah.common.LinkedHantoPlayerFactory.makeGammaPlayers;
+import static hanto.otnah.common.LinkedHantoPlayerFactory.makeDeltaPlayers;
 
 
 /**
@@ -34,7 +34,7 @@ import static hanto.otnah.common.LinkedHantoPlayerFactory.makeGammaPlayers;
  */
 public class DeltaHantoGame extends GameState
 {
-	private LinkedHantoPlayer current = makeGammaPlayers(RED, BLUE);
+	private LinkedHantoPlayer current = makeDeltaPlayers(RED, BLUE);
 
 	/**
 	 * default constructor
