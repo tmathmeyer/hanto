@@ -34,7 +34,7 @@ public class SparrowMoveValidator extends PieceMoveValidator
 		switch(version)
 		{
 			case DELTA_HANTO:
-				return deltaSparrowValidator(to,from);
+				return deltaSparrowValidator(to, from);
 			default:
 				return defaultSparrowValidator(to, from);
 		}
@@ -50,10 +50,10 @@ public class SparrowMoveValidator extends PieceMoveValidator
 		{
 			return result && hasPieceInInventory(HantoPieceType.SPARROW) &&
 					checkButterflyLegality(HantoPieceType.BUTTERFLY, 4) &&
-					isValidNewPlaceLocation(to,currentPlayerColor());
+					isValidNewPlaceLocation(to, currentPlayerColor());
 		}
 		return result && isGraphContinuityPreservedAfter(from, to) &&
-				isValidNewPlaceLocation(to,null);
+				isValidNewPlaceLocation(to, null);
 	}
 	
 	private boolean defaultSparrowValidator(Position to, Position from)

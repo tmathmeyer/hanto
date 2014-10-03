@@ -104,7 +104,7 @@ public class DeltaHantoGame extends GameState
 	@Override
 	public boolean isMovePossible(Position from, Position to, HantoPieceType type, HantoPlayerColor color)
 	{
-		return PieceMoveValidatorFactory.getMoveValidator(HantoGameID.DELTA_HANTO,type).isValidMove(to, from, this);
+		return PieceMoveValidatorFactory.getMoveValidator(HantoGameID.DELTA_HANTO, type).isValidMove(to, from, this);
 	}
 	
 	private MoveResult gameState()

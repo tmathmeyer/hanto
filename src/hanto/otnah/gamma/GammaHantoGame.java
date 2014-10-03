@@ -97,7 +97,7 @@ public class GammaHantoGame extends GameState
 	@Override
 	public boolean isMovePossible(Position from, Position to, HantoPieceType type, HantoPlayerColor color)
 	{
-		return PieceMoveValidatorFactory.getMoveValidator(HantoGameID.GAMMA_HANTO,type)
+		return PieceMoveValidatorFactory.getMoveValidator(HantoGameID.GAMMA_HANTO, type)
 				.isValidMove(to, from, this);
 	}
 	
