@@ -18,8 +18,19 @@ import static hanto.otnah.common.util.CollectionUtils.makeInventory;
 import static hanto.otnah.common.util.CollectionUtils.with;
 import static hanto.otnah.common.LinkedHantoPlayer.makePlayer;
 
+/**
+ * 
+ * @author otnah
+ * 
+ * factory for generating linked players
+ *
+ */
 public class LinkedHantoPlayerFactory
 {
+	/**
+	 * @param colors the players as colors
+	 * @return the players linked together
+	 */
 	public static LinkedHantoPlayer makeGammaPlayers(HantoPlayerColor ... colors)
 	{
 		return makeLinkedPlayers(new PlayerGen(){
@@ -36,6 +47,10 @@ public class LinkedHantoPlayerFactory
 		
 	}
 	
+	/**
+	 * @param colors the colors of the players
+	 * @return the players linked together
+	 */
 	public static LinkedHantoPlayer makeDeltaPlayers(HantoPlayerColor ... colors)
 	{
 		return makeLinkedPlayers(new PlayerGen(){
@@ -72,6 +87,11 @@ public class LinkedHantoPlayerFactory
 		return first;
 	}
 	
+	/**
+	 * 
+	 * @author otnah
+	 *
+	 */
 	private static interface PlayerGen
 	{
 		LinkedHantoPlayer gen(HantoPlayerColor hpc);

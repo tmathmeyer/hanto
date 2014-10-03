@@ -15,6 +15,13 @@ import hanto.common.MoveResult;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 
+ * @author otnah
+ * 
+ * linked hanto players, linked by turn order
+ *
+ */
 public class LinkedHantoPlayer extends HantoPlayer<LinkedHantoPlayer>
 {
 	private LinkedHantoPlayer(HantoPlayerColor hpc,

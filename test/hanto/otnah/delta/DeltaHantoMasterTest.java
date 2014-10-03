@@ -252,9 +252,9 @@ public class DeltaHantoMasterTest
 		game.makeMove(SPARROW, null, makeCoordinate(-1, 0));
 		game.makeMove(SPARROW, null, makeCoordinate(3, 0));
 		game.makeMove(SPARROW, null, makeCoordinate(-1, 1));
-		game.makeMove(SPARROW, makeCoordinate(3,0), makeCoordinate(0, 1));
+		game.makeMove(SPARROW, makeCoordinate(3, 0), makeCoordinate(0, 1));
 		game.makeMove(SPARROW, null, makeCoordinate(0, -2));
-		assertEquals(BLUE_WINS,game.makeMove(SPARROW, makeCoordinate(2,0), makeCoordinate(1, -1)));
+		assertEquals(BLUE_WINS, game.makeMove(SPARROW, makeCoordinate(2, 0), makeCoordinate(1, -1)));
 		
 	}
 	
