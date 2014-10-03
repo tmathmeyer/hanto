@@ -76,7 +76,7 @@ public class DeltaHantoMasterTest
 	public void setup()
 	{
 		// By default, blue moves first.
-		testGame = FACTORY.makeTestHantoGame(HantoGameID.GAMMA_HANTO);
+		testGame = FACTORY.makeTestHantoGame(HantoGameID.DELTA_HANTO);
 		game = testGame;
 	}
 	

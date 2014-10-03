@@ -54,8 +54,8 @@ public class DeltaTest {
 	@Test
 	public void canGammaBeMade()
 	{
-		GameState red = (GameState) HantoGameFactory.getInstance().makeHantoGame(HantoGameID.GAMMA_HANTO, HantoPlayerColor.RED);
-		GameState blue = (GameState) HantoGameFactory.getInstance().makeHantoGame(HantoGameID.GAMMA_HANTO, HantoPlayerColor.BLUE);
+		GameState red = (GameState) HantoGameFactory.getInstance().makeHantoGame(HantoGameID.DELTA_HANTO, HantoPlayerColor.RED);
+		GameState blue = (GameState) HantoGameFactory.getInstance().makeHantoGame(HantoGameID.DELTA_HANTO, HantoPlayerColor.BLUE);
 		
 		assertTrue(red.getCurrentPlayer().getColor().equals(HantoPlayerColor.RED));
 		assertTrue(blue.getCurrentPlayer().getColor().equals(HantoPlayerColor.BLUE));
@@ -82,6 +82,7 @@ public class DeltaTest {
 		assertEquals(redInv[2], 0);
 		assertEquals(blueInv[2], 0);
 	}
+	 
 	
 	
 }
