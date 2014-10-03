@@ -236,6 +236,28 @@ public class DeltaHantoMasterTest
 		assertEquals(OK, game.makeMove(CRAB, makeCoordinate(-1,0), makeCoordinate(0, -1)));
 	}
 	
+	/**
+	 * Can a player win by surrounding
+	 * @param x
+	 * @param y
+	 * @return
+	 */
+	@Test
+	public void surroundRed() throws HantoException
+	{
+		game.makeMove(BUTTERFLY, null, makeCoordinate(0,0));
+		game.makeMove(BUTTERFLY, null, makeCoordinate(1,0));
+		game.makeMove(SPARROW, null, makeCoordinate(0, -1));
+		game.makeMove(SPARROW, null, makeCoordinate(2, 0));
+		game.makeMove(SPARROW, null, makeCoordinate(-1, 0));
+		game.makeMove(SPARROW, null, makeCoordinate(3, 0));
+		game.makeMove(SPARROW, null, makeCoordinate(-1, 1));
+		game.makeMove(SPARROW, makeCoordinate(3,0), makeCoordinate(0, 1));
+		game.makeMove(SPARROW, null, makeCoordinate(0, -2));
+		assertEquals(BLUE_WINS,game.makeMove(SPARROW, makeCoordinate(2,0), makeCoordinate(1, -1)));
+		
+	}
+	
 	// Helper methods
 	private HantoCoordinate makeCoordinate(int x, int y)
 	{
