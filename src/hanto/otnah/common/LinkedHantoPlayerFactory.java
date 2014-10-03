@@ -94,6 +94,10 @@ public class LinkedHantoPlayerFactory
 	 */
 	private static interface PlayerGen
 	{
+		/**
+		 * @param hpc the color
+		 * @return a linked hanto player, unlinked, of this color
+		 */
 		LinkedHantoPlayer gen(HantoPlayerColor hpc);
 	}
 }

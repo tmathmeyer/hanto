@@ -23,6 +23,9 @@ public class SparrowMoveValidator extends PieceMoveValidator
 {
 	private HantoGameID version;
 	
+	/**
+	 * @param version the version of the game
+	 */
 	public SparrowMoveValidator(HantoGameID version)
 	{
 		this.version = version;

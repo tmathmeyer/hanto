@@ -238,6 +238,7 @@ public class DeltaHantoMasterTest
 	
 	/**
 	 * Can a player win by surrounding
+	 * @throws HantoException if something goes wrong
 	 */
 	@Test
 	public void surroundRed() throws HantoException

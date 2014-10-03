@@ -23,6 +23,7 @@ public class PieceMoveValidatorFactory
 	/**
 	 * 
 	 * @param type the piece type to which a validator should be gotten
+	 * @param game the game to switch on
 	 * @return the move validator for that type
 	 */
 	public static PieceMoveValidator getMoveValidator(HantoGameID game, HantoPieceType type)

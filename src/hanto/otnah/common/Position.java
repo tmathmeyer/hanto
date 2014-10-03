@@ -141,6 +141,7 @@ public abstract class Position implements HantoCoordinate
 	
 	/**
 	 * Gets the list of tiles adjacent to this position in the given game state
+	 * @param state the state of the game
 	 * @return the list of adjacent tiles
 	 */
 	public Collection<HantoPiece> adjacentTiles(GameState state)

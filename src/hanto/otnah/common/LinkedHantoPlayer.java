@@ -92,6 +92,7 @@ public class LinkedHantoPlayer extends HantoPlayer<LinkedHantoPlayer>
 	}
 	
 	/**
+	 * @param state the board state to check on
 	 * @return whether this players butterfly is surrounded
 	 */
 	public boolean isSurrounded(GameState state)
