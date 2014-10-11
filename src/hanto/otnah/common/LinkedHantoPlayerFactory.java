@@ -13,6 +13,7 @@ package hanto.otnah.common;
 import hanto.common.HantoPlayerColor;
 import hanto.otnah.common.pieces.Butterfly;
 import hanto.otnah.common.pieces.Crab;
+import hanto.otnah.common.pieces.Horse;
 import hanto.otnah.common.pieces.Sparrow;
 import static hanto.otnah.common.util.CollectionUtils.makeInventory;
 import static hanto.otnah.common.util.CollectionUtils.with;
@@ -27,6 +28,23 @@ import static hanto.otnah.common.LinkedHantoPlayer.makePlayer;
  */
 public class LinkedHantoPlayerFactory
 {
+	
+	/**
+	 * @param colors the colors of the players
+	 * @return the players linked together
+	 */
+	public static LinkedHantoPlayer makeBetaPlayers(HantoPlayerColor ... colors)
+	{
+		return makeLinkedPlayers(new PlayerGen(){
+			@Override
+			public LinkedHantoPlayer gen(HantoPlayerColor each) {
+				return makePlayer(each, makeInventory(HantoTile.class,
+						 		 		with(Butterfly.class, 1, each),
+						 		 		with(Sparrow.class, 5, each)));
+			}
+		}, colors);
+	}
+	
 	/**
 	 * @param colors the players as colors
 	 * @return the players linked together
@@ -64,17 +82,21 @@ public class LinkedHantoPlayerFactory
 	 * @param colors the colors of the players
 	 * @return the players linked together
 	 */
-	public static LinkedHantoPlayer makeBetaPlayers(HantoPlayerColor ... colors)
+	public static LinkedHantoPlayer makeEpsilonPlayers(HantoPlayerColor ... colors)
 	{
 		return makeLinkedPlayers(new PlayerGen(){
 			@Override
 			public LinkedHantoPlayer gen(HantoPlayerColor each) {
 				return makePlayer(each, makeInventory(HantoTile.class,
-						 		 		with(Butterfly.class, 1, each),
-						 		 		with(Sparrow.class, 5, each)));
+						with(Butterfly.class, 1, each),
+						with(Sparrow.class,   2, each),
+						with(Crab.class,      6, each),
+						with(Horse.class,     4, each)));
 			}
 		}, colors);
 	}
+	
+	
 	
 	private static LinkedHantoPlayer makeLinkedPlayers(PlayerGen gen, HantoPlayerColor ... colors)
 	{
