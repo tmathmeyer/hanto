@@ -19,6 +19,9 @@ import hanto.otnah.common.HantoPlayer;
 import hanto.otnah.common.LinkedHantoPlayer;
 import hanto.otnah.common.Position;
 import hanto.otnah.common.HexPosition;
+import hanto.otnah.common.pieces.moves.PieceMoveValidatorFactory;
+
+import static hanto.otnah.common.LinkedHantoPlayer.makePlayer;
 
 /**
  * 
@@ -35,12 +38,18 @@ public class AlphaHantoGame extends GameState
 	 * @param red the red player
 	 * @param blue the blue player
 	 */
-	public AlphaHantoGame(final LinkedHantoPlayer red, final LinkedHantoPlayer blue)
+	public AlphaHantoGame()
 	{
-		redPlayer = red;
-		bluePlayer = blue;
+		redPlayer = makePlayer(HantoPlayerColor.RED, null);
+		bluePlayer = makePlayer(HantoPlayerColor.BLUE, null);
 		
 		which = true;
+	}
+	
+	@Override
+	public void skipTo(HantoPlayerColor player)
+	{
+		which = player == HantoPlayerColor.RED;
 	}
 	
 	@Override
@@ -95,15 +104,14 @@ public class AlphaHantoGame extends GameState
 		return result;
 	}
 
-	/**
-	 * get the default alpha game state
-	 * @return the default game
-	 */
-	public static AlphaHantoGame defaultAGS()
-	{
-		LinkedHantoPlayer redPlayer = LinkedHantoPlayer.makePlayer(HantoPlayerColor.RED, null);
-		LinkedHantoPlayer bluePlayer = LinkedHantoPlayer.makePlayer(HantoPlayerColor.BLUE, null);
-		
-		return new AlphaHantoGame(redPlayer, bluePlayer);
+	@Override
+	public boolean isOverMaxAllottedMoves(int currentMoveCount) {
+		return currentMoveCount >= 2;
+	}
+
+	@Override
+	public PieceMoveValidatorFactory getValidatorFactory()
+			throws HantoException {
+		throw new HantoException("you shouldn't be using validators!!!");
 	}
 }

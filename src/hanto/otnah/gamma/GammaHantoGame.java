@@ -12,7 +12,6 @@ package hanto.otnah.gamma;
 
 import hanto.common.HantoCoordinate;
 import hanto.common.HantoException;
-import hanto.common.HantoGameID;
 import hanto.common.HantoPieceType;
 import hanto.common.HantoPlayerColor;
 import hanto.common.MoveResult;
@@ -35,15 +34,16 @@ import static hanto.otnah.common.LinkedHantoPlayerFactory.makeGammaPlayers;
 public class GammaHantoGame extends GameState
 {
 	private LinkedHantoPlayer current = makeGammaPlayers(RED, BLUE);
-
-	/**
-	 * default constructor
-	 * 
-	 * @param firstPlayer the color pf the player that goes first
-	 */
-	public GammaHantoGame(HantoPlayerColor firstPlayer)
+	private final GammaRuleSet pieceRules = new GammaRuleSet();
+	
+	public GammaHantoGame(HantoPlayerColor player) {
+		skipTo(player);
+	}
+	
+	@Override
+	public void skipTo(HantoPlayerColor player)
 	{
-		current = current.skipTo(firstPlayer);
+		current = current.skipTo(player);
 	}
 
 	@Override
@@ -56,7 +56,7 @@ public class GammaHantoGame extends GameState
 		if(isMovePossible(from, to, pieceType, getCurrentPlayer().getColor()))
 		{
 			//remove piece from inventory
-			HantoTile played = removeFrom(from, pieceType);
+			HantoTile played = from.removePieceAt(this, pieceType);
 			
 			//put piece on board
 			setPieceAt(played, to);
@@ -76,17 +76,6 @@ public class GammaHantoGame extends GameState
 		
 		throw new HantoException("invalid move!");
 	}
-	
-	/**
-	 * 
-	 * @param pos the position from which to remove the piece
-	 * @param type the type of piece to remove
-	 * @return the piece that has been removed
-	 */
-	public HantoTile removeFrom(Position pos, HantoPieceType type)
-	{
-		return pos.removePieceAt(this, type);
-	}
 
 	@Override
 	public HantoPlayer<LinkedHantoPlayer> getCurrentPlayer()
@@ -97,7 +86,18 @@ public class GammaHantoGame extends GameState
 	@Override
 	public boolean isMovePossible(Position from, Position to, HantoPieceType type, HantoPlayerColor color)
 	{
-		return PieceMoveValidatorFactory.getMoveValidator(HantoGameID.GAMMA_HANTO, type)
-				.isValidMove(to, from, this);
+		return getValidatorFactory().getMoveValidator(type).isValidMove(to, from, this);
+	}
+
+	@Override
+	public boolean isOverMaxAllottedMoves(int currentMoveCount)
+	{
+		return currentMoveCount >= 40;
+	}
+
+	@Override
+	public PieceMoveValidatorFactory getValidatorFactory()
+	{
+		return new PieceMoveValidatorFactory(pieceRules);
 	}
 }

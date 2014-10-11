@@ -12,7 +12,6 @@ package hanto.otnah.delta;
 
 import hanto.common.HantoCoordinate;
 import hanto.common.HantoException;
-import hanto.common.HantoGameID;
 import hanto.common.HantoPieceType;
 import hanto.common.HantoPlayerColor;
 import hanto.common.MoveResult;
@@ -34,18 +33,18 @@ import static hanto.otnah.common.LinkedHantoPlayerFactory.makeDeltaPlayers;
  */
 public class DeltaHantoGame extends GameState
 {
-	private LinkedHantoPlayer current = makeDeltaPlayers(RED, BLUE);
-
-	/**
-	 * default constructor
-	 * 
-	 * @param firstPlayer the color pf the player that goes first
-	 */
-	public DeltaHantoGame(HantoPlayerColor firstPlayer)
-	{
-		current = current.skipTo(firstPlayer);
+	public DeltaHantoGame(HantoPlayerColor player) {
+		skipTo(player);
 	}
 
+	private LinkedHantoPlayer current = makeDeltaPlayers(RED, BLUE);
+
+	@Override
+	public void skipTo(HantoPlayerColor player)
+	{
+		current = current.skipTo(player);
+	}
+	
 	@Override
 	public MoveResult makeMove(HantoPieceType pieceType, HantoCoordinate fromHC,
 			HantoCoordinate toHC) throws HantoException {
@@ -63,7 +62,7 @@ public class DeltaHantoGame extends GameState
 		if(isMovePossible(from, to, pieceType, getCurrentPlayer().getColor()))
 		{
 			//remove piece from inventory
-			HantoTile played = removeFrom(from, pieceType);
+			HantoTile played = from.removePieceAt(this, pieceType);
 			
 			//put piece on board
 			setPieceAt(played, to);
@@ -83,17 +82,6 @@ public class DeltaHantoGame extends GameState
 		
 		throw new HantoException("invalid move!");
 	}
-	
-	/**
-	 * 
-	 * @param pos the position from which to remove the piece
-	 * @param type the type of piece to remove
-	 * @return the piece that has been removed
-	 */
-	public HantoTile removeFrom(Position pos, HantoPieceType type)
-	{
-		return pos.removePieceAt(this, type);
-	}
 
 	@Override
 	public HantoPlayer<LinkedHantoPlayer> getCurrentPlayer()
@@ -104,6 +92,18 @@ public class DeltaHantoGame extends GameState
 	@Override
 	public boolean isMovePossible(Position from, Position to, HantoPieceType type, HantoPlayerColor color)
 	{
-		return PieceMoveValidatorFactory.getMoveValidator(HantoGameID.DELTA_HANTO, type).isValidMove(to, from, this);
+		return getValidatorFactory().getMoveValidator(type).isValidMove(to, from, this);
+	}
+
+	@Override
+	public boolean isOverMaxAllottedMoves(int currentMoveCount)
+	{
+		return false;
+	}
+
+	@Override
+	public PieceMoveValidatorFactory getValidatorFactory()
+	{
+		return new PieceMoveValidatorFactory();
 	}
 }

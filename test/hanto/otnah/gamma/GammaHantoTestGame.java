@@ -74,7 +74,7 @@ public class GammaHantoTestGame extends GammaHantoGame implements HantoTestGame
 	@Override
 	public void setPlayerMoving(HantoPlayerColor player)
 	{
-		//TODO: useless method
+		skipTo(player);
 	}
 
 }

@@ -27,6 +27,7 @@ import hanto.otnah.common.HantoTile;
 import hanto.otnah.common.LinkedHantoPlayer;
 import hanto.otnah.common.Position;
 import hanto.otnah.common.HexPosition;
+import hanto.otnah.common.pieces.moves.PieceMoveValidatorFactory;
 
 /**
  * 
@@ -35,18 +36,18 @@ import hanto.otnah.common.HexPosition;
  */
 public class BetaHantoGame extends GameState
 {
-	private LinkedHantoPlayer current = makeBetaPlayers(BLUE, RED);
+	private LinkedHantoPlayer current = makeBetaPlayers(RED, BLUE);
 
-	/**
-	 * default constructor
-	 * 
-	 * @param firstPlayer the color pf the player that goes first
-	 */
-	public BetaHantoGame(HantoPlayerColor firstPlayer)
-	{
-		current = current.skipTo(firstPlayer);
+	public BetaHantoGame(HantoPlayerColor player) {
+		skipTo(player);
 	}
 
+	@Override
+	public void skipTo(HantoPlayerColor player)
+	{
+		current = current.skipTo(player);
+	}
+	
 	@Override
 	public MoveResult makeMove(HantoPieceType pieceType, HantoCoordinate from,
 			HantoCoordinate to) throws HantoException {
@@ -156,5 +157,16 @@ public class BetaHantoGame extends GameState
 	{
 		return getCurrentPlayer().getMovesPlayed() >= 3
 				&& hasPieceInInventory(HantoPieceType.BUTTERFLY);
+	}
+
+	@Override
+	public boolean isOverMaxAllottedMoves(int currentMoveCount) {
+		return currentMoveCount >= 12;
+	}
+
+	@Override
+	public PieceMoveValidatorFactory getValidatorFactory() throws HantoException
+	{
+		throw new HantoException("you shouldn't be using a validator!!!");
 	}
 }

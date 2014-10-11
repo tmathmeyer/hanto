@@ -65,7 +65,7 @@ public class HantoGameFactory
 		final HantoGame game;
 		switch (gameId) {
 			case ALPHA_HANTO:
-				game = AlphaHantoGame.defaultAGS();
+				game = new AlphaHantoGame();
 				break;
 			case BETA_HANTO:
 				game = new BetaHantoGame(movesFirst);

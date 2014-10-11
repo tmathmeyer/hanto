@@ -148,4 +148,25 @@ public class LinkedHantoPlayer extends HantoPlayer<LinkedHantoPlayer>
 		all.add(this);
 		return all;	
 	}
+
+	/**
+	 * gets the state resulting from a loss by this player
+	 * @return
+	 */
+	public MoveResult getLosingState()
+	{
+		MoveResult result;
+		switch(getColor())
+		{
+			case BLUE:
+				result = MoveResult.RED_WINS;
+				break;
+			case RED:
+				result = MoveResult.BLUE_WINS;
+				break;
+			default:
+				result = null;
+		}
+		return result;
+	}
 }

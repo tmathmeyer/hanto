@@ -42,8 +42,8 @@ public class AlphaGameStateTests {
 	 */
 	@Before
 	public void init() throws SecurityException, NoSuchFieldException, IllegalArgumentException, IllegalAccessException {
-		freshGame = AlphaHantoGame.defaultAGS();
-		unfreshGame = AlphaHantoGame.defaultAGS();
+		freshGame = new AlphaHantoGame();
+		unfreshGame = new AlphaHantoGame();
 		
 		Field f = unfreshGame.getClass().getDeclaredField("which");
 		f.setAccessible(true);
@@ -251,7 +251,7 @@ public class AlphaGameStateTests {
 	@Test(expected=HantoException.class)
 	public void veryInvalidMove() throws HantoException
 	{
-		AlphaHantoGame.defaultAGS().makeMove(null, null, null);
+		new AlphaHantoGame().makeMove(null, null, null);
 	}
 	
 	/**

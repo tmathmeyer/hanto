@@ -15,11 +15,13 @@ import java.util.Map;
 import java.util.Set;
 
 import hanto.common.HantoCoordinate;
+import hanto.common.HantoException;
 import hanto.common.HantoGame;
 import hanto.common.HantoPiece;
 import hanto.common.HantoPieceType;
 import hanto.common.HantoPlayerColor;
 import hanto.common.MoveResult;
+import hanto.otnah.common.pieces.moves.PieceMoveValidatorFactory;
 import hanto.otnah.common.util.graph.HexGraph;
 import static hanto.otnah.common.Position.asPosition;
 /**
@@ -32,12 +34,6 @@ public abstract class GameState implements HantoGame
 	private final Map<Position, HantoTile> gameBoard = new HashMap<>();
 	private final HexGraph gameGraph = new HexGraph();
 	private boolean gameOver = false;
-	
-	/**
-	 * Don't let this class be created from outside (not that it can anyways)
-	 */
-	protected GameState()
-	{}
 	
 	@Override
 	public HantoPiece getPieceAt(HantoCoordinate where)
@@ -126,6 +122,24 @@ public abstract class GameState implements HantoGame
 		return gameOver;
 	}
 	
+	/**
+	 * a method to abstract away the movement limit to child classes
+	 * @return whether this game has had the max number of moves
+	 */
+	public abstract boolean isOverMaxAllottedMoves(int currentMoveCount);
+	
+	/**
+	 * @return the move validator that this game uses
+	 * @throws HantoException if something goes wrong
+	 */
+	public abstract PieceMoveValidatorFactory getValidatorFactory() throws HantoException;
+	
+	/**
+	 * sets this players current move
+	 * @param player the color of the player to skip to
+	 */
+	public abstract void skipTo(HantoPlayerColor player);
+	
 	
 	
 	
@@ -136,6 +150,10 @@ public abstract class GameState implements HantoGame
 	public MoveResult gameState()
 	{
 		MoveResult returnValue = checkSurrounded();
+		if (isOverMaxAllottedMoves(getCurrentPlayer().getSelf().getTotalMoves()))
+		{
+			returnValue = MoveResult.DRAW;
+		}
 		return returnValue;
 	}
 	
@@ -153,7 +171,7 @@ public abstract class GameState implements HantoGame
 				}
 				else
 				{
-					result = player.getWinningState();
+					result = player.getLosingState();
 				}
 			}
 		}
