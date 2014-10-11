@@ -91,8 +91,7 @@ public class EpsilonHantoGame extends GameState
 	@Override
 	public boolean isMovePossible(Position from, Position to,
 			HantoPieceType type, HantoPlayerColor color) {
-		// TODO Auto-generated method stub
-		return false;
+		return getValidatorFactory().getMoveValidator(type).isValidMove(to, from, this);
 	}
 
 	@Override
@@ -102,7 +101,7 @@ public class EpsilonHantoGame extends GameState
 
 	@Override
 	public PieceMoveValidatorFactory getValidatorFactory()
-			throws HantoException {
+	{
 		return new PieceMoveValidatorFactory();
 	}
 
