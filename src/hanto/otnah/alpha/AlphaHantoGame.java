@@ -16,6 +16,7 @@ import hanto.common.HantoPlayerColor;
 import hanto.common.MoveResult;
 import hanto.otnah.common.GameState;
 import hanto.otnah.common.HantoPlayer;
+import hanto.otnah.common.LinkedHantoPlayer;
 import hanto.otnah.common.Position;
 import hanto.otnah.common.HexPosition;
 
@@ -26,7 +27,7 @@ import hanto.otnah.common.HexPosition;
  */
 public class AlphaHantoGame extends GameState
 {
-	private final AlphaHantoPlayer redPlayer, bluePlayer;
+	private final LinkedHantoPlayer redPlayer, bluePlayer;
 	private boolean which;
 	
 	/**
@@ -34,7 +35,7 @@ public class AlphaHantoGame extends GameState
 	 * @param red the red player
 	 * @param blue the blue player
 	 */
-	public AlphaHantoGame(final AlphaHantoPlayer red, final AlphaHantoPlayer blue)
+	public AlphaHantoGame(final LinkedHantoPlayer red, final LinkedHantoPlayer blue)
 	{
 		redPlayer = red;
 		bluePlayer = blue;
@@ -69,7 +70,7 @@ public class AlphaHantoGame extends GameState
 	}
 
 	@Override
-	public HantoPlayer<AlphaHantoPlayer> getCurrentPlayer()
+	public HantoPlayer<LinkedHantoPlayer> getCurrentPlayer()
 	{
 		return !which ? redPlayer : bluePlayer;
 	}
@@ -100,8 +101,8 @@ public class AlphaHantoGame extends GameState
 	 */
 	public static AlphaHantoGame defaultAGS()
 	{
-		AlphaHantoPlayer redPlayer = new AlphaHantoPlayer(HantoPlayerColor.RED);
-		AlphaHantoPlayer bluePlayer = new AlphaHantoPlayer(HantoPlayerColor.BLUE);
+		LinkedHantoPlayer redPlayer = LinkedHantoPlayer.makePlayer(HantoPlayerColor.RED, null);
+		LinkedHantoPlayer bluePlayer = LinkedHantoPlayer.makePlayer(HantoPlayerColor.BLUE, null);
 		
 		return new AlphaHantoGame(redPlayer, bluePlayer);
 	}

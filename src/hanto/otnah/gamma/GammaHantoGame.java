@@ -100,31 +100,4 @@ public class GammaHantoGame extends GameState
 		return PieceMoveValidatorFactory.getMoveValidator(HantoGameID.GAMMA_HANTO, type)
 				.isValidMove(to, from, this);
 	}
-	
-	private MoveResult gameState()
-	{
-		MoveResult returnValue = checkSurrounded();
-		if (getCurrentPlayer().getSelf().getTotalMoves() >= 40)
-		{
-			returnValue = MoveResult.DRAW;
-		}
-		return returnValue;
-	}
-	
-	private MoveResult checkSurrounded()
-	{
-		MoveResult result = MoveResult.OK;
-		for(LinkedHantoPlayer player : getCurrentPlayer().getSelf().collectAllUsers())
-		{
-			if (player.isSurrounded(this))
-			{
-				if (result != MoveResult.OK){
-					return MoveResult.DRAW;
-				}
-				result = player.getWinningState();
-			}
-		}
-		return result;
-	}
-	
 }

@@ -106,28 +106,4 @@ public class DeltaHantoGame extends GameState
 	{
 		return PieceMoveValidatorFactory.getMoveValidator(HantoGameID.DELTA_HANTO, type).isValidMove(to, from, this);
 	}
-	
-	private MoveResult gameState()
-	{
-		MoveResult returnValue = checkSurrounded();
-		return returnValue;
-	}
-	
-	private MoveResult checkSurrounded()
-	{
-		MoveResult result = MoveResult.OK;
-		for(LinkedHantoPlayer player : getCurrentPlayer().getSelf().collectAllUsers())
-		{
-			if (player.isSurrounded(this))
-			{
-				this.gameOver();
-				if (result != MoveResult.OK){
-					return MoveResult.DRAW;
-				}
-				result = player.getWinningState();
-			}
-		}
-		return result;
-	}
-	
 }

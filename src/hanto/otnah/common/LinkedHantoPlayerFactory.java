@@ -41,10 +41,6 @@ public class LinkedHantoPlayerFactory
 						 				with(Sparrow.class, 5, each)));
 			}
 		}, colors);
-		
-		
-		
-		
 	}
 	
 	/**
@@ -62,7 +58,22 @@ public class LinkedHantoPlayerFactory
 						 		 		with(Sparrow.class, 4, each)));
 			}
 		}, colors);
-		
+	}
+	
+	/**
+	 * @param colors the colors of the players
+	 * @return the players linked together
+	 */
+	public static LinkedHantoPlayer makeBetaPlayers(HantoPlayerColor ... colors)
+	{
+		return makeLinkedPlayers(new PlayerGen(){
+			@Override
+			public LinkedHantoPlayer gen(HantoPlayerColor each) {
+				return makePlayer(each, makeInventory(HantoTile.class,
+						 		 		with(Butterfly.class, 1, each),
+						 		 		with(Sparrow.class, 5, each)));
+			}
+		}, colors);
 	}
 	
 	private static LinkedHantoPlayer makeLinkedPlayers(PlayerGen gen, HantoPlayerColor ... colors)

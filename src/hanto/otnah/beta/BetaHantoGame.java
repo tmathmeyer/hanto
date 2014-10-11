@@ -10,8 +10,12 @@
 
 package hanto.otnah.beta;
 
+import static hanto.common.HantoPlayerColor.BLUE;
+import static hanto.common.HantoPlayerColor.RED;
+import static hanto.otnah.common.LinkedHantoPlayerFactory.makeBetaPlayers;
+
 import java.util.Set;
-import java.util.Collection;
+
 import hanto.common.HantoCoordinate;
 import hanto.common.HantoException;
 import hanto.common.HantoPieceType;
@@ -20,6 +24,7 @@ import hanto.common.MoveResult;
 import hanto.otnah.common.GameState;
 import hanto.otnah.common.HantoPlayer;
 import hanto.otnah.common.HantoTile;
+import hanto.otnah.common.LinkedHantoPlayer;
 import hanto.otnah.common.Position;
 import hanto.otnah.common.HexPosition;
 
@@ -30,9 +35,7 @@ import hanto.otnah.common.HexPosition;
  */
 public class BetaHantoGame extends GameState
 {
-	private BetaPlayer current;
-	private final BetaPlayer red = new BetaPlayer(HantoPlayerColor.RED);
-	private final BetaPlayer blue = new BetaPlayer(HantoPlayerColor.BLUE);
+	private LinkedHantoPlayer current = makeBetaPlayers(BLUE, RED);
 
 	/**
 	 * default constructor
@@ -41,17 +44,7 @@ public class BetaHantoGame extends GameState
 	 */
 	public BetaHantoGame(HantoPlayerColor firstPlayer)
 	{
-		red.setNextPlayer(blue);
-		blue.setNextPlayer(red);
-		switch (firstPlayer)
-		{
-			case BLUE:
-				current = blue;
-				break;
-			case RED:
-				current = red;
-				break;	
-		}
+		current = current.skipTo(firstPlayer);
 	}
 
 	@Override
@@ -82,7 +75,7 @@ public class BetaHantoGame extends GameState
 	}
 
 	@Override
-	public HantoPlayer<BetaPlayer> getCurrentPlayer() {
+	public HantoPlayer<LinkedHantoPlayer> getCurrentPlayer() {
 		return current;
 	}
 
@@ -164,47 +157,4 @@ public class BetaHantoGame extends GameState
 		return getCurrentPlayer().getMovesPlayed() >= 3
 				&& hasPieceInInventory(HantoPieceType.BUTTERFLY);
 	}
-	
-	private MoveResult gameState()
-	{
-		MoveResult returnValue = MoveResult.OK;
-		if(isSurrounded(red.getButterflyPosition()))
-		{
-			returnValue = MoveResult.BLUE_WINS;
-		}
-		if(isSurrounded(blue.getButterflyPosition()))
-		{
-			if(returnValue == MoveResult.BLUE_WINS)
-			{
-				returnValue = MoveResult.DRAW;
-			}
-			else
-			{
-				returnValue = MoveResult.RED_WINS;
-			}
-		}
-		if(red.getMovesPlayed() + blue.getMovesPlayed() == 12)
-		{
-			returnValue = MoveResult.DRAW;
-		}
-		return returnValue;
-	}
-	
-	private boolean isSurrounded(Position toCheck)
-	{
-		Collection<HantoCoordinate> positions = toCheck.adjacentCoordinates();
-		if(positions.size() < 6)
-		{
-			return false;
-		}
-		for(HantoCoordinate c : positions)
-		{
-			if(getPieceAt(c) == null)
-			{
-				return false;
-			}
-		}
-		return true;
-	}
-	
 }

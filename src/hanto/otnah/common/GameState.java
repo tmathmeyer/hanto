@@ -19,6 +19,7 @@ import hanto.common.HantoGame;
 import hanto.common.HantoPiece;
 import hanto.common.HantoPieceType;
 import hanto.common.HantoPlayerColor;
+import hanto.common.MoveResult;
 import hanto.otnah.common.util.graph.HexGraph;
 import static hanto.otnah.common.Position.asPosition;
 /**
@@ -31,6 +32,7 @@ public abstract class GameState implements HantoGame
 	private final Map<Position, HantoTile> gameBoard = new HashMap<>();
 	private final HexGraph gameGraph = new HexGraph();
 	private boolean gameOver = false;
+	
 	/**
 	 * Don't let this class be created from outside (not that it can anyways)
 	 */
@@ -47,7 +49,7 @@ public abstract class GameState implements HantoGame
 	 * get the player who's turn it is, IE, that they have not yet made a move
 	 * @return the current player
 	 */
-	public abstract HantoPlayer<?> getCurrentPlayer();
+	public abstract HantoPlayer<LinkedHantoPlayer> getCurrentPlayer();
 	
 	/**
 	 * 
@@ -122,5 +124,39 @@ public abstract class GameState implements HantoGame
 	public boolean isGameOver()
 	{
 		return gameOver;
+	}
+	
+	
+	
+	
+	/**
+	 * Gets the current state of the game (OK, DRAW, WINNER)
+	 * @return the current state of the game
+	 */
+	public MoveResult gameState()
+	{
+		MoveResult returnValue = checkSurrounded();
+		return returnValue;
+	}
+	
+	private MoveResult checkSurrounded()
+	{
+		MoveResult result = MoveResult.OK;
+		for(LinkedHantoPlayer player : getCurrentPlayer().getSelf().collectAllUsers())
+		{
+			if (player.isSurrounded(this))
+			{
+				gameOver();
+				if (result != MoveResult.OK)
+				{
+					result = MoveResult.DRAW;
+				}
+				else
+				{
+					result = player.getWinningState();
+				}
+			}
+		}
+		return result;
 	}
 }
