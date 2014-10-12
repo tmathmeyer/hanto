@@ -15,6 +15,7 @@ import org.junit.Test;
 
 import hanto.common.HantoPieceType;
 import hanto.common.HantoPlayerColor;
+import hanto.otnah.common.pieces.Butterfly;
 
 /**
  * 

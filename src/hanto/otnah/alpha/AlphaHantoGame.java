@@ -19,8 +19,8 @@ import hanto.otnah.common.HantoPlayer;
 import hanto.otnah.common.LinkedHantoPlayer;
 import hanto.otnah.common.Position;
 import hanto.otnah.common.HexPosition;
+import hanto.otnah.common.pieces.Butterfly;
 import hanto.otnah.common.pieces.moves.PieceMoveValidatorFactory;
-
 import static hanto.otnah.common.LinkedHantoPlayer.makePlayer;
 
 /**
