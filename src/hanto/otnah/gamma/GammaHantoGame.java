@@ -15,12 +15,11 @@ import hanto.common.HantoPlayerColor;
 import hanto.common.MoveResult;
 import hanto.otnah.common.GameState;
 import hanto.otnah.common.HantoPlayer;
-import hanto.otnah.common.LinkedHantoPlayer;
 import hanto.otnah.common.Position;
 import hanto.otnah.common.pieces.moves.PieceMoveValidatorFactory;
 import static hanto.common.HantoPlayerColor.RED;
 import static hanto.common.HantoPlayerColor.BLUE;
-import static hanto.otnah.common.LinkedHantoPlayerFactory.makeGammaPlayers;
+import static hanto.otnah.common.HantoPlayerFactory.makeGammaPlayers;
 
 
 /**
@@ -30,7 +29,7 @@ import static hanto.otnah.common.LinkedHantoPlayerFactory.makeGammaPlayers;
  */
 public class GammaHantoGame extends GameState
 {
-	private LinkedHantoPlayer current = makeGammaPlayers(RED, BLUE);
+	private HantoPlayer current = makeGammaPlayers(RED, BLUE);
 	private final GammaRuleSet pieceRules = new GammaRuleSet();
 	
 	public GammaHantoGame(HantoPlayerColor player) {
@@ -44,7 +43,7 @@ public class GammaHantoGame extends GameState
 	}
 
 	@Override
-	public HantoPlayer<LinkedHantoPlayer> getCurrentPlayer()
+	public HantoPlayer getCurrentPlayer()
 	{
 		return current;
 	}
@@ -69,6 +68,6 @@ public class GammaHantoGame extends GameState
 
 	@Override
 	public MoveResult tryResignation() {
-		return getCurrentPlayer().getSelf().getLosingState();
+		return getCurrentPlayer().getLosingState();
 	}
 }

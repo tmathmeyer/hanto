@@ -16,13 +16,12 @@ import hanto.common.HantoPrematureResignationException;
 import hanto.common.MoveResult;
 import hanto.otnah.common.GameState;
 import hanto.otnah.common.HantoPlayer;
-import hanto.otnah.common.LinkedHantoPlayer;
 import hanto.otnah.common.Position;
 import hanto.otnah.common.HexPosition;
 import hanto.otnah.common.pieces.moves.PieceMoveValidatorFactory;
 import static hanto.common.HantoPlayerColor.BLUE;
 import static hanto.common.HantoPlayerColor.RED;
-import static hanto.otnah.common.LinkedHantoPlayerFactory.makeAlphaPlayers;
+import static hanto.otnah.common.HantoPlayerFactory.makeAlphaPlayers;
 
 /**
  * 
@@ -31,7 +30,7 @@ import static hanto.otnah.common.LinkedHantoPlayerFactory.makeAlphaPlayers;
  */
 public class AlphaHantoGame extends GameState
 {
-	private LinkedHantoPlayer current = makeAlphaPlayers(BLUE, RED);
+	private HantoPlayer current = makeAlphaPlayers(BLUE, RED);
 	
 	@Override
 	public void skipTo(HantoPlayerColor player)
@@ -40,7 +39,7 @@ public class AlphaHantoGame extends GameState
 	}
 
 	@Override
-	public HantoPlayer<LinkedHantoPlayer> getCurrentPlayer()
+	public HantoPlayer getCurrentPlayer()
 	{
 		return current;
 	}

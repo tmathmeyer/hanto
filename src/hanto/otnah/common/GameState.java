@@ -69,7 +69,7 @@ public abstract class GameState implements HantoGame
 			
 			if(pieceType == HantoPieceType.BUTTERFLY)
 			{
-				getCurrentPlayer().getSelf().setButterflyPosition(to);
+				getCurrentPlayer().setButterflyPosition(to);
 			}
 			
 			//switch player
@@ -86,7 +86,7 @@ public abstract class GameState implements HantoGame
 	 * get the player who's turn it is, IE, that they have not yet made a move
 	 * @return the current player
 	 */
-	public abstract HantoPlayer<LinkedHantoPlayer> getCurrentPlayer();
+	public abstract HantoPlayer getCurrentPlayer();
 	
 	/**
 	 * 
@@ -208,7 +208,7 @@ public abstract class GameState implements HantoGame
 	public MoveResult gameState()
 	{
 		MoveResult returnValue = checkSurrounded();
-		if (isOverMaxAllottedMoves(getCurrentPlayer().getSelf().getTotalMoves()))
+		if (isOverMaxAllottedMoves(getCurrentPlayer().getTotalMoves()))
 		{
 			returnValue = MoveResult.DRAW;
 		}
@@ -218,7 +218,7 @@ public abstract class GameState implements HantoGame
 	private MoveResult checkSurrounded()
 	{
 		MoveResult result = MoveResult.OK;
-		for(LinkedHantoPlayer player : getCurrentPlayer().getSelf().collectAllUsers())
+		for(HantoPlayer player : getCurrentPlayer().collectAllUsers())
 		{
 			if (player.isSurrounded(this))
 			{

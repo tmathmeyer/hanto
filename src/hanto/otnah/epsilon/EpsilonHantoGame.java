@@ -2,13 +2,12 @@ package hanto.otnah.epsilon;
 
 import static hanto.common.HantoPlayerColor.BLUE;
 import static hanto.common.HantoPlayerColor.RED;
-import static hanto.otnah.common.LinkedHantoPlayerFactory.makeEpsilonPlayers;
+import static hanto.otnah.common.HantoPlayerFactory.makeEpsilonPlayers;
 import hanto.common.HantoPieceType;
 import hanto.common.HantoPlayerColor;
 import hanto.common.MoveResult;
 import hanto.otnah.common.GameState;
 import hanto.otnah.common.HantoPlayer;
-import hanto.otnah.common.LinkedHantoPlayer;
 import hanto.otnah.common.Position;
 import hanto.otnah.common.pieces.moves.PieceMoveValidatorFactory;
 
@@ -19,7 +18,7 @@ public class EpsilonHantoGame extends GameState
 		skipTo(player);
 	}
 
-	private LinkedHantoPlayer current = makeEpsilonPlayers(BLUE, RED);
+	private HantoPlayer current = makeEpsilonPlayers(BLUE, RED);
 
 	@Override
 	public void skipTo(HantoPlayerColor player)
@@ -32,7 +31,7 @@ public class EpsilonHantoGame extends GameState
 	{
 		//TODO: implement brute force resignation checker
 		
-		return getCurrentPlayer().getSelf().getLosingState();
+		return getCurrentPlayer().getLosingState();
 	}
 	
 	
@@ -41,7 +40,7 @@ public class EpsilonHantoGame extends GameState
 	
 
 	@Override
-	public HantoPlayer<LinkedHantoPlayer> getCurrentPlayer() {
+	public HantoPlayer getCurrentPlayer() {
 		return current;
 	}
 

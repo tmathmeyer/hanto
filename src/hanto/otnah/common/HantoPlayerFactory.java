@@ -17,7 +17,7 @@ import hanto.otnah.common.pieces.Horse;
 import hanto.otnah.common.pieces.Sparrow;
 import static hanto.otnah.common.util.CollectionUtils.makeInventory;
 import static hanto.otnah.common.util.CollectionUtils.with;
-import static hanto.otnah.common.LinkedHantoPlayer.makePlayer;
+import static hanto.otnah.common.HantoPlayer.makePlayer;
 
 /**
  * 
@@ -26,14 +26,14 @@ import static hanto.otnah.common.LinkedHantoPlayer.makePlayer;
  * factory for generating linked players
  *
  */
-public class LinkedHantoPlayerFactory
+public class HantoPlayerFactory
 {
 	
-	public static LinkedHantoPlayer makeAlphaPlayers(HantoPlayerColor ... colors)
+	public static HantoPlayer makeAlphaPlayers(HantoPlayerColor ... colors)
 	{
 		return makeLinkedPlayers(new PlayerGen(){
 			@Override
-			public LinkedHantoPlayer gen(HantoPlayerColor each) {
+			public HantoPlayer gen(HantoPlayerColor each) {
 				return makePlayer(each, makeInventory(HantoTile.class,
 						 		 		with(Butterfly.class, 1, each)));
 			}
@@ -44,11 +44,11 @@ public class LinkedHantoPlayerFactory
 	 * @param colors the colors of the players
 	 * @return the players linked together
 	 */
-	public static LinkedHantoPlayer makeBetaPlayers(HantoPlayerColor ... colors)
+	public static HantoPlayer makeBetaPlayers(HantoPlayerColor ... colors)
 	{
 		return makeLinkedPlayers(new PlayerGen(){
 			@Override
-			public LinkedHantoPlayer gen(HantoPlayerColor each) {
+			public HantoPlayer gen(HantoPlayerColor each) {
 				return makePlayer(each, makeInventory(HantoTile.class,
 						 		 		with(Butterfly.class, 1, each),
 						 		 		with(Sparrow.class, 5, each)));
@@ -60,11 +60,11 @@ public class LinkedHantoPlayerFactory
 	 * @param colors the players as colors
 	 * @return the players linked together
 	 */
-	public static LinkedHantoPlayer makeGammaPlayers(HantoPlayerColor ... colors)
+	public static HantoPlayer makeGammaPlayers(HantoPlayerColor ... colors)
 	{
 		return makeLinkedPlayers(new PlayerGen(){
 			@Override
-			public LinkedHantoPlayer gen(HantoPlayerColor each) {
+			public HantoPlayer gen(HantoPlayerColor each) {
 				return makePlayer(each, makeInventory(HantoTile.class,
 						 				with(Butterfly.class, 1, each),
 						 				with(Sparrow.class, 5, each)));
@@ -76,11 +76,11 @@ public class LinkedHantoPlayerFactory
 	 * @param colors the colors of the players
 	 * @return the players linked together
 	 */
-	public static LinkedHantoPlayer makeDeltaPlayers(HantoPlayerColor ... colors)
+	public static HantoPlayer makeDeltaPlayers(HantoPlayerColor ... colors)
 	{
 		return makeLinkedPlayers(new PlayerGen(){
 			@Override
-			public LinkedHantoPlayer gen(HantoPlayerColor each) {
+			public HantoPlayer gen(HantoPlayerColor each) {
 				return makePlayer(each, makeInventory(HantoTile.class,
 						 		 		with(Crab.class, 4, each),
 						 		 		with(Butterfly.class, 1, each),
@@ -93,11 +93,11 @@ public class LinkedHantoPlayerFactory
 	 * @param colors the colors of the players
 	 * @return the players linked together
 	 */
-	public static LinkedHantoPlayer makeEpsilonPlayers(HantoPlayerColor ... colors)
+	public static HantoPlayer makeEpsilonPlayers(HantoPlayerColor ... colors)
 	{
 		return makeLinkedPlayers(new PlayerGen(){
 			@Override
-			public LinkedHantoPlayer gen(HantoPlayerColor each) {
+			public HantoPlayer gen(HantoPlayerColor each) {
 				return makePlayer(each, makeInventory(HantoTile.class,
 						with(Butterfly.class, 1, each),
 						with(Sparrow.class,   2, each),
@@ -109,13 +109,13 @@ public class LinkedHantoPlayerFactory
 	
 	
 	
-	private static LinkedHantoPlayer makeLinkedPlayers(PlayerGen gen, HantoPlayerColor ... colors)
+	private static HantoPlayer makeLinkedPlayers(PlayerGen gen, HantoPlayerColor ... colors)
 	{
-		LinkedHantoPlayer first=null, last=null;
+		HantoPlayer first=null, last=null;
 		
 		for(HantoPlayerColor each : colors)
 		{
-			LinkedHantoPlayer current = gen.gen(each);
+			HantoPlayer current = gen.gen(each);
 			current.setNextPlayer(last);
 			last = current;
 			if (first == null)
@@ -142,6 +142,6 @@ public class LinkedHantoPlayerFactory
 		 * @param hpc the color
 		 * @return a linked hanto player, unlinked, of this color
 		 */
-		LinkedHantoPlayer gen(HantoPlayerColor hpc);
+		HantoPlayer gen(HantoPlayerColor hpc);
 	}
 }

@@ -11,7 +11,9 @@ package hanto.otnah.common;
 
 import hanto.common.HantoPieceType;
 import hanto.common.HantoPlayerColor;
+import hanto.common.MoveResult;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
@@ -23,12 +25,14 @@ import java.util.Set;
  *
  * @param <T> the subclass of HantoPlayer
  */
-public abstract class HantoPlayer<T extends HantoPlayer<T>>
+public class HantoPlayer
 {
 	private final HantoPlayerColor playerColor;
 	private final Set<Position> currentPositions = new HashSet<>();
 	private final List<HantoTile> currentInventory;
 	private int movesPlayed;
+	private HantoPlayer nextPlayer;
+	private Position butterflyPosition = new InventoryPosition();
 	
 	
 	/**
@@ -101,19 +105,20 @@ public abstract class HantoPlayer<T extends HantoPlayer<T>>
 	/**
 	 * @return the player who's turn it is next
 	 */
-	public abstract T getNextPlayer();
-	
-	/**
-	 * @return implicitly casted self reference
-	 */
-	public abstract T getSelf();
+	public HantoPlayer getNextPlayer()
+	{
+		return nextPlayer;
+	}
 	
 	/**
 	 * re-arrange the order of players
 	 * 
 	 * @param next the next player
 	 */
-	public abstract void setNextPlayer(T next);
+	public void setNextPlayer(HantoPlayer next)
+	{
+		nextPlayer = next;
+	}
 
 	/**
 	 * 
@@ -122,5 +127,125 @@ public abstract class HantoPlayer<T extends HantoPlayer<T>>
 	public int getMovesPlayed()
 	{
 		return movesPlayed;
+	}
+	
+	/**
+	 * 
+	 * @return the location of this players butterfly
+	 */
+	public Position getButterflyPosition()
+	{
+		return butterflyPosition;
+	}
+	
+	/**
+	 * 
+	 * @param p the location at which the player has placed his butterfly
+	 */
+	public void setButterflyPosition(Position p)
+	{
+		butterflyPosition = p;
+	}
+	
+	/**
+	 * @param hpc the color
+	 * @param defaultInventory the default inventory
+	 * @return a linked hanto player with those types
+	 */
+	public static HantoPlayer makePlayer(HantoPlayerColor hpc,
+			List<HantoTile> defaultInventory) {
+		return new HantoPlayer(hpc, defaultInventory);
+	}
+	
+	/**
+	 * 
+	 * @param firstPlayer the color of the first player
+	 * @return the player with that colors
+	 */
+	public HantoPlayer skipTo(HantoPlayerColor firstPlayer) {
+		if (getColor() == firstPlayer)
+		{
+			return this;
+		}
+		return getNextPlayer().skipTo(firstPlayer);
+	}
+	
+	/**
+	 * @param state the board state to check on
+	 * @return whether this players butterfly is surrounded
+	 */
+	public boolean isSurrounded(GameState state)
+	{
+		return getButterflyPosition().adjacentTiles(state).size() == 6;
+	}
+
+	/**
+	 * @return the total number of moves played by all players
+	 */
+	public int getTotalMoves() {
+		int count = 0;
+		for(HantoPlayer each : collectAllUsers())
+		{
+			count += each.getMovesPlayed();
+		}
+		return count;
+	}
+	
+	/**
+	 * @return the winning state of this player
+	 */
+	public MoveResult getWinningState()
+	{
+		MoveResult result;
+		switch(getColor())
+		{
+			case BLUE:
+				result = MoveResult.BLUE_WINS;
+				break;
+			case RED:
+				result = MoveResult.RED_WINS;
+				break;
+			default:
+				result = null;
+		}
+		return result;
+	}
+	
+	/**
+	 * gets the state resulting from a loss by this player
+	 * @return
+	 */
+	public MoveResult getLosingState()
+	{
+		MoveResult result;
+		switch(getColor())
+		{
+			case BLUE:
+				result = MoveResult.RED_WINS;
+				break;
+			case RED:
+				result = MoveResult.BLUE_WINS;
+				break;
+			default:
+				result = null;
+		}
+		return result;
+	}
+	
+	/**
+	 * @return the total number of moves
+	 */
+	public List<HantoPlayer> collectAllUsers() {
+		return getNextPlayer().collectAllUsers(getColor());
+	}
+	
+	private List<HantoPlayer> collectAllUsers(HantoPlayerColor color) {
+		List<HantoPlayer> all = new ArrayList<>();
+		if (color != getColor())
+		{
+			all = getNextPlayer().collectAllUsers(color);
+		}
+		all.add(this);
+		return all;	
 	}
 }

@@ -12,7 +12,7 @@ package hanto.otnah.beta;
 
 import static hanto.common.HantoPlayerColor.BLUE;
 import static hanto.common.HantoPlayerColor.RED;
-import static hanto.otnah.common.LinkedHantoPlayerFactory.makeBetaPlayers;
+import static hanto.otnah.common.HantoPlayerFactory.makeBetaPlayers;
 
 import java.util.Set;
 
@@ -23,7 +23,6 @@ import hanto.common.MoveResult;
 import hanto.otnah.common.GameState;
 import hanto.otnah.common.HantoPlayer;
 import hanto.otnah.common.HantoTile;
-import hanto.otnah.common.LinkedHantoPlayer;
 import hanto.otnah.common.Position;
 import hanto.otnah.common.HexPosition;
 import hanto.otnah.common.pieces.moves.PieceMoveValidatorFactory;
@@ -35,7 +34,7 @@ import hanto.otnah.common.pieces.moves.PieceMoveValidatorFactory;
  */
 public class BetaHantoGame extends GameState
 {
-	private LinkedHantoPlayer current = makeBetaPlayers(RED, BLUE);
+	private HantoPlayer current = makeBetaPlayers(RED, BLUE);
 
 	public BetaHantoGame(HantoPlayerColor player) {
 		skipTo(player);
@@ -48,7 +47,7 @@ public class BetaHantoGame extends GameState
 	}
 
 	@Override
-	public HantoPlayer<LinkedHantoPlayer> getCurrentPlayer() {
+	public HantoPlayer getCurrentPlayer() {
 		return current;
 	}
 

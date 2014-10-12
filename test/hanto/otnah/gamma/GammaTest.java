@@ -27,7 +27,7 @@ import org.junit.Test;
  */
 public class GammaTest {
 
-	private int[] inventoryCounts(HantoPlayer<?> p)
+	private int[] inventoryCounts(HantoPlayer p)
 	{
 		int[] result = new int[3];
 		for(HantoTile t : p.getInventory())

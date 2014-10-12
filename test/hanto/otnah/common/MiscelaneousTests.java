@@ -66,7 +66,7 @@ public class MiscelaneousTests {
 	@Test
 	public void testCurrentPositions()
 	{
-		LinkedHantoPlayer ghp = LinkedHantoPlayerFactory.makeGammaPlayers(HantoPlayerColor.RED);
+		HantoPlayer ghp = HantoPlayerFactory.makeGammaPlayers(HantoPlayerColor.RED);
 		
 		assertEquals(ghp.getCurrentPositions().size(), 0);
 		

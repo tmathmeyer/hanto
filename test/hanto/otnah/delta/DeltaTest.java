@@ -27,7 +27,7 @@ import org.junit.Test;
  */
 public class DeltaTest {
 
-	private int[] inventoryCounts(HantoPlayer<?> p)
+	private int[] inventoryCounts(HantoPlayer p)
 	{
 		int[] result = new int[4];
 		for(HantoTile t : p.getInventory())

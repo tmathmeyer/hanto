@@ -33,7 +33,7 @@ public class DeltaHantoTestGame extends DeltaHantoGame implements HantoTestGame
 		{
 			if (plp.getPieceType() == HantoPieceType.BUTTERFLY)
 			{
-				getCurrentPlayer().getSelf().skipTo(plp.getPlayer())
+				getCurrentPlayer().skipTo(plp.getPlayer())
 				                  .setButterflyPosition(asPosition(plp.getLocation()));
 			}
 			setPieceAt(new HantoTile(){

@@ -15,12 +15,11 @@ import hanto.common.HantoPlayerColor;
 import hanto.common.MoveResult;
 import hanto.otnah.common.GameState;
 import hanto.otnah.common.HantoPlayer;
-import hanto.otnah.common.LinkedHantoPlayer;
 import hanto.otnah.common.Position;
 import hanto.otnah.common.pieces.moves.PieceMoveValidatorFactory;
 import static hanto.common.HantoPlayerColor.RED;
 import static hanto.common.HantoPlayerColor.BLUE;
-import static hanto.otnah.common.LinkedHantoPlayerFactory.makeDeltaPlayers;
+import static hanto.otnah.common.HantoPlayerFactory.makeDeltaPlayers;
 
 
 /**
@@ -34,7 +33,7 @@ public class DeltaHantoGame extends GameState
 		skipTo(player);
 	}
 
-	private LinkedHantoPlayer current = makeDeltaPlayers(RED, BLUE);
+	private HantoPlayer current = makeDeltaPlayers(RED, BLUE);
 
 	@Override
 	public void skipTo(HantoPlayerColor player)
@@ -43,7 +42,7 @@ public class DeltaHantoGame extends GameState
 	}
 
 	@Override
-	public HantoPlayer<LinkedHantoPlayer> getCurrentPlayer()
+	public HantoPlayer getCurrentPlayer()
 	{
 		return current;
 	}
