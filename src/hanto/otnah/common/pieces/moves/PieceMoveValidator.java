@@ -102,7 +102,7 @@ public abstract class PieceMoveValidator
 		 * if the butterfly has been played, or is the current piece to be played, all good
 		 * otherwise, the move count must be less than the limit
 		 */
-		if (type == HantoPieceType.BUTTERFLY || hasPieceInInventory(HantoPieceType.BUTTERFLY))
+		if (type == HantoPieceType.BUTTERFLY || !hasPieceInInventory(HantoPieceType.BUTTERFLY))
 		{
 			return true;
 		}
@@ -167,6 +167,16 @@ public abstract class PieceMoveValidator
 		}, new LinkedList<HantoPiece>());
 		
 		return blockingPieces.size() < 2;
+	}
+	
+	/**
+	 * 
+	 * @param check the position
+	 * @return check that there is a piece next to us
+	 */
+	protected boolean piecePlaceContinuityCheck(Position check)
+	{	
+		return check.adjacentTiles(latest).size() != 0;
 	}
 	
 	/**
