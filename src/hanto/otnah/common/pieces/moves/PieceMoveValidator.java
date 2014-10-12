@@ -9,10 +9,10 @@
 
 package hanto.otnah.common.pieces.moves;
 
-import static hanto.otnah.common.util.CollectionUtils.map;
+import static hanto.otnah.common.util.CollectionUtils.positionsToPieces;
 import static hanto.otnah.common.util.HexUtil.slideBlockers;
 
-import java.util.LinkedList;
+import java.util.Collection;
 import java.util.List;
 
 import hanto.common.HantoCoordinate;
@@ -23,7 +23,7 @@ import hanto.otnah.common.GameState;
 import hanto.otnah.common.HantoTile;
 import hanto.otnah.common.HexPosition;
 import hanto.otnah.common.Position;
-import hanto.otnah.common.util.CollectionUtils.Lambda;
+import hanto.otnah.common.util.HexUtil;
 
 /**
  * 
@@ -158,15 +158,8 @@ public abstract class PieceMoveValidator
 	 * @return whether this piece is walking bloked
 	 */
 	protected boolean isWalkingBlocked(Position from, Position to)
-	{
-		List<HantoPiece> blockingPieces = map(slideBlockers(from, to), new Lambda<Position, HantoPiece>(){
-			@Override
-			public HantoPiece apply(Position in) {
-				return latest.getPieceAt(in);
-			}
-		}, new LinkedList<HantoPiece>());
-		
-		return blockingPieces.size() < 2;
+	{	
+		return positionsToPieces(slideBlockers(from, to), latest).size() < 2;
 	}
 	
 	/**
@@ -208,5 +201,15 @@ public abstract class PieceMoveValidator
 	protected boolean isPieceAtPositionCorrectType(Position pos, HantoPieceType type)
 	{
 		return pos.hasPieceType(latest, type);
+	}
+	
+	protected boolean areAllPiecesBetweenFilled(Position to, Position from)
+	{
+		Collection<Position> positionsInBetween = HexUtil.getLinearSlide(to, from);
+		
+		List<HantoPiece> piecesInBetween = positionsToPieces(positionsInBetween, latest);
+		
+		return positionsInBetween.size() != 0 &&
+			   positionsInBetween.size() == piecesInBetween.size();
 	}
 }

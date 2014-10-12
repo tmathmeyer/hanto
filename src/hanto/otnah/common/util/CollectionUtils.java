@@ -8,6 +8,9 @@
  *******************************************************************************/
 
 package hanto.otnah.common.util;
+import hanto.common.HantoPiece;
+import hanto.otnah.common.GameState;
+import hanto.otnah.common.Position;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
@@ -43,6 +46,21 @@ public class CollectionUtils
 			}
 		}
 		return empty;
+	}
+	
+	/**
+	 * @param a the collection of positions
+	 * @param latest the game state that holds information
+	 * @return a list of pieces
+	 */
+	public static List<HantoPiece> positionsToPieces(Collection<Position> a, final GameState latest)
+	{
+		return map(a, new Lambda<Position, HantoPiece>(){
+			@Override
+			public HantoPiece apply(Position in) {
+				return latest.getPieceAt(in);
+			}
+		}, new LinkedList<HantoPiece>());
 	}
 	
 	/**
