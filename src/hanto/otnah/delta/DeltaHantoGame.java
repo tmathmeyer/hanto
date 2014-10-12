@@ -10,14 +10,11 @@
 
 package hanto.otnah.delta;
 
-import hanto.common.HantoCoordinate;
-import hanto.common.HantoException;
 import hanto.common.HantoPieceType;
 import hanto.common.HantoPlayerColor;
 import hanto.common.MoveResult;
 import hanto.otnah.common.GameState;
 import hanto.otnah.common.HantoPlayer;
-import hanto.otnah.common.HantoTile;
 import hanto.otnah.common.LinkedHantoPlayer;
 import hanto.otnah.common.Position;
 import hanto.otnah.common.pieces.moves.PieceMoveValidatorFactory;
@@ -44,44 +41,6 @@ public class DeltaHantoGame extends GameState
 	{
 		current = current.skipTo(player);
 	}
-	
-	@Override
-	public MoveResult makeMove(HantoPieceType pieceType, HantoCoordinate fromHC,
-			HantoCoordinate toHC) throws HantoException {
-		if(pieceType == null && fromHC == null && toHC == null)
-		{	
-			return getCurrentPlayer().getNextPlayer().getWinningState();
-		}
-		if(isGameOver())
-		{
-			throw new HantoException("Game is over, no moves are allowed.");
-		}
-		Position   to = Position.asPosition(toHC);
-		Position from = Position.asPosition(fromHC);
-		
-		if(isMovePossible(from, to, pieceType, getCurrentPlayer().getColor()))
-		{
-			//remove piece from inventory
-			HantoTile played = from.removePieceAt(this, pieceType);
-			
-			//put piece on board
-			setPieceAt(played, to);
-			
-			//increment player count
-			getCurrentPlayer().increaseMoveCount();
-			
-			if(pieceType == HantoPieceType.BUTTERFLY)
-			{
-				getCurrentPlayer().getSelf().setButterflyPosition(to);
-			}
-			
-			//switch player
-			current = current.getNextPlayer();
-			return gameState();
-		}
-		
-		throw new HantoException("invalid move!");
-	}
 
 	@Override
 	public HantoPlayer<LinkedHantoPlayer> getCurrentPlayer()
@@ -105,5 +64,10 @@ public class DeltaHantoGame extends GameState
 	public PieceMoveValidatorFactory getValidatorFactory()
 	{
 		return new PieceMoveValidatorFactory();
+	}
+
+	@Override
+	public MoveResult tryResignation() {
+		return getCurrentPlayer().getNextPlayer().getWinningState();
 	}
 }

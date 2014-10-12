@@ -16,7 +16,6 @@ import static hanto.otnah.common.LinkedHantoPlayerFactory.makeBetaPlayers;
 
 import java.util.Set;
 
-import hanto.common.HantoCoordinate;
 import hanto.common.HantoException;
 import hanto.common.HantoPieceType;
 import hanto.common.HantoPlayerColor;
@@ -46,33 +45,6 @@ public class BetaHantoGame extends GameState
 	public void skipTo(HantoPlayerColor player)
 	{
 		current = current.skipTo(player);
-	}
-	
-	@Override
-	public MoveResult makeMove(HantoPieceType pieceType, HantoCoordinate from,
-			HantoCoordinate to) throws HantoException {
-		if(isMovePossible(Position.asPosition(from), Position.asPosition(to), pieceType, null))
-		{
-			//remove piece from inventory
-			HantoTile played = getCurrentPlayer().play(pieceType);
-			
-			//put piece on board
-			setPieceAt(played, to);
-			
-			//increment player count
-			current.increaseMoveCount();
-			
-			if(pieceType == HantoPieceType.BUTTERFLY)
-			{
-				current.setButterflyPosition(Position.asPosition(to));
-			}
-			
-			//switch player
-			current = current.getNextPlayer();
-			return gameState();
-		}
-		
-		throw new HantoException("invalid move!");
 	}
 
 	@Override
@@ -168,5 +140,11 @@ public class BetaHantoGame extends GameState
 	public PieceMoveValidatorFactory getValidatorFactory() throws HantoException
 	{
 		throw new HantoException("you shouldn't be using a validator!!!");
+	}
+
+	@Override
+	public MoveResult tryResignation() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

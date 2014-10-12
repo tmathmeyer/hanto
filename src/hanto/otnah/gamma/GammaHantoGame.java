@@ -10,14 +10,11 @@
 
 package hanto.otnah.gamma;
 
-import hanto.common.HantoCoordinate;
-import hanto.common.HantoException;
 import hanto.common.HantoPieceType;
 import hanto.common.HantoPlayerColor;
 import hanto.common.MoveResult;
 import hanto.otnah.common.GameState;
 import hanto.otnah.common.HantoPlayer;
-import hanto.otnah.common.HantoTile;
 import hanto.otnah.common.LinkedHantoPlayer;
 import hanto.otnah.common.Position;
 import hanto.otnah.common.pieces.moves.PieceMoveValidatorFactory;
@@ -47,37 +44,6 @@ public class GammaHantoGame extends GameState
 	}
 
 	@Override
-	public MoveResult makeMove(HantoPieceType pieceType, HantoCoordinate fromHC,
-			HantoCoordinate toHC) throws HantoException {
-		
-		Position   to = Position.asPosition(toHC);
-		Position from = Position.asPosition(fromHC);
-		
-		if(isMovePossible(from, to, pieceType, getCurrentPlayer().getColor()))
-		{
-			//remove piece from inventory
-			HantoTile played = from.removePieceAt(this, pieceType);
-			
-			//put piece on board
-			setPieceAt(played, to);
-			
-			//increment player count
-			getCurrentPlayer().increaseMoveCount();
-			
-			if(pieceType == HantoPieceType.BUTTERFLY)
-			{
-				getCurrentPlayer().getSelf().setButterflyPosition(to);
-			}
-			
-			//switch player
-			current = current.getNextPlayer();
-			return gameState();
-		}
-		
-		throw new HantoException("invalid move!");
-	}
-
-	@Override
 	public HantoPlayer<LinkedHantoPlayer> getCurrentPlayer()
 	{
 		return current;
@@ -99,5 +65,10 @@ public class GammaHantoGame extends GameState
 	public PieceMoveValidatorFactory getValidatorFactory()
 	{
 		return new PieceMoveValidatorFactory(pieceRules);
+	}
+
+	@Override
+	public MoveResult tryResignation() {
+		return getCurrentPlayer().getSelf().getLosingState();
 	}
 }

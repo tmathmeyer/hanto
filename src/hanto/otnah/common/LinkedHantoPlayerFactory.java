@@ -29,6 +29,17 @@ import static hanto.otnah.common.LinkedHantoPlayer.makePlayer;
 public class LinkedHantoPlayerFactory
 {
 	
+	public static LinkedHantoPlayer makeAlphaPlayers(HantoPlayerColor ... colors)
+	{
+		return makeLinkedPlayers(new PlayerGen(){
+			@Override
+			public LinkedHantoPlayer gen(HantoPlayerColor each) {
+				return makePlayer(each, makeInventory(HantoTile.class,
+						 		 		with(Butterfly.class, 1, each)));
+			}
+		}, colors);
+	}
+	
 	/**
 	 * @param colors the colors of the players
 	 * @return the players linked together

@@ -9,19 +9,20 @@
 
 package hanto.otnah.alpha;
 
-import hanto.common.HantoCoordinate;
 import hanto.common.HantoException;
 import hanto.common.HantoPieceType;
 import hanto.common.HantoPlayerColor;
+import hanto.common.HantoPrematureResignationException;
 import hanto.common.MoveResult;
 import hanto.otnah.common.GameState;
 import hanto.otnah.common.HantoPlayer;
 import hanto.otnah.common.LinkedHantoPlayer;
 import hanto.otnah.common.Position;
 import hanto.otnah.common.HexPosition;
-import hanto.otnah.common.pieces.Butterfly;
 import hanto.otnah.common.pieces.moves.PieceMoveValidatorFactory;
-import static hanto.otnah.common.LinkedHantoPlayer.makePlayer;
+import static hanto.common.HantoPlayerColor.BLUE;
+import static hanto.common.HantoPlayerColor.RED;
+import static hanto.otnah.common.LinkedHantoPlayerFactory.makeAlphaPlayers;
 
 /**
  * 
@@ -30,58 +31,18 @@ import static hanto.otnah.common.LinkedHantoPlayer.makePlayer;
  */
 public class AlphaHantoGame extends GameState
 {
-	private final LinkedHantoPlayer redPlayer, bluePlayer;
-	private boolean which;
-	
-	/**
-	 * normal constructor for AlphaHantoGame
-	 * @param red the red player
-	 * @param blue the blue player
-	 */
-	public AlphaHantoGame()
-	{
-		redPlayer = makePlayer(HantoPlayerColor.RED, null);
-		bluePlayer = makePlayer(HantoPlayerColor.BLUE, null);
-		
-		which = true;
-	}
+	private LinkedHantoPlayer current = makeAlphaPlayers(BLUE, RED);
 	
 	@Override
 	public void skipTo(HantoPlayerColor player)
 	{
-		which = player == HantoPlayerColor.RED;
-	}
-	
-	@Override
-	public MoveResult makeMove(HantoPieceType pieceType, HantoCoordinate from, HantoCoordinate to) throws HantoException
-	{
-		if (pieceType != HantoPieceType.BUTTERFLY)
-		{
-			throw new HantoException("piece: " + (pieceType==null?"null":pieceType.getPrintableName()) + " not recognized");
-		}
-		
-		if (isMovePossible(Position.asPosition(from), Position.asPosition(to), pieceType, null))
-		{
-			if (which)
-			{ // blue: red can go
-				setPieceAt(new Butterfly(HantoPlayerColor.BLUE), to);
-				which = false;
-				return MoveResult.OK;
-			}
-			else
-			{ // red: game is over
-				setPieceAt(new Butterfly(HantoPlayerColor.RED), to);
-				return MoveResult.DRAW;
-			}
-		}
-		
-		throw new HantoException("bad move!");
+		current = current.skipTo(player);
 	}
 
 	@Override
 	public HantoPlayer<LinkedHantoPlayer> getCurrentPlayer()
 	{
-		return !which ? redPlayer : bluePlayer;
+		return current;
 	}
 
 	@Override
@@ -92,7 +53,7 @@ public class AlphaHantoGame extends GameState
 		if (distance == 0)
 		{
 			final int whichDistance = new HexPosition(0, 0).getDistanceTo(Position.asPosition(to));
-			if (which)
+			if (current.getColor() == HantoPlayerColor.BLUE)
 			{ // color is blue
 				result = (whichDistance == 0);
 			}
@@ -113,5 +74,11 @@ public class AlphaHantoGame extends GameState
 	public PieceMoveValidatorFactory getValidatorFactory()
 			throws HantoException {
 		throw new HantoException("you shouldn't be using validators!!!");
+	}
+
+	@Override
+	public MoveResult tryResignation() throws HantoException
+	{
+		throw new HantoPrematureResignationException();
 	}
 }

@@ -18,7 +18,7 @@ package hanto.common;
  * @version Oct 6, 2014
  */
 @SuppressWarnings("serial")
-public class HantoPrematureResignationException extends Exception
+public class HantoPrematureResignationException extends HantoException
 {
 	public HantoPrematureResignationException()
 	{

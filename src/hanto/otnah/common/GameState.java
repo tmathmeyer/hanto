@@ -41,6 +41,47 @@ public abstract class GameState implements HantoGame
 		return gameBoard.get(Position.asPosition(where));
 	}
 	
+	@Override
+	public MoveResult makeMove(HantoPieceType pieceType, HantoCoordinate fromHC, HantoCoordinate toHC) throws HantoException
+	{
+		if (checkResignation(pieceType, fromHC, toHC))
+		{
+			return tryResignation();
+		}
+		if(isGameOver())
+		{
+			throw new HantoException("Game is over, no moves are allowed.");
+		}
+		
+		Position   to = Position.asPosition(toHC);
+		Position from = Position.asPosition(fromHC);
+		
+		if(isMovePossible(from, to, pieceType, getCurrentPlayer().getColor()))
+		{
+			//remove piece from inventory
+			HantoTile played = from.removePieceAt(this, pieceType);
+			
+			//put piece on board
+			setPieceAt(played, to);
+			
+			//increment player count
+			getCurrentPlayer().increaseMoveCount();
+			
+			if(pieceType == HantoPieceType.BUTTERFLY)
+			{
+				getCurrentPlayer().getSelf().setButterflyPosition(to);
+			}
+			
+			//switch player
+			skipTo(getCurrentPlayer().getNextPlayer().getColor());
+			return gameState();
+		}
+		
+		throw new HantoException("invalid move!");
+	}
+	
+	
+	
 	/**
 	 * get the player who's turn it is, IE, that they have not yet made a move
 	 * @return the current player
@@ -140,6 +181,23 @@ public abstract class GameState implements HantoGame
 	 */
 	public abstract void skipTo(HantoPlayerColor player);
 	
+	/**
+	 * 
+	 * @return return the resigning players losing state
+	 * @throws HantoException if the resignation is invalid
+	 */
+	public abstract MoveResult tryResignation() throws HantoException;
+	
+	/**
+	 * @param a something
+	 * @param b something
+	 * @param c something
+	 * @return whether they are all null
+	 */
+	public boolean checkResignation(Object a, Object b, Object c)
+	{
+		return a == null && b == null && c == null;
+	}
 	
 	
 	

@@ -11,8 +11,6 @@ package hanto.otnah.alpha;
 
 import static org.junit.Assert.*;
 
-import java.lang.reflect.Field;
-
 import org.junit.Before;
 import org.junit.Test;
 
@@ -39,15 +37,14 @@ public class AlphaGameStateTests {
 	 * @throws NoSuchFieldException reflection issue
 	 * @throws IllegalArgumentException reflection issue
 	 * @throws IllegalAccessException reflection issue
+	 * @throws HantoException if the creating of the unfresh game is bad
 	 */
 	@Before
-	public void init() throws SecurityException, NoSuchFieldException, IllegalArgumentException, IllegalAccessException {
+	public void init() throws HantoException {
 		freshGame = new AlphaHantoGame();
 		unfreshGame = new AlphaHantoGame();
 		
-		Field f = unfreshGame.getClass().getDeclaredField("which");
-		f.setAccessible(true);
-		f.setBoolean(unfreshGame, false);
+		unfreshGame.makeMove(HantoPieceType.BUTTERFLY, new InventoryPosition(), new HexPosition(0, 0));
 	}
 
 	/**
