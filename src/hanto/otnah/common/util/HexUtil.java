@@ -10,11 +10,12 @@
 
 package hanto.otnah.common.util;
 
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
-import hanto.common.HantoCoordinate;
 import hanto.otnah.common.HexPosition;
+import hanto.otnah.common.Position;
 
 /**
  * 
@@ -29,7 +30,7 @@ public class HexUtil
 	 * @param to end
 	 * @return the destance between the start and end
 	 */
-	public static int distance(HantoCoordinate from, HantoCoordinate to)
+	public static int distance(Position from, Position to)
 	{
 		int deltax = from.getX() - to.getX();
 		int deltay = from.getY() - to.getY();
@@ -45,9 +46,9 @@ public class HexUtil
 	 * @param position the position
 	 * @return the positions surrounding the provided position
 	 */
-	public static Set<HantoCoordinate> locationsSurrounding(HantoCoordinate position)
+	public static Collection<Position> locationsSurrounding(Position position)
 	{
-		Set<HantoCoordinate> surrounding = new HashSet<>();
+		Set<Position> surrounding = new HashSet<>();
 		if (position == null)
 		{
 			return surrounding;
@@ -72,12 +73,60 @@ public class HexUtil
 	 * @param b another position
 	 * @return the two pieces that would block sliding from a to b if they were occupied
 	 */
-	public static Set<HantoCoordinate> slideBlockers(HantoCoordinate a, HantoCoordinate b)
+	public static Collection<Position> slideBlockers(Position a, Position b)
 	{
-		Set<HantoCoordinate> aSurrounds = locationsSurrounding(a);
-		Set<HantoCoordinate> bSurrounds = locationsSurrounding(b);
+		Collection<Position> aSurrounds = locationsSurrounding(a);
+		Collection<Position> bSurrounds = locationsSurrounding(b);
 		
 		aSurrounds.retainAll(bSurrounds);
 		return aSurrounds;
+	}
+	
+	/**
+	 * 
+	 * @param a the first point
+	 * @param b the second point
+	 * @return whether the pieces are in a straight line
+	 */
+	public static boolean checkLinearality(Position a, Position b)
+	{
+		int dx = a.getX() - b.getX();
+		int dy = a.getY() - b.getY();
+		
+		if (dx == 0 || dy == 0)
+		{
+			return true;
+		}
+		
+		return dx == dy;
+	}
+	
+	/**
+	 * 
+	 * @param a the first point
+	 * @param b the second point
+	 * @return the set of pieces in a striaght line between the two provided end points, non inclusive
+	 */
+	public static Collection<Position> getLinearSlide(Position a, Position b)
+	{
+		Set<Position> result = new HashSet<Position>();
+		
+		int dx = a.getX() - b.getX();
+		int dy = a.getY() - b.getY();
+		
+		int distance = Math.max(Math.abs(dx), Math.abs(dy));
+		
+		if (distance > 1)
+		{
+			int adx = dx / distance;
+			int ady = dy / distance;
+			
+			for(int i = 1; i < distance; i++)
+			{
+				result.add(new HexPosition(a.getX() - (i * adx), a.getY() - (i * ady)));
+			}
+		}
+		
+		return result;
 	}
 }

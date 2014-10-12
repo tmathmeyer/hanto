@@ -122,38 +122,6 @@ public class CollectionUtils
 	{
 		private final List<T> inner = new LinkedList<>();
 		
-		/**
-		 * Wrapper for creating N instances of a type, where that type
-		 * has a 1 parameter default constructor
-		 * 
-		 * @param type the type of object
-		 * @param count the number of them
-		 * @param arg1 the actual parameter to the type constructor
-		 */
-		private <B> Factory(Class<T> type, int count, B arg1)
-		{
-			for(int i = 0; i < count; i++)
-			{
-				Constructor<T> cons;
-				try {
-					cons = type.getConstructor(arg1.getClass());
-					if (cons != null) {
-						inner.add(cons.newInstance(arg1));
-					}
-				} catch (NoSuchMethodException
-						| SecurityException
-						| InstantiationException
-						| IllegalAccessException
-						| IllegalArgumentException
-						| InvocationTargetException e) {
-					e.printStackTrace();
-				}
-				
-			}
-		}
-		
-		
-		
 		private Factory(Class<T> type, int count, Object... args)
 		{
 			for(int i = 0; i < count; i++)
@@ -200,19 +168,6 @@ public class CollectionUtils
 		public List<T> getWrapped()
 		{
 			return inner;
-		}
-		
-		/**
-		 * @param <A> the type of factory
-		 * @param <B> the type for the constructor of A
-		 * @param type the type
-		 * @param count the count
-		 * @param ob the actual param
-		 * @return a factory of type, count, ob
-		 */
-		public static <A, B> Factory<A> makes(Class<A> type, int count, B ob)
-		{
-			return new Factory<A> (type, count, ob);
 		}
 	}
 }

@@ -119,24 +119,9 @@ public abstract class Position implements HantoCoordinate
 	 * Gets the list of coordinates that are adjacent to the given position.
 	 * @return the list of adjacent coordinates
 	 */
-	public Collection<HantoCoordinate> adjacentCoordinates()
-	{
-		return HexUtil.locationsSurrounding(this);
-	}
-	
-	/**
-	 * Gets the list of positions that are adjacent to the given position.
-	 * @return the list of adjacent positions
-	 */
 	public Collection<Position> adjacentPositions()
 	{
-		Collection<HantoCoordinate> coords = adjacentCoordinates();
-		Collection<Position> positions = new ArrayList<>();
-		for(HantoCoordinate n : coords)
-		{
-			positions.add(asPosition(n));
-		}
-		return positions;
+		return HexUtil.locationsSurrounding(this);
 	}
 	
 	/**
@@ -146,7 +131,7 @@ public abstract class Position implements HantoCoordinate
 	 */
 	public Collection<HantoPiece> adjacentTiles(GameState state)
 	{
-		Collection<HantoCoordinate> coords = adjacentCoordinates();
+		Collection<Position> coords = adjacentPositions();
 		Collection<HantoPiece> positions = new ArrayList<>();
 		for(HantoCoordinate n : coords)
 		{

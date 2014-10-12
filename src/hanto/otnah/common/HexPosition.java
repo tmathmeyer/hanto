@@ -9,9 +9,6 @@
 
 package hanto.otnah.common;
 
-import java.util.Collection;
-
-import hanto.common.HantoCoordinate;
 import hanto.common.HantoPiece;
 import hanto.common.HantoPieceType;
 import hanto.otnah.common.util.HexUtil;
@@ -58,11 +55,6 @@ public class HexPosition extends Position
 	@Override
 	public int distanceFrom(Position other) {
 		return HexUtil.distance(this, other);
-	}
-	
-	@Override
-	public Collection<HantoCoordinate> adjacentCoordinates(){
-		return HexUtil.locationsSurrounding(this);
 	}
 	
 	@Override

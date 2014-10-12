@@ -10,11 +10,12 @@
 package hanto.otnah.common.util;
 
 import static org.junit.Assert.*;
+import static hanto.otnah.common.util.HexUtil.*;
 
 import java.util.Collection;
 
-import hanto.common.HantoCoordinate;
 import hanto.otnah.common.HexPosition;
+import hanto.otnah.common.Position;
 
 import org.junit.Test;
 
@@ -25,13 +26,22 @@ import org.junit.Test;
  */
 public class HexUtilsTest {
 
-	HantoCoordinate HC0 = new HexPosition(0, 0);
-	HantoCoordinate HC1 = new HexPosition(1, 0);
-	HantoCoordinate HC2 = new HexPosition(0, 1);
-	HantoCoordinate HC3 = new HexPosition(-1, 1);
-	HantoCoordinate HC4 = new HexPosition(1, -1);
-	HantoCoordinate HC5 = new HexPosition(-1, 0);
-	HantoCoordinate HC6 = new HexPosition(0, -1);
+	Position HC0 = new HexPosition(0, 0);
+	Position HC1 = new HexPosition(1, 0);
+	Position HC2 = new HexPosition(0, 1);
+	Position HC3 = new HexPosition(-1, 1);
+	Position HC4 = new HexPosition(1, -1);
+	Position HC5 = new HexPosition(-1, 0);
+	Position HC6 = new HexPosition(0, -1);
+	
+	Position HC7 = new HexPosition(-3, -3);
+	Position HC8 = new HexPosition(-2, -2);
+	Position HC9 = new HexPosition(-1, -1);
+	Position HCA = new HexPosition(0, 0);
+	Position HCB = new HexPosition(1, 1);
+	Position HCC = new HexPosition(2, 2);
+	Position HCD = new HexPosition(3, 3);
+	Position HCE = new HexPosition(3, 9);
 	
 	/**
 	 * test that vertical distances are correct
@@ -39,10 +49,10 @@ public class HexUtilsTest {
 	@Test
 	public void verticalDistance()
 	{
-		assertEquals(HexUtil.distance(HC2, HC6), 2);
-		assertEquals(HexUtil.distance(HC0, HC6), 1);
-		assertEquals(HexUtil.distance(HC2, HC0), 1);
-		assertEquals(HexUtil.distance(HC6, HC2), 2);
+		assertEquals(distance(HC2, HC6), 2);
+		assertEquals(distance(HC0, HC6), 1);
+		assertEquals(distance(HC2, HC0), 1);
+		assertEquals(distance(HC6, HC2), 2);
 	}
 	
 	/**
@@ -51,10 +61,10 @@ public class HexUtilsTest {
 	@Test
 	public void positiveSlopeDistance()
 	{
-		assertEquals(HexUtil.distance(HC1, HC5), 2);
-		assertEquals(HexUtil.distance(HC0, HC5), 1);
-		assertEquals(HexUtil.distance(HC1, HC0), 1);
-		assertEquals(HexUtil.distance(HC5, HC1), 2);
+		assertEquals(distance(HC1, HC5), 2);
+		assertEquals(distance(HC0, HC5), 1);
+		assertEquals(distance(HC1, HC0), 1);
+		assertEquals(distance(HC5, HC1), 2);
 	}
 	
 	/**
@@ -63,10 +73,10 @@ public class HexUtilsTest {
 	@Test
 	public void negativeSlopeDistance()
 	{
-		assertEquals(HexUtil.distance(HC3, HC4), 2);
-		assertEquals(HexUtil.distance(HC0, HC4), 1);
-		assertEquals(HexUtil.distance(HC3, HC0), 1);
-		assertEquals(HexUtil.distance(HC4, HC3), 2);
+		assertEquals(distance(HC3, HC4), 2);
+		assertEquals(distance(HC0, HC4), 1);
+		assertEquals(distance(HC3, HC0), 1);
+		assertEquals(distance(HC4, HC3), 2);
 	}
 	
 	/**
@@ -75,7 +85,7 @@ public class HexUtilsTest {
 	@Test
 	public void testSurrounding()
 	{
-		Collection<HantoCoordinate> coords = HexUtil.locationsSurrounding(HC0);
+		Collection<Position> coords = HexUtil.locationsSurrounding(HC0);
 		
 		assertTrue(coords.contains(HC1));
 		assertTrue(coords.contains(HC2));
@@ -83,6 +93,24 @@ public class HexUtilsTest {
 		assertTrue(coords.contains(HC4));
 		assertTrue(coords.contains(HC5));
 		assertTrue(coords.contains(HC6));
+	}
+	
+	@Test
+	public void testLinearality()
+	{
+		assertTrue(checkLinearality(HC7, HCD));
+		assertTrue(checkLinearality(HCD, HCE));
+		assertFalse(checkLinearality(HC7, HCE));
+	}
+	
+	@Test
+	public void testLinearPieceAccumulation()
+	{
+		Collection<Position> co1 = getLinearSlide(HC7, HCD);
+		assertTrue(co1.contains(HC8));
+		
+		Collection<Position> co2 = getLinearSlide(HCD, HC7);
+		assertTrue(co2.contains(HC8));
 	}
 
 }

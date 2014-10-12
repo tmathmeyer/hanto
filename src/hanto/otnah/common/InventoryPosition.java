@@ -9,11 +9,10 @@
 
 package hanto.otnah.common;
 
-import hanto.common.HantoCoordinate;
-import hanto.common.HantoPieceType;
-
-import java.util.Collections;
 import java.util.Collection;
+import java.util.Collections;
+
+import hanto.common.HantoPieceType;
 
 /**
  * 
@@ -48,12 +47,6 @@ public class InventoryPosition extends Position
 	}
 	
 	@Override
-	public Collection<HantoCoordinate> adjacentCoordinates()
-	{
-		return Collections.emptyList();
-	}
-	
-	@Override
 	public boolean equals(Object other)
 	{
 		return other instanceof InventoryPosition;
@@ -63,6 +56,12 @@ public class InventoryPosition extends Position
 	public int hashCode()
 	{
 		return 655678901;
+	}
+	
+	@Override
+	public Collection<Position> adjacentPositions()
+	{
+		return Collections.emptyList();
 	}
 	
 	@Override

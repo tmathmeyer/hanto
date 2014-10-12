@@ -159,9 +159,9 @@ public abstract class PieceMoveValidator
 	 */
 	protected boolean isWalkingBlocked(Position from, Position to)
 	{
-		List<HantoPiece> blockingPieces = map(slideBlockers(from, to), new Lambda<HantoCoordinate, HantoPiece>(){
+		List<HantoPiece> blockingPieces = map(slideBlockers(from, to), new Lambda<Position, HantoPiece>(){
 			@Override
-			public HantoPiece apply(HantoCoordinate in) {
+			public HantoPiece apply(Position in) {
 				return latest.getPieceAt(in);
 			}
 		}, new LinkedList<HantoPiece>());

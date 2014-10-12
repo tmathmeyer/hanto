@@ -34,11 +34,6 @@ public class EpsilonHantoGame extends GameState
 		return getCurrentPlayer().getLosingState();
 	}
 	
-	
-	
-	
-	
-
 	@Override
 	public HantoPlayer getCurrentPlayer() {
 		return current;

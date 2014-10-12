@@ -170,7 +170,7 @@ public class HexGraph
 	public void insertNodeAt(Position key)
 	{
 		Node n = new Node();
-		Collection<HantoCoordinate> adjacent = key.adjacentCoordinates();
+		Collection<Position> adjacent = key.adjacentPositions();
 		for(HantoCoordinate coord : adjacent)
 		{
 			Node lookup = points.get(asPosition(coord));

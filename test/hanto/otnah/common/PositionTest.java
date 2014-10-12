@@ -12,7 +12,6 @@ package hanto.otnah.common;
 import static org.junit.Assert.*;
 import java.util.Collection;
 import org.junit.Test;
-import hanto.common.HantoCoordinate;
 
 /**
  * 
@@ -92,7 +91,7 @@ public class PositionTest
 	@Test
 	public void testAdjacentPositions(){
 		Position around = new HexPosition(0, 0);
-		Collection<HantoCoordinate> col = around.adjacentCoordinates();
+		Collection<Position> col = around.adjacentPositions();
 		assertTrue(col.contains(new HexPosition(0, 1)));
 		assertTrue(col.contains(new HexPosition(1, -1)));
 		assertTrue(col.contains(new HexPosition(1, 0)));
