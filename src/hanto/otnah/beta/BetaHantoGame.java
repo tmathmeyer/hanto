@@ -13,8 +13,6 @@ package hanto.otnah.beta;
 import static hanto.common.HantoPlayerColor.BLUE;
 import static hanto.common.HantoPlayerColor.RED;
 import static hanto.otnah.common.HantoPlayerFactory.makeBetaPlayers;
-
-
 import hanto.common.HantoException;
 import hanto.common.HantoPieceType;
 import hanto.common.HantoPlayerColor;
@@ -31,21 +29,18 @@ import hanto.otnah.common.pieces.moves.PieceMoveValidatorFactory;
  */
 public class BetaHantoGame extends GameState
 {
-	private HantoPlayer current = makeBetaPlayers(RED, BLUE);
-
-	public BetaHantoGame(HantoPlayerColor player) {
+	/**
+	 * @param player the color of the first player
+	 */
+	public BetaHantoGame(HantoPlayerColor player)
+	{
 		skipTo(player);
 	}
 
 	@Override
-	public void skipTo(HantoPlayerColor player)
+	public HantoPlayer makePlayers()
 	{
-		current = current.skipTo(player);
-	}
-
-	@Override
-	public HantoPlayer getCurrentPlayer() {
-		return current;
+		return makeBetaPlayers(BLUE, RED);
 	}
 
 	@Override

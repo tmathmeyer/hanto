@@ -34,6 +34,7 @@ public abstract class GameState implements HantoGame
 	private final Map<Position, HantoTile> gameBoard = new HashMap<>();
 	private final HexGraph gameGraph = new HexGraph();
 	private boolean gameOver = false;
+	private HantoPlayer current = makePlayers();
 	
 	@Override
 	public HantoPiece getPieceAt(HantoCoordinate where)
@@ -86,7 +87,10 @@ public abstract class GameState implements HantoGame
 	 * get the player who's turn it is, IE, that they have not yet made a move
 	 * @return the current player
 	 */
-	public abstract HantoPlayer getCurrentPlayer();
+	public HantoPlayer getCurrentPlayer()
+	{
+		return current;
+	}
 	
 	/**
 	 * 
@@ -165,6 +169,7 @@ public abstract class GameState implements HantoGame
 	
 	/**
 	 * a method to abstract away the movement limit to child classes
+	 * @param currentMoveCount the current number of moves
 	 * @return whether this game has had the max number of moves
 	 */
 	public abstract boolean isOverMaxAllottedMoves(int currentMoveCount);
@@ -179,7 +184,10 @@ public abstract class GameState implements HantoGame
 	 * sets this players current move
 	 * @param player the color of the player to skip to
 	 */
-	public abstract void skipTo(HantoPlayerColor player);
+	public void skipTo(HantoPlayerColor player)
+	{
+		current = current.skipTo(player);
+	}
 	
 	/**
 	 * 
@@ -187,6 +195,12 @@ public abstract class GameState implements HantoGame
 	 * @throws HantoException if the resignation is invalid
 	 */
 	public abstract MoveResult tryResignation() throws HantoException;
+	
+	/**
+	 * make players specific to the game
+	 * @return the first player, with the rest linked in depending on game type
+	 */
+	public abstract HantoPlayer makePlayers();
 	
 	/**
 	 * @param a something

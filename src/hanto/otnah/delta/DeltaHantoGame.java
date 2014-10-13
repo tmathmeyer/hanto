@@ -29,22 +29,18 @@ import static hanto.otnah.common.HantoPlayerFactory.makeDeltaPlayers;
  */
 public class DeltaHantoGame extends GameState
 {
+	/**
+	 * a default delta hanto game
+	 * @param player the color of the first player
+	 */
 	public DeltaHantoGame(HantoPlayerColor player) {
 		skipTo(player);
 	}
 
-	private HantoPlayer current = makeDeltaPlayers(RED, BLUE);
-
 	@Override
-	public void skipTo(HantoPlayerColor player)
+	public HantoPlayer makePlayers()
 	{
-		current = current.skipTo(player);
-	}
-
-	@Override
-	public HantoPlayer getCurrentPlayer()
-	{
-		return current;
+		return makeDeltaPlayers(BLUE, RED);
 	}
 
 	@Override

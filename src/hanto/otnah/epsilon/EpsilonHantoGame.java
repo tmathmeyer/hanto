@@ -1,3 +1,12 @@
+/*******************************************************************************
+ * All sources under the hanto.otnah package were developed by
+ * Ted Meyer and Nilesh Patel for the term project in CS4233
+ * at Worcester Polytechnic Institute. Since WPI holds all other forms
+ * of ownership to this software, we have decided to not make this
+ * software available under any license. Evaluation or compilation rights
+ * are therefore granted only to course staff.
+ *******************************************************************************/
+
 package hanto.otnah.epsilon;
 
 import static hanto.common.HantoPlayerColor.BLUE;
@@ -13,19 +22,25 @@ import hanto.otnah.common.Position;
 import hanto.otnah.common.moves.MoveEnumerator;
 import hanto.otnah.common.pieces.moves.PieceMoveValidatorFactory;
 
+/**
+ * 
+ * @author otnah
+ *
+ */
 public class EpsilonHantoGame extends GameState
 {
-
+	/**
+	 * default epsilon game
+	 * @param player the color of the first player
+	 */
 	public EpsilonHantoGame(HantoPlayerColor player) {
 		skipTo(player);
 	}
 
-	private HantoPlayer current = makeEpsilonPlayers(BLUE, RED);
-
 	@Override
-	public void skipTo(HantoPlayerColor player)
+	public HantoPlayer makePlayers()
 	{
-		current = current.skipTo(player);
+		return makeEpsilonPlayers(BLUE, RED);
 	}
 	
 	@Override
@@ -37,11 +52,6 @@ public class EpsilonHantoGame extends GameState
 		}
 		
 		return getCurrentPlayer().getLosingState();
-	}
-	
-	@Override
-	public HantoPlayer getCurrentPlayer() {
-		return current;
 	}
 
 	@Override
@@ -60,5 +70,4 @@ public class EpsilonHantoGame extends GameState
 	{
 		return new PieceMoveValidatorFactory();
 	}
-
 }

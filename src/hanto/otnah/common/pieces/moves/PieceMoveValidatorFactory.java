@@ -21,6 +21,9 @@ public class PieceMoveValidatorFactory
 {
 	private final PieceRuleSet RULES;
 	
+	/**
+	 * default constructor with default rules
+	 */
 	public PieceMoveValidatorFactory()
 	{
 		this(new PieceRuleSet(){
@@ -54,6 +57,7 @@ public class PieceMoveValidatorFactory
 	
 	/**
 	 * singleton constructor
+	 * @param rules the rules for the factory
 	 */
 	public PieceMoveValidatorFactory(PieceRuleSet rules)
 	{
@@ -61,9 +65,7 @@ public class PieceMoveValidatorFactory
 	}
 	
 	/**
-	 * 
 	 * @param type the piece type to which a validator should be gotten
-	 * @param game the game to switch on
 	 * @return the move validator for that type
 	 */
 	public PieceMoveValidator getMoveValidator(HantoPieceType type)

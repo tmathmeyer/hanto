@@ -95,6 +95,9 @@ public class HexUtilsTest {
 		assertTrue(coords.contains(HC6));
 	}
 	
+	/**
+	 * test to make sure linear checking works
+	 */
 	@Test
 	public void testLinearality()
 	{
@@ -103,6 +106,9 @@ public class HexUtilsTest {
 		assertFalse(checkLinearality(HC7, HCE));
 	}
 	
+	/**
+	 * test to make sure that it correctly picks up the right pieces
+	 */
 	@Test
 	public void testLinearPieceAccumulation()
 	{

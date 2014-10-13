@@ -28,7 +28,10 @@ import static hanto.otnah.common.HantoPlayer.makePlayer;
  */
 public class HantoPlayerFactory
 {
-	
+	/**
+	 * @param colors the array of colors for each player
+	 * @return the linked players
+	 */
 	public static HantoPlayer makeAlphaPlayers(HantoPlayerColor ... colors)
 	{
 		return makeLinkedPlayers(new PlayerGen(){

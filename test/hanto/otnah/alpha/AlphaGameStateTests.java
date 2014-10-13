@@ -33,11 +33,7 @@ public class AlphaGameStateTests {
 
 	/**
 	 * setup for tests
-	 * @throws SecurityException reflection issue
-	 * @throws NoSuchFieldException reflection issue
-	 * @throws IllegalArgumentException reflection issue
-	 * @throws IllegalAccessException reflection issue
-	 * @throws HantoException if the creating of the unfresh game is bad
+	 * @throws HantoException if the game instantiation goes poorly
 	 */
 	@Before
 	public void init() throws HantoException {

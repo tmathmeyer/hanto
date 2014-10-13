@@ -29,23 +29,20 @@ import static hanto.otnah.common.HantoPlayerFactory.makeGammaPlayers;
  */
 public class GammaHantoGame extends GameState
 {
-	private HantoPlayer current = makeGammaPlayers(RED, BLUE);
 	private final GammaRuleSet pieceRules = new GammaRuleSet();
 	
+	/**
+	 * default gamma game
+	 * @param player the color of the first player
+	 */
 	public GammaHantoGame(HantoPlayerColor player) {
 		skipTo(player);
 	}
 	
 	@Override
-	public void skipTo(HantoPlayerColor player)
+	public HantoPlayer makePlayers()
 	{
-		current = current.skipTo(player);
-	}
-
-	@Override
-	public HantoPlayer getCurrentPlayer()
-	{
-		return current;
+		return makeGammaPlayers(BLUE, RED);
 	}
 
 	@Override

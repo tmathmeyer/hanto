@@ -23,7 +23,6 @@ import java.util.Set;
  * 
  * @author otnah
  *
- * @param <T> the subclass of HantoPlayer
  */
 public class HantoPlayer
 {
@@ -213,7 +212,7 @@ public class HantoPlayer
 	
 	/**
 	 * gets the state resulting from a loss by this player
-	 * @return
+	 * @return the state the game would be in if this player lost
 	 */
 	public MoveResult getLosingState()
 	{

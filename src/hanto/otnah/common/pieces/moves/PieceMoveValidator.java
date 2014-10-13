@@ -203,6 +203,11 @@ public abstract class PieceMoveValidator
 		return pos.hasPieceType(latest, type);
 	}
 	
+	/**
+	 * @param to one end position
+	 * @param from the other end
+	 * @return whether every spot between these two has a piece in it
+	 */
 	protected boolean areAllPiecesBetweenFilled(Position to, Position from)
 	{
 		Collection<Position> positionsInBetween = HexUtil.getLinearSlide(to, from);

@@ -88,7 +88,9 @@ public class MiscelaneousTests {
 		Position c = new HexPosition(1, 0);
 		Position d = new HexPosition(0, 1);
 		
-		assertFalse(a.equals(null));
+		Object test = null;
+		
+		assertFalse(a.equals(test));
 		assertTrue(a.equals(a));
 		assertTrue(a.equals(b));
 		assertFalse(a.equals(c));

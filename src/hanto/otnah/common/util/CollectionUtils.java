@@ -50,7 +50,8 @@ public class CollectionUtils
 	
 	
 	/**
-	 * 
+	 * @param <A> the type of thing to filter
+	 * @param <C> a collection of A's
 	 * @param input the input collection
 	 * @param func the filter function
 	 * @param empty the empty collection to fill
@@ -177,8 +178,9 @@ public class CollectionUtils
 						| InstantiationException
 						| IllegalAccessException
 						| IllegalArgumentException
-						| InvocationTargetException
 						| NullPointerException e) {
+					e.printStackTrace();
+				} catch (InvocationTargetException e) {
 					e.printStackTrace();
 				}
 			}

@@ -29,19 +29,11 @@ import static hanto.otnah.common.HantoPlayerFactory.makeAlphaPlayers;
  *
  */
 public class AlphaHantoGame extends GameState
-{
-	private HantoPlayer current = makeAlphaPlayers(BLUE, RED);
-	
+{	
 	@Override
-	public void skipTo(HantoPlayerColor player)
+	public HantoPlayer makePlayers()
 	{
-		current = current.skipTo(player);
-	}
-
-	@Override
-	public HantoPlayer getCurrentPlayer()
-	{
-		return current;
+		return makeAlphaPlayers(BLUE, RED);
 	}
 
 	@Override
@@ -52,7 +44,7 @@ public class AlphaHantoGame extends GameState
 		if (distance == 0)
 		{
 			final int whichDistance = new HexPosition(0, 0).getDistanceTo(Position.asPosition(to));
-			if (current.getColor() == HantoPlayerColor.BLUE)
+			if (getCurrentPlayer().getColor() == HantoPlayerColor.BLUE)
 			{ // color is blue
 				result = (whichDistance == 0);
 			}
@@ -76,7 +68,7 @@ public class AlphaHantoGame extends GameState
 	}
 
 	@Override
-	public MoveResult tryResignation() throws HantoException
+	public MoveResult tryResignation() throws HantoPrematureResignationException
 	{
 		throw new HantoPrematureResignationException();
 	}
