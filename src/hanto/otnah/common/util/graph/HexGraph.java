@@ -222,6 +222,23 @@ public class HexGraph
 	}
 	
 	/**
+	 * Checks whether the given move would break the contiguity of the
+	 * pieces on the board. Essentially, a connectivity check.
+	 * @param from initial location
+	 * @return true if the graph is connected after the move is made.
+	 */
+	public boolean isContinuousSans(Position from)
+	{
+		removeNodeAt(from);
+		
+		boolean result = isContinuous();
+		
+		insertNodeAt(from);
+		
+		return result;
+	}
+	
+	/**
 	 * @return whether the graph in its current state is continuous
 	 */
 	public boolean isContinuous()

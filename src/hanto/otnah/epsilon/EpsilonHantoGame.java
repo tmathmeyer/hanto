@@ -5,10 +5,12 @@ import static hanto.common.HantoPlayerColor.RED;
 import static hanto.otnah.common.HantoPlayerFactory.makeEpsilonPlayers;
 import hanto.common.HantoPieceType;
 import hanto.common.HantoPlayerColor;
+import hanto.common.HantoPrematureResignationException;
 import hanto.common.MoveResult;
 import hanto.otnah.common.GameState;
 import hanto.otnah.common.HantoPlayer;
 import hanto.otnah.common.Position;
+import hanto.otnah.common.moves.MoveEnumerator;
 import hanto.otnah.common.pieces.moves.PieceMoveValidatorFactory;
 
 public class EpsilonHantoGame extends GameState
@@ -27,9 +29,12 @@ public class EpsilonHantoGame extends GameState
 	}
 	
 	@Override
-	public MoveResult tryResignation()
+	public MoveResult tryResignation() throws HantoPrematureResignationException
 	{
-		//TODO: implement brute force resignation checker
+		if (new MoveEnumerator().getAllCurrentMoves(this).size() != 0)
+		{
+			throw new HantoPrematureResignationException();
+		}
 		
 		return getCurrentPlayer().getLosingState();
 	}

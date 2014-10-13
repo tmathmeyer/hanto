@@ -48,6 +48,26 @@ public class CollectionUtils
 		return empty;
 	}
 	
+	
+	/**
+	 * 
+	 * @param input the input collection
+	 * @param func the filter function
+	 * @param empty the empty collection to fill
+	 * @return the filtered collection
+	 */
+	public static <A, C extends Collection<A>> C filter(Collection<A> input, Lambda<A, Boolean> func, C empty)
+	{
+		for(A a : input)
+		{
+			if (func.apply(a))
+			{
+				empty.add(a);
+			}
+		}
+		return empty;
+	}
+	
 	/**
 	 * @param a the collection of positions
 	 * @param latest the game state that holds information
