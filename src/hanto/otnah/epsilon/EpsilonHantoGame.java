@@ -12,6 +12,7 @@ package hanto.otnah.epsilon;
 import static hanto.common.HantoPlayerColor.BLUE;
 import static hanto.common.HantoPlayerColor.RED;
 import static hanto.otnah.common.HantoPlayerFactory.makeEpsilonPlayers;
+import hanto.common.HantoException;
 import hanto.common.HantoPieceType;
 import hanto.common.HantoPlayerColor;
 import hanto.common.HantoPrematureResignationException;
@@ -44,7 +45,7 @@ public class EpsilonHantoGame extends GameState
 	}
 	
 	@Override
-	public MoveResult tryResignation() throws HantoPrematureResignationException
+	public MoveResult tryResignation() throws HantoException
 	{
 		if (new MoveEnumerator().getAllCurrentMoves(this).size() != 0)
 		{

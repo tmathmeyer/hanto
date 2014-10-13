@@ -13,7 +13,9 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.LinkedList;
 
+import hanto.common.HantoException;
 import hanto.common.HantoPiece;
+import hanto.common.HantoPieceType;
 import hanto.common.HantoPlayerColor;
 import hanto.otnah.common.GameState;
 import hanto.otnah.common.HantoPlayer;
@@ -84,8 +86,9 @@ public class MoveEnumerator
 	 * 
 	 * @param state the gamestate
 	 * @return all potential moves
+	 * @throws HantoException if there is an error
 	 */
-	public Collection<PotentialMove> getAllCurrentMoves(GameState state)
+	public Collection<PotentialMove> getAllCurrentMoves(GameState state) throws HantoException
 	{
 		Collection<Position> newPiecePlays = generatePiecePlays(state);
 		Collection<Position> movePiecePlays = generatePieceMoveTos(state);
@@ -103,7 +106,9 @@ public class MoveEnumerator
 		{ // from
 			for(Position p : movePiecePlays)
 			{ //to
-				if (state.isGraphContinuityPreservedAfter(cur, p))
+				HantoPieceType type = state.getPieceAt(cur).getType();
+				
+				if (state.getValidatorFactory().getMoveValidator(type).isValidMove(p, cur, state))
 				{
 					result.add(new PotentialMove(p, cur, state.getCurrentPlayer().getColor(), state.getPieceAt(cur).getType()));
 				}

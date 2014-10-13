@@ -8,7 +8,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
 
-package hanto.otnah.delta;
+package hanto.otnah.epsilon;
 
 import hanto.common.*;
 import hanto.otnah.common.*;
@@ -19,9 +19,9 @@ import static hanto.otnah.common.Position.asPosition;
  * Test Gamma Hanto Game
  * @version Sep 22, 2014
  */
-public class DeltaHantoTestGame extends DeltaHantoGame implements HantoTestGame
+public class EpsilonHantoTestGame extends EpsilonHantoGame implements HantoTestGame
 {
-	public DeltaHantoTestGame(HantoPlayerColor movesFirst)
+	public EpsilonHantoTestGame(HantoPlayerColor movesFirst)
 	{
 		super(movesFirst);
 	}
