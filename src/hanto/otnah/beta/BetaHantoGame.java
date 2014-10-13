@@ -75,8 +75,8 @@ public class BetaHantoGame extends GameState
 	}
 
 	@Override
-	public MoveResult tryResignation() {
-		// TODO Auto-generated method stub
-		return null;
+	public MoveResult tryResignation() throws HantoException
+	{
+		throw new HantoException("you can't do that in a beta game");
 	}
 }

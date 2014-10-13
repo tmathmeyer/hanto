@@ -256,4 +256,14 @@ public class AlphaGameStateTests {
 		assertEquals("", freshGame.getPrintableBoard());
 		assertEquals("", unfreshGame.getPrintableBoard());
 	}
+	
+	/**
+	 * test that a very bad move can't happen
+	 * @throws HantoException on failure
+	 */
+	@Test(expected=HantoException.class)
+	public void failAtGettingFactory() throws HantoException
+	{
+		new AlphaHantoGame().getValidatorFactory();
+	}
 }

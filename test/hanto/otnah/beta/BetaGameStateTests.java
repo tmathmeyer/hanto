@@ -291,4 +291,26 @@ public class BetaGameStateTests
 		//move 4
 		assertEquals(beta.makeMove(HantoPieceType.BUTTERFLY, new InventoryPosition(), new HexPosition(1, 0)), MoveResult.BLUE_WINS);
 	}
+	
+	/**
+	 * get coverage on the stupid things
+	 */
+	@Test
+	public void unusedFactoryTests()
+	{
+		assertTrue(new BetaHantoRules().makeCrabMoveValidator() instanceof BetaHantoRules);
+		
+		assertTrue(new BetaHantoRules().makeHorseMoveValidator() instanceof BetaHantoRules);
+	}
+	
+	/**
+	 * make sure that two plays cant be to the same location
+	 * @throws HantoException
+	 */
+	@Test(expected=HantoException.class)
+	public void attemptResign() throws HantoException
+	{
+		BetaHantoGame beta = BetaHantoGame.createBetaGameState(HantoPlayerColor.BLUE);
+		beta.tryResignation();
+	}
 }

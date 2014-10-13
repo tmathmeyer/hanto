@@ -7,7 +7,7 @@
  * are therefore granted only to course staff.
  *******************************************************************************/
 
-package hanto.otnah.alpha;
+package hanto.otnah.common.pieces;
 
 import static org.junit.Assert.*;
 
