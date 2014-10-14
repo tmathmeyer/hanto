@@ -85,7 +85,7 @@ public class HantoPlayer
 	 * @param pieceType the piece type to remove from the inventory
 	 * @return the piece removed
 	 */
-	public HantoTile play(HantoPieceType pieceType)
+	public HantoTile play(HantoPieceType pieceType, Position to)
 	{
 		int index = 0, assumed = 0;
 		
@@ -97,6 +97,8 @@ public class HantoPlayer
 			}
 			assumed ++;
 		}
+		
+		currentPositions.add(to);
 		
 		return currentInventory.remove(index);
 	}

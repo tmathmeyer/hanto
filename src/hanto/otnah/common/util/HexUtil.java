@@ -98,7 +98,7 @@ public class HexUtil
 			return true;
 		}
 		
-		return dx == dy;
+		return dx == -dy;
 	}
 	
 	/**

@@ -20,6 +20,7 @@ import hanto.common.HantoPlayerColor;
 import hanto.otnah.common.GameState;
 import hanto.otnah.common.HantoPlayer;
 import hanto.otnah.common.HantoTile;
+import hanto.otnah.common.HexPosition;
 import hanto.otnah.common.InventoryPosition;
 import hanto.otnah.common.Position;
 import hanto.otnah.common.util.CollectionUtils;
@@ -45,6 +46,16 @@ public class MoveEnumerator
 		
 		Collection<Position> hasOnBoard = currentPlayer.getCurrentPositions();
 		Collection<Position> adjacentToCurrent = new HashSet<>();
+		HantoPlayerColor cantTouchThis = currentPlayer.getNextPlayer().getColor();
+		if (state.filledLocations().size() == 0)
+		{
+			adjacentToCurrent.add(new HexPosition(0, 0));
+		}
+		else if (state.filledLocations().size() == 1)
+		{
+			adjacentToCurrent.addAll(new HexPosition(0, 0).adjacentPositions());
+			cantTouchThis = null;
+		}
 		
 		for(Position p : hasOnBoard)
 		{
@@ -52,7 +63,8 @@ public class MoveEnumerator
 		}
 		
 		adjacentToCurrent.removeAll(hasOnBoard);
-		return filterByPlacementAvailibility(adjacentToCurrent, currentPlayer.getNextPlayer().getColor(), state);
+		adjacentToCurrent.removeAll(currentPlayer.getNextPlayer().getCurrentPositions());
+		return filterByPlacementAvailibility(adjacentToCurrent, cantTouchThis, state);
 		
 	}
 	
@@ -106,11 +118,14 @@ public class MoveEnumerator
 		{ // from
 			for(Position p : movePiecePlays)
 			{ //to
-				HantoPieceType type = state.getPieceAt(cur).getType();
-				
-				if (state.getValidatorFactory().getMoveValidator(type).isValidMove(p, cur, state))
+				if (state.getPieceAt(cur) != null)
 				{
-					result.add(new PotentialMove(p, cur, state.getCurrentPlayer().getColor(), state.getPieceAt(cur).getType()));
+					HantoPieceType type = state.getPieceAt(cur).getType();
+					
+					if (state.getValidatorFactory().getMoveValidator(type).isValidMove(p, cur, state))
+					{
+						result.add(new PotentialMove(p, cur, state.getCurrentPlayer().getColor(), state.getPieceAt(cur).getType()));
+					}
 				}
 			}
 		}

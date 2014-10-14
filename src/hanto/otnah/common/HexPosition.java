@@ -9,6 +9,7 @@
 
 package hanto.otnah.common;
 
+import hanto.common.HantoCoordinate;
 import hanto.common.HantoPiece;
 import hanto.common.HantoPieceType;
 import hanto.otnah.common.util.HexUtil;
@@ -62,6 +63,11 @@ public class HexPosition extends Position
 	{
 		HantoPiece piece = state.getPieceAt(this);
 		return piece != null && piece.getType() == type;
+	}
+
+	@Override
+	public HantoCoordinate unwrap() {
+		return this;
 	}
 
 }

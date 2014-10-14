@@ -12,6 +12,7 @@ package hanto.otnah.common.moves;
 import hanto.common.HantoPieceType;
 import hanto.common.HantoPlayerColor;
 import hanto.otnah.common.Position;
+import hanto.tournament.HantoMoveRecord;
 
 /**
  * 
@@ -65,5 +66,14 @@ public class PotentialMove
 	 */
 	public HantoPieceType getType() {
 		return type;
+	}
+
+	/**
+	 * converts internal representation to pollice's external one
+	 * @return the converted external representation
+	 */
+	public HantoMoveRecord asHantoMoveRecord()
+	{
+		return new HantoMoveRecord(type, from.unwrap(), to.unwrap());
 	}
 }

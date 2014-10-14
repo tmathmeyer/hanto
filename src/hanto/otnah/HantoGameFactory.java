@@ -15,6 +15,7 @@ import hanto.common.*;
 import hanto.otnah.alpha.AlphaHantoGame;
 import hanto.otnah.beta.BetaHantoGame;
 import hanto.otnah.delta.DeltaHantoGame;
+import hanto.otnah.epsilon.EpsilonHantoGame;
 import hanto.otnah.gamma.GammaHantoGame;
 
 /**
@@ -75,6 +76,9 @@ public class HantoGameFactory
 				break;
 			case DELTA_HANTO:
 				game = new DeltaHantoGame(movesFirst);
+				break;
+			case EPSILON_HANTO:
+				game = new EpsilonHantoGame(movesFirst);
 				break;
 			default:
 				throw new NotImplementedException();

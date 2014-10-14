@@ -44,6 +44,10 @@ public class ButterflyMoveValidator extends PieceMoveValidator
 					   checkButterflyLegality(HantoPieceType.BUTTERFLY, 4) &&
 					   isValidNewPlaceLocation(to, currentPlayerColor()));
 		}
+		else
+		{
+			result = false;
+		}
 		return result;
 	}
 }

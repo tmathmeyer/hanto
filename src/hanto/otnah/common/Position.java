@@ -103,6 +103,11 @@ public abstract class Position implements HantoCoordinate
 				return piece != null && piece.getType() == type;
 			}
 
+			@Override
+			public HantoCoordinate unwrap() {
+				return other;
+			}
+
 		};
 	}
 
@@ -148,11 +153,12 @@ public abstract class Position implements HantoCoordinate
 	 *  remove a piece from a place and return it.
 	 * @param gameState the state of the game (for access to board and players)
 	 * @param type the type of piece that the caller is looking for
+	 * @param to 
 	 * @return the piece removed from this powition
 	 */
-	public HantoTile removePieceAt(GameState gameState, HantoPieceType type)
+	public HantoTile movePieceFrom(GameState gameState, HantoPieceType type, Position to)
 	{
-		return gameState.removePieceFrom(this);	
+		return gameState.removePieceFrom(this);
 	}
 
 	/**
@@ -162,4 +168,10 @@ public abstract class Position implements HantoCoordinate
 	 * @return whether this location has that type
 	 */
 	public abstract boolean hasPieceType(GameState state, HantoPieceType type);
+	
+	/**
+	 * convert back into an unwrapped form
+	 * @return a coordinate
+	 */
+	public abstract HantoCoordinate unwrap();
 }

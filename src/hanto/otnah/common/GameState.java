@@ -60,7 +60,7 @@ public abstract class GameState implements HantoGame
 		if(isMovePossible(from, to, pieceType, getCurrentPlayer().getColor()))
 		{
 			//remove piece from inventory
-			HantoTile played = from.removePieceAt(this, pieceType);
+			HantoTile played = from.movePieceFrom(this, pieceType, to);
 			
 			//put piece on board
 			setPieceAt(played, to);

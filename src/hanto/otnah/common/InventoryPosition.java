@@ -12,6 +12,7 @@ package hanto.otnah.common;
 import java.util.Collection;
 import java.util.Collections;
 
+import hanto.common.HantoCoordinate;
 import hanto.common.HantoPieceType;
 
 /**
@@ -65,9 +66,9 @@ public class InventoryPosition extends Position
 	}
 	
 	@Override
-	public HantoTile removePieceAt(GameState state, HantoPieceType type)
+	public HantoTile movePieceFrom(GameState state, HantoPieceType type, Position to)
 	{
-		return state.getCurrentPlayer().play(type);
+		return state.getCurrentPlayer().play(type, to);
 	}
 
 	@Override
@@ -81,5 +82,10 @@ public class InventoryPosition extends Position
 			}
 		}
 		return false;
+	}
+
+	@Override
+	public HantoCoordinate unwrap() {
+		return null;
 	}
 }
