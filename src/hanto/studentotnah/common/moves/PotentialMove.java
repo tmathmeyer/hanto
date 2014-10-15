@@ -100,9 +100,12 @@ public class PotentialMove
 		int result = 0;
 		
 		// make the first move
-		if (from instanceof InventoryPosition && type == BUTTERFLY)
+		if (type == BUTTERFLY)
 		{
-			result += 30;
+			if (to.adjacentTiles(state).size() <= from.adjacentTiles(state).size())
+			{
+				result += 10;
+			}
 		}
 		
 		// if it just up to the next players BF, do it, if it's a win, REALLY do it.
@@ -134,6 +137,7 @@ public class PotentialMove
 			}
 		}
 		
+		
 		// favor new piece plays
 		if (from instanceof InventoryPosition)
 		{
@@ -143,10 +147,10 @@ public class PotentialMove
 			}
 			if (type == SPARROW)
 			{
-				result += 5;
+				result += 3;
 			}
 			if (type == HORSE){
-				result += 3;
+				result += 2;
 			}
 			if (type == CRAB)
 			{

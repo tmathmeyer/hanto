@@ -9,7 +9,9 @@
 
 package hanto.studentotnah.tournament;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 
 import hanto.common.HantoException;
 import hanto.common.HantoGameID;
@@ -105,19 +107,26 @@ public class HantoPlayer implements HantoGamePlayer
 	public PotentialMove rank(Collection<PotentialMove> allMoves, GameState state) {
 		
 		int max = -99999;
-		PotentialMove result = null;
+		ArrayList<PotentialMove> result = new ArrayList<>();
 		
 		for(PotentialMove p : allMoves)
 		{
 			int score = p.score(state);
+			if (score == max)
+			{
+				result.add(p);
+			}
 			if (score > max)
 			{
-				result = p;
+				result = new ArrayList<>();
+				result.add(p);
 				max = score;
 			}
-			
 		}
 		
-		return result;
+		Collections.shuffle(result);
+		
+		
+		return result.get(0);
 	}
 }
