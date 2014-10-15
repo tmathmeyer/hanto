@@ -111,16 +111,11 @@ public class HantoPlayerTest {
 		
 		List<PotentialMove> col = new ArrayList<>(Arrays.asList(arr));
 		HantoPlayer hp1 = new HantoPlayer();
-		Collection<PotentialMove> res = hp1.rank(col);
+		EpsilonHantoGame ehg = new EpsilonHantoGame(RED);
+		PotentialMove res = hp1.rank(col, ehg);
 		
 		// make the butterfly move
-		assertEquals(res.size(), 1);
-		
-		col.removeAll(res);
-		
-		res = hp1.rank(col);
-		
-		assertTrue(res.size() == 6);
+		assertEquals(res.getClass(), PotentialMove.class);
 	}
 	
 	/**

@@ -9,16 +9,12 @@
 
 package hanto.otnah.tournament;
 
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.LinkedList;
-import java.util.List;
 
 import hanto.common.HantoException;
 import hanto.common.HantoGameID;
-import hanto.common.HantoPieceType;
 import hanto.common.HantoPlayerColor;
-import hanto.otnah.common.InventoryPosition;
+import hanto.otnah.common.GameState;
 import hanto.otnah.common.moves.PotentialMove;
 import hanto.otnah.epsilon.EpsilonHantoGame;
 import hanto.tournament.HantoGamePlayer;
@@ -78,8 +74,6 @@ public class HantoPlayer implements HantoGamePlayer
 				game.makeMove(opponentsMove.getPiece(), opponentsMove.getFrom(), opponentsMove.getTo());
 			}
 			
-			System.out.println(game.getPrintableBoard());
-			
 			Collection<PotentialMove> allMoves = game.getMoveEnumerator().getAllCurrentMoves(game);
 			
 			if (allMoves.size() == 0)
@@ -88,7 +82,7 @@ public class HantoPlayer implements HantoGamePlayer
 				throw new HantoException("there are no more moves, resign");
 			}
 			
-			HantoMoveRecord hmr = rank(allMoves).iterator().next().asHantoMoveRecord();
+			HantoMoveRecord hmr = rank(allMoves, game).asHantoMoveRecord();
 			
 			game.makeMove(hmr.getPiece(), hmr.getFrom(), hmr.getTo());
 			
@@ -107,21 +101,22 @@ public class HantoPlayer implements HantoGamePlayer
 	 * @param allMoves all the possible moves
 	 * @return the sorted list
 	 */
-	public Collection<PotentialMove> rank(Collection<PotentialMove> allMoves) {
+	public PotentialMove rank(Collection<PotentialMove> allMoves, GameState state) {
 		
-		List<PotentialMove> result = new ArrayList<>(allMoves);
+		int max = -99999;
+		PotentialMove result = null;
 		
-		for(PotentialMove p : result)
+		for(PotentialMove p : allMoves)
 		{
-			if (p.getFrom() instanceof InventoryPosition && p.getType() == HantoPieceType.BUTTERFLY)
+			int score = p.score(state);
+			if (score > max)
 			{
-				List<PotentialMove> nr = new LinkedList<>();
-				nr.add(p);
-				return nr;
+				result = p;
+				max = score;
 			}
+			
 		}
 		
 		return result;
 	}
-
 }

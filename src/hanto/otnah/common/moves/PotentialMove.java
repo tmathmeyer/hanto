@@ -13,8 +13,11 @@ import hanto.common.HantoException;
 import hanto.common.HantoPieceType;
 import hanto.common.HantoPlayerColor;
 import hanto.otnah.common.GameState;
+import hanto.otnah.common.InventoryPosition;
 import hanto.otnah.common.Position;
 import hanto.tournament.HantoMoveRecord;
+
+import static hanto.common.HantoPieceType.*;
 
 /**
  * 
@@ -87,5 +90,80 @@ public class PotentialMove
 	 */
 	public boolean isValid(GameState state) throws HantoException {
 		return state.isMovePossible(from, to, type, color);
+	}
+
+	/**
+	 * Scores a move based on some stupid heuristic thing
+	 * @param state the game state
+	 * @return a score
+	 */
+	public int score(GameState state) {
+		/*
+		if (p.getFrom() instanceof InventoryPosition && p.getType() == HantoPieceType.BUTTERFLY)
+		{
+			List<PotentialMove> nr = new LinkedList<>();
+			nr.add(p);
+			return nr;
+		}
+		*/
+		
+		int result = 0;
+		
+		// make the first move
+		if (from instanceof InventoryPosition && type == BUTTERFLY)
+		{
+			result += 30;
+		}
+		
+		// if it juts up to the next players BF, do it, if it's a win, REALLY do it.
+		if (state.getCurrentPlayer().getNextPlayer().getButterflyPosition().isAdjacentTo(to))
+		{
+			result += 5;
+			if (state.getCurrentPlayer().getNextPlayer().getButterflyPosition().adjacentTiles(state).size() == 5)
+			{
+				result += 300;
+			}
+		}
+		
+		if (state.getCurrentPlayer().getNextPlayer().getButterflyPosition().isAdjacentTo(from))
+		{
+			result -= 5;
+			if (state.getCurrentPlayer().getNextPlayer().getButterflyPosition().adjacentTiles(state).size() == 5)
+			{
+				result -= 300;
+			}
+		}
+		
+		// if this would border our butterfly, avoid it, if it would sepuku, REALLY dont do it.
+		if (state.getCurrentPlayer().getButterflyPosition().isAdjacentTo(to))
+		{
+			result -= 1;
+			if (state.getCurrentPlayer().getButterflyPosition().adjacentTiles(state).size() == 5)
+			{
+				result -= 300;
+			}
+		}
+		
+		// favor new piece plays
+		if (from instanceof InventoryPosition)
+		{
+			if (type == BUTTERFLY)
+			{
+				result += 30;
+			}
+			if (type == SPARROW)
+			{
+				result += 5;
+			}
+			if (type == HORSE){
+				result += 3;
+			}
+			if (type == CRAB)
+			{
+				result += 1;
+			}
+		}
+		
+		return result;
 	}
 }
