@@ -91,6 +91,10 @@ public class EpsilonHantoTests {
 		assertEquals(new MoveEnumerator().getAllCurrentMoves(g).size(), 38);
 	}
 	
+	/**
+	 * test an example game
+	 * @throws HantoException uh oh
+	 */
 	@Test
 	public void testExampleGame() throws HantoException
 	{

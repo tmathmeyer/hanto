@@ -92,6 +92,13 @@ public class MoveEnumerator
 		return adjacentToCurrent;
 	}
 	
+	/**
+	 * get all the moves that a player can make from somewhere
+	 * on the board to somewhere else on the board
+	 * @param state the game state
+	 * @return a bunch of potential moves
+	 * @throws HantoException if sh1t goes down
+	 */
 	public Collection<PotentialMove> getMovesCanMake(GameState state) throws HantoException
 	{
 		Collection<PotentialMove> result = new HashSet<>();
@@ -118,7 +125,13 @@ public class MoveEnumerator
 		
 		return result;
 	}
-	
+	/**
+	 * gets all the moves that a player could make from their inventory
+	 * onto the board
+	 * @param state the game state
+	 * @return a bunch of potential moves
+	 * @throws HantoException when sh1t goes down
+	 */
 	public Collection<PotentialMove> getPlaysCanMake(GameState state) throws HantoException
 	{
 		Collection<PotentialMove> result = new HashSet<>();

@@ -84,7 +84,7 @@ public class PotentialMove
 	/**
 	 * tests whether this move is valid
 	 * @param state
-	 * @return
+	 * @return whether the move is valid
 	 * @throws HantoException 
 	 */
 	public boolean isValid(GameState state) throws HantoException {
@@ -97,15 +97,6 @@ public class PotentialMove
 	 * @return a score
 	 */
 	public int score(GameState state) {
-		/*
-		if (p.getFrom() instanceof InventoryPosition && p.getType() == HantoPieceType.BUTTERFLY)
-		{
-			List<PotentialMove> nr = new LinkedList<>();
-			nr.add(p);
-			return nr;
-		}
-		*/
-		
 		int result = 0;
 		
 		// make the first move
@@ -114,7 +105,7 @@ public class PotentialMove
 			result += 30;
 		}
 		
-		// if it juts up to the next players BF, do it, if it's a win, REALLY do it.
+		// if it just up to the next players BF, do it, if it's a win, REALLY do it.
 		if (state.getCurrentPlayer().getNextPlayer().getButterflyPosition().isAdjacentTo(to))
 		{
 			result += 5;

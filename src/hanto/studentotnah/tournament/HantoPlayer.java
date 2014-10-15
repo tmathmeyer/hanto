@@ -99,6 +99,7 @@ public class HantoPlayer implements HantoGamePlayer
 	/**
 	 * sort the potential moves by value and give them back in that order
 	 * @param allMoves all the possible moves
+	 * @param state the game state
 	 * @return the sorted list
 	 */
 	public PotentialMove rank(Collection<PotentialMove> allMoves, GameState state) {

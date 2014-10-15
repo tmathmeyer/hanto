@@ -18,7 +18,6 @@ import org.junit.*;
 import hanto.otnah.common.HantoTestGame;
 import hanto.otnah.common.HantoTestGameFactory;
 import hanto.otnah.common.PieceLocationPair;
-import hanto.studentotnah.common.*;
 import static hanto.common.HantoPieceType.*;
 import static hanto.common.MoveResult.*;
 import static hanto.common.HantoPlayerColor.*;
