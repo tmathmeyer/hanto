@@ -174,4 +174,10 @@ public abstract class Position implements HantoCoordinate
 	 * @return a coordinate
 	 */
 	public abstract HantoCoordinate unwrap();
+	
+	@Override
+	public String toString()
+	{
+		return "("+getX()+","+getY()+")";
+	}
 }

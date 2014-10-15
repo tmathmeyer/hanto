@@ -9,8 +9,10 @@
 
 package hanto.otnah.common.moves;
 
+import hanto.common.HantoException;
 import hanto.common.HantoPieceType;
 import hanto.common.HantoPlayerColor;
+import hanto.otnah.common.GameState;
 import hanto.otnah.common.Position;
 import hanto.tournament.HantoMoveRecord;
 
@@ -75,5 +77,15 @@ public class PotentialMove
 	public HantoMoveRecord asHantoMoveRecord()
 	{
 		return new HantoMoveRecord(type, from.unwrap(), to.unwrap());
+	}
+
+	/**
+	 * tests whether this move is valid
+	 * @param state
+	 * @return
+	 * @throws HantoException 
+	 */
+	public boolean isValid(GameState state) throws HantoException {
+		return state.isMovePossible(from, to, type, color);
 	}
 }

@@ -82,15 +82,68 @@ public class MoveEnumerator
 		Collection<Position> adjacentToCurrent = new HashSet<>();
 		for(HantoPlayer p : state.getCurrentPlayer().collectAllUsers())
 		{
-			Collection<Position> perPlayer = p.getCurrentPositions();
-			hasOnBoard.addAll(perPlayer);
-			for(Position pos : perPlayer)
-			{
-				adjacentToCurrent.addAll(pos.adjacentPositions());
-			}
+			hasOnBoard.addAll(p.getCurrentPositions());
+		}
+		for(Position p : hasOnBoard)
+		{
+			adjacentToCurrent.addAll(p.adjacentPositions());
 		}
 		adjacentToCurrent.removeAll(hasOnBoard);
 		return adjacentToCurrent;
+	}
+	
+	public Collection<PotentialMove> getMovesCanMake(GameState state) throws HantoException
+	{
+		Collection<PotentialMove> result = new HashSet<>();
+		Collection<PotentialMove> temp = new HashSet<>();
+		Collection<Position> openSpots = generatePieceMoveTos(state);
+		Collection<Position> myPieces = state.getCurrentPlayer().getCurrentPositions();
+		
+		for(Position from : myPieces)
+		{
+			for(Position to : openSpots)
+			{
+				HantoPlayerColor color = state.getPieceAt(from).getColor();
+				HantoPieceType type = state.getPieceAt(from).getType();
+				temp.add(new PotentialMove(to, from, color, type));
+			}
+		}
+		
+		for(PotentialMove pm : temp)
+		{
+			if (pm.isValid(state)) {
+				result.add(pm);
+			}
+		}
+		
+		return result;
+	}
+	
+	public Collection<PotentialMove> getPlaysCanMake(GameState state) throws HantoException
+	{
+		Collection<PotentialMove> result = new HashSet<>();
+		Collection<PotentialMove> temp = new HashSet<>();
+		Collection<Position> openSpots = generatePiecePlays(state);
+		Collection<HantoTile> myPieces = state.getCurrentPlayer().getInventory();
+		
+		for(HantoTile from : myPieces)
+		{
+			for(Position to : openSpots)
+			{
+				HantoPlayerColor color = state.getCurrentPlayer().getColor();
+				HantoPieceType type = from.getType();
+				temp.add(new PotentialMove(to, new InventoryPosition(), color, type));
+			}
+		}
+		
+		for(PotentialMove pm : temp)
+		{
+			if (pm.isValid(state)) {
+				result.add(pm);
+			}
+		}
+		
+		return result;
 	}
 	
 	/**
@@ -102,35 +155,11 @@ public class MoveEnumerator
 	 */
 	public Collection<PotentialMove> getAllCurrentMoves(GameState state) throws HantoException
 	{
-		Collection<Position> newPiecePlays = generatePiecePlays(state);
-		Collection<Position> movePiecePlays = generatePieceMoveTos(state);
+		Collection<PotentialMove> newPiecePlays = getPlaysCanMake(state);
+		Collection<PotentialMove> movePiecePlays = getMovesCanMake(state);
 		
-		Collection<PotentialMove> result = new HashSet<>();
-		for(HantoTile t : state.getCurrentPlayer().getInventory())
-		{
-			for(Position p : newPiecePlays)
-			{
-				result.add(new PotentialMove(p, new InventoryPosition(), t.getColor(), t.getType()));
-			}
-		}
-		
-		for(Position cur : state.getCurrentPlayer().getCurrentPositions())
-		{ // from
-			for(Position p : movePiecePlays)
-			{ //to
-				if (state.getPieceAt(cur) != null)
-				{
-					HantoPieceType type = state.getPieceAt(cur).getType();
-					
-					if (state.getValidatorFactory().getMoveValidator(type).isValidMove(p, cur, state))
-					{
-						result.add(new PotentialMove(p, cur, state.getCurrentPlayer().getColor(), state.getPieceAt(cur).getType()));
-					}
-				}
-			}
-		}
-		
-		return result;
+		newPiecePlays.addAll(movePiecePlays);
+		return newPiecePlays;
 	}
 	
 	

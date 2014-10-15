@@ -12,11 +12,14 @@ package hanto.otnah.epsilon;
 import static org.junit.Assert.*;
 import hanto.common.HantoCoordinate;
 import hanto.common.HantoException;
+import hanto.common.HantoPieceType;
 import hanto.common.HantoPlayerColor;
 import hanto.common.MoveResult;
+import hanto.otnah.common.PieceLocationPair;
 import hanto.otnah.common.moves.MoveEnumerator;
-
 import static hanto.common.HantoPieceType.*;
+import static hanto.common.HantoPlayerColor.BLUE;
+import static hanto.common.HantoPlayerColor.RED;
 
 import org.junit.Test;
 
@@ -87,6 +90,29 @@ public class EpsilonHantoTests {
 		assertEquals(new MoveEnumerator().getAllCurrentMoves(g).size(), 38);
 	}
 	
+	@Test
+	public void testExampleGame() throws HantoException
+	{
+		EpsilonHantoTestGame g = new EpsilonHantoTestGame(HantoPlayerColor.BLUE);
+		
+		PieceLocationPair[] plp = {
+				plPair(BLUE, BUTTERFLY, 0, 0), plPair(BLUE, HORSE, 1, 0),
+				plPair(BLUE, HORSE, -1, 2),    plPair(BLUE, HORSE, 0, 2),
+				plPair(BLUE, CRAB, 0, 1), plPair(BLUE, CRAB, 1, 2),
+				plPair(BLUE, SPARROW, 1, 1), plPair(RED, BUTTERFLY, -1, 0),
+				plPair(RED, CRAB, -2, 1), plPair(RED, CRAB, 0, -2),
+				plPair(RED, CRAB, 1, -3), plPair(RED, HORSE, -1, -1),
+				plPair(RED, HORSE, 0, -3)};
+		
+		g.initializeBoard(plp);
+		
+		assertTrue(g.getCurrentPlayer().getColor() == BLUE);
+		assertEquals(g.getCurrentPlayer().getInventory().size(), 6);
+		assertTrue(g.getMoveEnumerator().getAllCurrentMoves(g).size() > 0);
+		
+	}
+	
+	
 	/**
 	 * try to place and jump a horse
 	 * TODO: do this
@@ -105,4 +131,18 @@ public class EpsilonHantoTests {
 		assertEquals(new MoveEnumerator().getAllCurrentMoves(g).size(), 38);
 	}
 
+	
+	/**
+	 * Factory method to create a piece location pair.
+	 * @param player the player color
+	 * @param pieceType the piece type
+	 * @param x starting location
+	 * @param y end location
+	 * @return
+	 */
+	private PieceLocationPair plPair(HantoPlayerColor player, HantoPieceType pieceType, 
+			int x, int y)
+	{
+		return new PieceLocationPair(player, pieceType, new C(x, y));
+	}
 }

@@ -78,6 +78,8 @@ public class HantoPlayer implements HantoGamePlayer
 				game.makeMove(opponentsMove.getPiece(), opponentsMove.getFrom(), opponentsMove.getTo());
 			}
 			
+			System.out.println(game.getPrintableBoard());
+			
 			Collection<PotentialMove> allMoves = game.getMoveEnumerator().getAllCurrentMoves(game);
 			
 			if (allMoves.size() == 0)
@@ -94,6 +96,8 @@ public class HantoPlayer implements HantoGamePlayer
 		}
 		catch (HantoException e)
 		{
+			System.out.println(e.getMessage());
+			System.out.println(game.getPrintableBoard());
 			return new HantoMoveRecord(null, null, null);
 		}
 	}

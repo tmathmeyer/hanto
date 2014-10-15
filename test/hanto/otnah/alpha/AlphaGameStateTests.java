@@ -262,7 +262,7 @@ public class AlphaGameStateTests {
 	public void testPrintableBoardIsEmpty()
 	{
 		assertEquals("", freshGame.getPrintableBoard());
-		assertEquals("", unfreshGame.getPrintableBoard());
+		assertEquals("BLUE Butterfly @ (0,0)\n", unfreshGame.getPrintableBoard());
 	}
 	
 	/**

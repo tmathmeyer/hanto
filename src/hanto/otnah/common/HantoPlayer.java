@@ -250,4 +250,14 @@ public class HantoPlayer
 		all.add(this);
 		return all;	
 	}
+
+	/**
+	 * update the held locations
+	 * @param from the old place
+	 * @param to the new place
+	 */
+	public void updateHeldLocations(Position from, Position to) {
+		currentPositions.remove(from);
+		currentPositions.add(to);
+	}
 }

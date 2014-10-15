@@ -12,6 +12,7 @@ package hanto.otnah.common;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 
 import hanto.common.HantoCoordinate;
@@ -62,6 +63,8 @@ public abstract class GameState implements HantoGame
 			//remove piece from inventory
 			HantoTile played = from.movePieceFrom(this, pieceType, to);
 			
+			getCurrentPlayer().updateHeldLocations(from, to);
+			
 			//put piece on board
 			setPieceAt(played, to);
 			
@@ -78,7 +81,7 @@ public abstract class GameState implements HantoGame
 			return gameState();
 		}
 		
-		throw new HantoException("invalid move!");
+		throw new HantoException(pieceType.toString() + " movement from: " + from.toString() + " to " + to.toString() + " is not valid");
 	}
 	
 	
@@ -106,7 +109,21 @@ public abstract class GameState implements HantoGame
 	@Override
 	public String getPrintableBoard()
 	{
-		return "";
+		StringBuilder sb = new StringBuilder();
+		for(Entry<Position, HantoTile> en : gameBoard.entrySet())
+		{
+			Position p = en.getKey();
+			HantoTile t = en.getValue();
+			
+			sb.append(t.getColor().toString());
+			sb.append(" ");
+			sb.append(t.getType().toString());
+			sb.append(" @ ");
+			sb.append(p.toString());
+			sb.append("\n");
+			
+		}
+		return sb.toString();
 	}
 	
 	/**

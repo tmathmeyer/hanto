@@ -88,4 +88,10 @@ public class InventoryPosition extends Position
 	public HantoCoordinate unwrap() {
 		return null;
 	}
+	
+	@Override
+	public String toString()
+	{
+		return "the inventory";
+	}
 }

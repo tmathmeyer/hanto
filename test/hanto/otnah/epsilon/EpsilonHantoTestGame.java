@@ -36,6 +36,9 @@ public class EpsilonHantoTestGame extends EpsilonHantoGame implements HantoTestG
 				getCurrentPlayer().skipTo(plp.getPlayer())
 				                  .setButterflyPosition(asPosition(plp.getLocation()));
 			}
+			
+			getCurrentPlayer().skipTo(plp.getPlayer()).play(plp.getPieceType(), asPosition(plp.getLocation()));
+			
 			setPieceAt(new HantoTile(){
 
 				@Override
