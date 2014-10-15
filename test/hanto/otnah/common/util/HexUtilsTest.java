@@ -10,12 +10,13 @@
 package hanto.otnah.common.util;
 
 import static org.junit.Assert.*;
-import static hanto.otnah.common.util.HexUtil.*;
+import static hanto.studentotnah.common.util.HexUtil.*;
 
 import java.util.Collection;
 
-import hanto.otnah.common.HexPosition;
-import hanto.otnah.common.Position;
+import hanto.studentotnah.common.HexPosition;
+import hanto.studentotnah.common.Position;
+import hanto.studentotnah.common.util.HexUtil;
 
 import org.junit.Test;
 

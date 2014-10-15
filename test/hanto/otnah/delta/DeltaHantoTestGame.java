@@ -11,9 +11,11 @@
 package hanto.otnah.delta;
 
 import hanto.common.*;
-import hanto.otnah.common.*;
-
-import static hanto.otnah.common.Position.asPosition;
+import hanto.otnah.common.HantoTestGame;
+import hanto.otnah.common.PieceLocationPair;
+import hanto.studentotnah.common.*;
+import hanto.studentotnah.delta.DeltaHantoGame;
+import static hanto.studentotnah.common.Position.asPosition;
 
 /**
  * Test Gamma Hanto Game

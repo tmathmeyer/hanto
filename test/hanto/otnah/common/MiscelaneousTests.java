@@ -11,8 +11,13 @@ package hanto.otnah.common;
 
 import static org.junit.Assert.*;
 import hanto.common.HantoPlayerColor;
-import hanto.otnah.common.pieces.Butterfly;
-import hanto.otnah.gamma.GammaHantoGame;
+import hanto.studentotnah.common.HantoPlayer;
+import hanto.studentotnah.common.HantoPlayerFactory;
+import hanto.studentotnah.common.HexPosition;
+import hanto.studentotnah.common.InventoryPosition;
+import hanto.studentotnah.common.Position;
+import hanto.studentotnah.common.pieces.Butterfly;
+import hanto.studentotnah.gamma.GammaHantoGame;
 
 import org.junit.Test;
 

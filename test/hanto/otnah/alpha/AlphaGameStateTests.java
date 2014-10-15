@@ -18,9 +18,10 @@ import hanto.common.HantoException;
 import hanto.common.HantoPieceType;
 import hanto.common.HantoPlayerColor;
 import hanto.common.MoveResult;
-import hanto.otnah.common.GameState;
-import hanto.otnah.common.InventoryPosition;
-import hanto.otnah.common.HexPosition;
+import hanto.studentotnah.alpha.AlphaHantoGame;
+import hanto.studentotnah.common.GameState;
+import hanto.studentotnah.common.HexPosition;
+import hanto.studentotnah.common.InventoryPosition;
 
 /**
  * 

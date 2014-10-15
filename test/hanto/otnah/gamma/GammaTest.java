@@ -12,10 +12,11 @@ package hanto.otnah.gamma;
 import static org.junit.Assert.*;
 import hanto.common.HantoGameID;
 import hanto.common.HantoPlayerColor;
-import hanto.otnah.HantoGameFactory;
-import hanto.otnah.common.GameState;
-import hanto.otnah.common.HantoPlayer;
-import hanto.otnah.common.HantoTile;
+import hanto.studentotnah.HantoGameFactory;
+import hanto.studentotnah.common.GameState;
+import hanto.studentotnah.common.HantoPlayer;
+import hanto.studentotnah.common.HantoTile;
+import hanto.studentotnah.gamma.GammaHantoGame;
 
 import org.junit.Test;
 

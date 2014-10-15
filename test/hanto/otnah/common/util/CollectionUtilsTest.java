@@ -10,6 +10,7 @@
 package hanto.otnah.common.util;
 
 import static org.junit.Assert.*;
+import hanto.studentotnah.common.util.CollectionUtils;
 
 import java.util.HashSet;
 import java.util.Set;

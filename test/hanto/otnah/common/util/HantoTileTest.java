@@ -10,9 +10,9 @@
 package hanto.otnah.common.util;
 
 import static org.junit.Assert.*;
-import hanto.otnah.common.HantoTile;
-import hanto.otnah.common.pieces.Butterfly;
-import hanto.otnah.common.pieces.Sparrow;
+import hanto.studentotnah.common.HantoTile;
+import hanto.studentotnah.common.pieces.Butterfly;
+import hanto.studentotnah.common.pieces.Sparrow;
 import hanto.common.HantoPlayerColor;
 
 import org.junit.Test;

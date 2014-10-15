@@ -10,7 +10,8 @@
 package hanto.otnah.common.util.graph;
 
 import static org.junit.Assert.*;
-import hanto.otnah.common.HexPosition;
+import hanto.studentotnah.common.HexPosition;
+import hanto.studentotnah.common.util.graph.HexGraph;
 
 import org.junit.Test;
 

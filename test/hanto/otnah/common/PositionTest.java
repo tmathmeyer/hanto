@@ -10,7 +10,12 @@
 package hanto.otnah.common;
 
 import static org.junit.Assert.*;
+import hanto.studentotnah.common.HexPosition;
+import hanto.studentotnah.common.InventoryPosition;
+import hanto.studentotnah.common.Position;
+
 import java.util.Collection;
+
 import org.junit.Test;
 
 /**

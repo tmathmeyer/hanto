@@ -14,10 +14,12 @@ import hanto.common.HantoException;
 import hanto.common.HantoPieceType;
 import hanto.common.HantoPlayerColor;
 import hanto.common.MoveResult;
-import hanto.otnah.common.HantoPlayer;
-import hanto.otnah.common.HantoTile;
-import hanto.otnah.common.InventoryPosition;
-import hanto.otnah.common.HexPosition;
+import hanto.studentotnah.beta.BetaHantoGame;
+import hanto.studentotnah.beta.BetaHantoRules;
+import hanto.studentotnah.common.HantoPlayer;
+import hanto.studentotnah.common.HantoTile;
+import hanto.studentotnah.common.HexPosition;
+import hanto.studentotnah.common.InventoryPosition;
 
 import org.junit.Test;
 

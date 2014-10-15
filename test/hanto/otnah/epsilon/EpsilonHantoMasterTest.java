@@ -15,10 +15,10 @@ import static hanto.common.HantoPlayerColor.*;
 import static hanto.common.MoveResult.*;
 import static org.junit.Assert.*;
 import hanto.common.*;
-import hanto.otnah.HantoGameFactory;
 import hanto.otnah.common.HantoTestGame;
 import hanto.otnah.common.HantoTestGameFactory;
 import hanto.otnah.common.PieceLocationPair;
+import hanto.studentotnah.HantoGameFactory;
 
 import org.junit.*;
 

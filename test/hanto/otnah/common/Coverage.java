@@ -14,7 +14,7 @@ import hanto.common.HantoGameID;
 import hanto.common.HantoPieceType;
 import hanto.common.HantoPlayerColor;
 import hanto.common.MoveResult;
-import hanto.otnah.HantoGameFactory;
+import hanto.studentotnah.HantoGameFactory;
 import static hanto.common.HantoPieceType.*;
 
 import org.junit.Test;
