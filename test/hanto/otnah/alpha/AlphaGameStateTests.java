@@ -66,36 +66,40 @@ public class AlphaGameStateTests {
 
 	/**
 	 * test whether the first move that must be played is in fact a legal move
+	 * @throws HantoException on err
 	 */
 	@Test
-	public void isFirstMovePossible() {
+	public void isFirstMovePossible() throws HantoException {
 		assertTrue(freshGame.isMovePossible(new InventoryPosition(),
 				new HexPosition(0, 0), HantoPieceType.BUTTERFLY, null));
 	}
 	
 	/**
 	 * test whether the second move that must be played is legal
+	 * @throws HantoException on err
 	 */
 	@Test
-	public void isSecondMovePossible() {
+	public void isSecondMovePossible() throws HantoException {
 		assertTrue(unfreshGame.isMovePossible(new InventoryPosition(),
 				new HexPosition(1, 0), HantoPieceType.BUTTERFLY, null));
 	}
 	
 	/**
 	 * test whether the first move is legal, using "standard" args
+	 * @throws HantoException on err
 	 */
 	@Test
-	public void isFirstStandardMovePossible() {
+	public void isFirstStandardMovePossible() throws HantoException {
 		assertTrue(freshGame.isMovePossible(null,
 				new HexPosition(0, 0), HantoPieceType.BUTTERFLY, null));
 	}
 	
 	/**
 	 * test whether the second move is legal, using "standard args"
+	 * @throws HantoException on err
 	 */
 	@Test
-	public void isSecondStandardMovePossible() {
+	public void isSecondStandardMovePossible() throws HantoException {
 		assertTrue(unfreshGame.isMovePossible(null,
 				new HexPosition(1, 0), HantoPieceType.BUTTERFLY, null));
 	}
@@ -104,36 +108,40 @@ public class AlphaGameStateTests {
 	
 	/**
 	 * test that a bad move fails
+	 * @throws HantoException on err
 	 */
 	@Test
-	public void failOnBadFirstMove() {
+	public void failOnBadFirstMove() throws HantoException {
 		assertFalse(freshGame.isMovePossible(new InventoryPosition(),
 				new HexPosition(1, 0), HantoPieceType.BUTTERFLY, null));
 	}
 	
 	/**
 	 * test that a bad move fails
+	 * @throws HantoException on err
 	 */
 	@Test
-	public void failOnBadSecondMove() {
+	public void failOnBadSecondMove() throws HantoException {
 		assertFalse(unfreshGame.isMovePossible(new InventoryPosition(),
 				new HexPosition(0, 0), HantoPieceType.BUTTERFLY, null));
 	}
 	
 	/**
 	 * test that a "standard" bad move fails
+	 * @throws HantoException on err
 	 */
 	@Test
-	public void failOnBadStandardFirstMove() {
+	public void failOnBadStandardFirstMove() throws HantoException {
 		assertFalse(freshGame.isMovePossible(null,
 				new HexPosition(1, 0), HantoPieceType.BUTTERFLY, null));
 	}
 	
 	/**
 	 * test that a "standard" bad move fails
+	 * @throws HantoException on err
 	 */
 	@Test
-	public void failOnBadStandardSecondMove() {
+	public void failOnBadStandardSecondMove() throws HantoException {
 		assertFalse(unfreshGame.isMovePossible(null,
 				new HexPosition(0, 0), HantoPieceType.BUTTERFLY, null));
 	}

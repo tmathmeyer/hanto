@@ -8,6 +8,7 @@
  *******************************************************************************/
 package hanto.otnah.common.pieces.moves;
 
+import hanto.common.HantoException;
 import hanto.common.HantoPieceType;
 
 /**
@@ -67,8 +68,9 @@ public class PieceMoveValidatorFactory
 	/**
 	 * @param type the piece type to which a validator should be gotten
 	 * @return the move validator for that type
+	 * @throws HantoException if the type is bad
 	 */
-	public PieceMoveValidator getMoveValidator(HantoPieceType type)
+	public PieceMoveValidator getMoveValidator(HantoPieceType type) throws HantoException
 	{
 		switch(type)
 		{
@@ -84,7 +86,7 @@ public class PieceMoveValidatorFactory
 				break;
 		}
 		
-		throw new IllegalArgumentException("bad type");
+		throw new HantoException("bad piece type");
 	}
 	
 	

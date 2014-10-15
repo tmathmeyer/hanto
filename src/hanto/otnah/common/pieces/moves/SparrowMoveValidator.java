@@ -36,7 +36,8 @@ public class SparrowMoveValidator extends PieceMoveValidator
 					checkButterflyLegality(HantoPieceType.SPARROW, 4) &&
 					isValidNewPlaceLocation(to, currentPlayerColor());
 		}
-		return result && isGraphContinuityPreservedAfter(from, to) &&
+		return result && moveDistance < 5 && 
+				isGraphContinuityPreservedAfter(from, to) &&
 				isValidNewPlaceLocation(to, null);
 	}
 

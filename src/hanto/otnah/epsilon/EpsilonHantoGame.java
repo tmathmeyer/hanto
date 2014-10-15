@@ -57,7 +57,7 @@ public class EpsilonHantoGame extends GameState
 
 	@Override
 	public boolean isMovePossible(Position from, Position to,
-			HantoPieceType type, HantoPlayerColor color) {
+			HantoPieceType type, HantoPlayerColor color) throws HantoException {
 		return getValidatorFactory().getMoveValidator(type).isValidMove(to, from, this);
 	}
 

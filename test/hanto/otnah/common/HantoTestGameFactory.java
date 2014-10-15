@@ -12,6 +12,7 @@ package hanto.otnah.common;
 
 import hanto.common.*;
 import hanto.otnah.delta.DeltaHantoTestGame;
+import hanto.otnah.epsilon.EpsilonHantoTestGame;
 import hanto.otnah.gamma.GammaHantoTestGame;
 
 /**
@@ -64,9 +65,14 @@ public class HantoTestGameFactory
 			case DELTA_HANTO:
 				game = new DeltaHantoTestGame(movesFirst);
 				break;
+			case EPSILON_HANTO:
+				game = new EpsilonHantoTestGame(movesFirst);
+				break;
 			default:
 				game = null;
 		}
 		return game;
 	}
+
+	
 }

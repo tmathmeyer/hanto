@@ -55,5 +55,18 @@ public class EpsilonHantoTests {
 		g.makeMove(BUTTERFLY, null, new C(0, 1));
 		assertEquals(new MoveEnumerator().getAllCurrentMoves(g).size(), 38);
 	}
+	
+	@Test
+	public void testHorse() throws HantoException
+	{
+		EpsilonHantoGame g = newGame();
+		assertEquals(new MoveEnumerator().getAllCurrentMoves(g).size(), 13);
+		
+		g.makeMove(BUTTERFLY, null, new C(0, 0));
+		assertEquals(new MoveEnumerator().getAllCurrentMoves(g).size(), 13*6);
+		
+		g.makeMove(BUTTERFLY, null, new C(0, 1));
+		assertEquals(new MoveEnumerator().getAllCurrentMoves(g).size(), 38);
+	}
 
 }

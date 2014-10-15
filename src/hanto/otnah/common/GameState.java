@@ -99,8 +99,9 @@ public abstract class GameState implements HantoGame
 	 * @param type the type of piece
 	 * @param color the color of the piece
 	 * @return if there a move is possible
+	 * @throws HantoException if there is an issue
 	 */
-	public abstract boolean isMovePossible(Position from, Position to, HantoPieceType type, HantoPlayerColor color);
+	public abstract boolean isMovePossible(Position from, Position to, HantoPieceType type, HantoPlayerColor color) throws HantoException;
 	
 	@Override
 	public String getPrintableBoard()

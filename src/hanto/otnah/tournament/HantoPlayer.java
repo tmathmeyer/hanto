@@ -18,7 +18,7 @@ import hanto.tournament.HantoMoveRecord;
 
 public class HantoPlayer implements HantoGamePlayer
 {
-	EpsilonHantoGame game;
+	private EpsilonHantoGame game;
 	
 	@Override
 	public void startGame(HantoGameID version, HantoPlayerColor myColor, boolean doIMoveFirst)

@@ -101,7 +101,7 @@ public class HexUtilsTest {
 	@Test
 	public void testLinearality()
 	{
-		assertTrue(checkLinearality(HC7, HCD));
+		assertFalse(checkLinearality(HC7, HCD));
 		assertTrue(checkLinearality(HCD, HCE));
 		assertFalse(checkLinearality(HC7, HCE));
 	}
