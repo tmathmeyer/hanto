@@ -36,7 +36,7 @@ public class EpsilonHantoMasterTest
 	{
 		private final int x, y;
 		
-		public TestHantoCoordinate(int x, int y)
+		private TestHantoCoordinate(int x, int y)
 		{
 			this.x = x;
 			this.y = y;
@@ -61,16 +61,22 @@ public class EpsilonHantoMasterTest
 
 	}
 	
-	private static HantoTestGameFactory factory;
+	private static HantoTestGameFactory factory = null;
 	private HantoGame game;
 	private HantoTestGame testGame;
 	
+	/**
+	 * not my problem
+	 */
 	@BeforeClass
 	public static void initializeClass()
 	{
 		factory = HantoTestGameFactory.getInstance();
 	}
 	
+	/**
+	 * not my problem
+	 */
 	@Before
 	public void setup()
 	{
@@ -79,6 +85,10 @@ public class EpsilonHantoMasterTest
 		game = testGame;
 	}
 	
+	/**
+	 * not my problem
+	 * @throws HantoException on error
+	 */
 	@Test
 	public void bluePlacesButterflyFirst() throws HantoException
 	{
@@ -89,6 +99,10 @@ public class EpsilonHantoMasterTest
 		assertEquals(BUTTERFLY, piece.getType());
 	}
 	
+	/**
+	 * not my problem
+	 * @throws HantoException on error
+	 */
 	@Test
 	public void redMovesFirstUsingHantoGameFactory() throws HantoException
 	{
@@ -100,6 +114,10 @@ public class EpsilonHantoMasterTest
 		assertEquals(BUTTERFLY, piece.getType());
 	}
 	
+	/**
+	 * not my problem
+	 * @throws HantoException on error
+	 */
 	@Test
 	public void placeHorse() throws HantoException
 	{
@@ -110,6 +128,10 @@ public class EpsilonHantoMasterTest
 		assertEquals(HORSE, piece.getType());
 	}
 	
+	/**
+	 * not my problem
+	 * @throws HantoException on error
+	 */
 	@Test
 	public void sparrowFliesFourSpaces() throws HantoException
 	{
@@ -129,6 +151,10 @@ public class EpsilonHantoMasterTest
 		assertNull(game.getPieceAt(makeCoordinate(0, -1)));
 	}
 	
+	/**
+	 * not my problem
+	 * @throws HantoException on error
+	 */
 	@Test(expected=HantoException.class)
 	public void sparrowTriesToFlyTooFar() throws HantoException
 	{
@@ -144,12 +170,20 @@ public class EpsilonHantoMasterTest
 				makeCoordinate(0, 4));
 	}
 	
+	/**
+	 * not my problem
+	 * @throws HantoException on error
+	 */
 	@Test(expected=HantoException.class)
 	public void movePieceNotInGame() throws HantoException
 	{
 		game.makeMove(CRANE, null, makeCoordinate(0, 0));
 	}
 	
+	/**
+	 * not my problem
+	 * @throws HantoException on error
+	 */
 	@Test
 	public void horseJumps() throws HantoException
 	{
@@ -168,13 +202,17 @@ public class EpsilonHantoMasterTest
 		assertNull(game.getPieceAt(makeCoordinate(0, -1)));
 	}
 	
+	/**
+	 * not my problem
+	 * @throws HantoException on error
+	 */
 	@Test(expected=HantoException.class)
 	public void horseTriesToJumpAGap() throws HantoException
 	{
 		final PieceLocationPair[] board = new PieceLocationPair[] {
 			    plPair(BLUE, BUTTERFLY, 0, 0), plPair(RED, BUTTERFLY, -1, 1),
 			    plPair(BLUE, HORSE, 1, -1), plPair(RED, SPARROW, -3, 3),
-			    plPair(BLUE, SPARROW, -2, 1), plPair(RED,SPARROW, -3, 2) 
+			    plPair(BLUE, SPARROW, -2, 1), plPair(RED, SPARROW, -3, 2) 
 		};
 		testGame.initializeBoard(board);
 		testGame.setPlayerMoving(BLUE);
@@ -182,6 +220,10 @@ public class EpsilonHantoMasterTest
 		game.makeMove(HORSE, makeCoordinate(1, -1), makeCoordinate(-4, 4));
 	}
 	
+	/**
+	 * not my problem
+	 * @throws HantoException on error
+	 */
 	@Test(expected=HantoException.class)
 	public void sparrowCausesDisconnectedGroup() throws HantoException
 	{
@@ -195,6 +237,10 @@ public class EpsilonHantoMasterTest
 		game.makeMove(SPARROW, makeCoordinate(1, -1), makeCoordinate(0, 1));
 	}
 	
+	/**
+	 * not my problem
+	 * @throws HantoException on error
+	 */
 	@Test(expected=HantoException.class)
 	public void horseCausesDisconnectedGroup() throws HantoException
 	{
@@ -208,6 +254,10 @@ public class EpsilonHantoMasterTest
 		game.makeMove(HORSE, makeCoordinate(1, -1), makeCoordinate(-2, 2));
 	}
 	
+	/**
+	 * not my problem
+	 * @throws HantoException on error
+	 */
 	@Test(expected=HantoPrematureResignationException.class)
 	public void resignWhileThereAreStillMoves() throws HantoException
 	{
@@ -215,6 +265,10 @@ public class EpsilonHantoMasterTest
 		game.makeMove(null,  null,  null);
 	}
 	
+	/**
+	 * not my problem
+	 * @throws HantoException on error
+	 */
 	@Test
 	public void crabMoves() throws HantoException
 	{
@@ -229,6 +283,10 @@ public class EpsilonHantoMasterTest
 		assertNull(game.getPieceAt(makeCoordinate(0, -1)));
 	}
 	
+	/**
+	 * not my problem
+	 * @throws HantoException on error
+	 */
 	@Test
 	public void blueWins() throws HantoException
 	{
@@ -245,6 +303,10 @@ public class EpsilonHantoMasterTest
 				makeCoordinate(0, 2)));
 	}
 	
+	/**
+	 * not my problem
+	 * @throws HantoException on error
+	 */
 	@Test(expected=HantoException.class)
 	public void placePieceNextToOpponent() throws HantoException
 	{

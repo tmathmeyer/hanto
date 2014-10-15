@@ -1,3 +1,12 @@
+/*******************************************************************************
+ * All sources under the hanto.otnah package were developed by
+ * Ted Meyer and Nilesh Patel for the term project in CS4233
+ * at Worcester Polytechnic Institute. Since WPI holds all other forms
+ * of ownership to this software, we have decided to not make this
+ * software available under any license. Evaluation or compilation rights
+ * are therefore granted only to course staff.
+ *******************************************************************************/
+
 package hanto.otnah.tournament;
 
 import java.util.ArrayList;
@@ -10,12 +19,17 @@ import hanto.common.HantoGameID;
 import hanto.common.HantoPieceType;
 import hanto.common.HantoPlayerColor;
 import hanto.otnah.common.InventoryPosition;
-import hanto.otnah.common.moves.MoveEnumerator;
 import hanto.otnah.common.moves.PotentialMove;
 import hanto.otnah.epsilon.EpsilonHantoGame;
 import hanto.tournament.HantoGamePlayer;
 import hanto.tournament.HantoMoveRecord;
 
+/**
+ * 
+ * @author otnah
+ *
+ *	The AI for the game
+ */
 public class HantoPlayer implements HantoGamePlayer
 {
 	private EpsilonHantoGame game;
@@ -33,15 +47,22 @@ public class HantoPlayer implements HantoGamePlayer
 		}
 	}
 	
-	private final HantoPlayerColor other(HantoPlayerColor col)
+	/**
+	 * get the other color
+	 * @param col the current color
+	 * @return the other color
+	 */
+	public HantoPlayerColor other(HantoPlayerColor col)
 	{
 		HantoPlayerColor result = null;
 		switch(col)
 		{
 			case BLUE:
 				result = HantoPlayerColor.RED;
+				break;
 			case RED:
 				result = HantoPlayerColor.BLUE;
+				break;
 		}
 		return result;
 	}
@@ -55,10 +76,9 @@ public class HantoPlayer implements HantoGamePlayer
 			if (opponentsMove != null)
 			{
 				game.makeMove(opponentsMove.getPiece(), opponentsMove.getFrom(), opponentsMove.getTo());
-				System.out.println(game.getPrintableBoard());
 			}
 			
-			Collection<PotentialMove> allMoves = new MoveEnumerator().getAllCurrentMoves(game);
+			Collection<PotentialMove> allMoves = game.getMoveEnumerator().getAllCurrentMoves(game);
 			
 			if (allMoves.size() == 0)
 			{
@@ -69,7 +89,6 @@ public class HantoPlayer implements HantoGamePlayer
 			HantoMoveRecord hmr = rank(allMoves).iterator().next().asHantoMoveRecord();
 			
 			game.makeMove(hmr.getPiece(), hmr.getFrom(), hmr.getTo());
-			System.out.println(game.getPrintableBoard());
 			
 			return hmr;
 		}
@@ -77,12 +96,14 @@ public class HantoPlayer implements HantoGamePlayer
 		{
 			return new HantoMoveRecord(null, null, null);
 		}
-		
-		
-		
 	}
 
-	private Collection<PotentialMove> rank(Collection<PotentialMove> allMoves) {
+	/**
+	 * sort the potential moves by value and give them back in that order
+	 * @param allMoves all the possible moves
+	 * @return the sorted list
+	 */
+	public Collection<PotentialMove> rank(Collection<PotentialMove> allMoves) {
 		
 		List<PotentialMove> result = new ArrayList<>(allMoves);
 		

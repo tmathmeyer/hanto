@@ -47,7 +47,7 @@ public class EpsilonHantoGame extends GameState
 	@Override
 	public MoveResult tryResignation() throws HantoException
 	{
-		if (new MoveEnumerator().getAllCurrentMoves(this).size() != 0)
+		if (getMoveEnumerator().getAllCurrentMoves(this).size() != 0)
 		{
 			throw new HantoPrematureResignationException();
 		}
@@ -70,5 +70,14 @@ public class EpsilonHantoGame extends GameState
 	public PieceMoveValidatorFactory getValidatorFactory()
 	{
 		return new PieceMoveValidatorFactory();
+	}
+
+	/**
+	 * for testing purposes, this allows a mock object to create
+	 * tainted move enumerators
+	 * @return a new move enumerator
+	 */
+	public MoveEnumerator getMoveEnumerator() {
+		return new MoveEnumerator();
 	}
 }

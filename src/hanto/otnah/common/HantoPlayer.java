@@ -83,6 +83,7 @@ public class HantoPlayer
 	/**
 	 * removes a single piece of this type from the inventory
 	 * @param pieceType the piece type to remove from the inventory
+	 * @param to the place the piece is being played to
 	 * @return the piece removed
 	 */
 	public HantoTile play(HantoPieceType pieceType, Position to)
